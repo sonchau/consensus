@@ -1,5 +1,6 @@
 import React from 'react';
 import { NextPage } from 'next';
+import {withApollo} from '../lib/apollo';
 
 interface InitialProps {
     greeting: string
@@ -14,6 +15,7 @@ return <div> {props.greeting}</div>
 }
 
 IndexPage.getInitialProps = async () => ({
-    greeting: 'hi Son'
+    greeting: 'hi Son Chau'
 })
-export default IndexPage
+const IndexPageWithApollo = withApollo(IndexPage)
+export default IndexPageWithApollo
