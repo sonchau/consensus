@@ -1,12 +1,39 @@
 import React, { useState } from 'react';
+import {useCreateTaskMutation} from '../generated/graphql'
 
-const CreateTaskForm: React.FC = () => {
+interface Props {
+    onTaskCreated: () => void
+}
+const CreateTaskForm: React.FC<Props> = ({onTaskCreated}) => {
   const [title, setTitle] = useState('');
+  const [createTask, {loading, error, data}] = useCreateTaskMutation( {
+      onCompleted: ()=> {
+        onTaskCreated()
+        setTitle('')
+      }
+  })
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if(!loading && title) {
+        createTask({
+            variables: {
+                input: {
+                    title
+                }
+            }
+        })
+    }
+
+  }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
+        {error && <p className="alert-error"> Some error </p>}
+
       <input
         type="text"
         name="title"
