@@ -1,41 +1,35 @@
 import React from 'react';
 import { NextPage } from 'next';
-import {withApollo} from '../lib/apollo';
+import { withApollo } from '../lib/apollo';
 import { useTaskQuery, TaskStatus } from '../generated/graphql';
 
-interface InitialProps {
+interface InitialProps {}
 
-}
+interface Props extends InitialProps {}
 
-interface Props extends InitialProps {
+const IndexPage: NextPage<Props, InitialProps> = props => {
+  const { loading, error, data } = useTaskQuery({
+    variables: { status: TaskStatus.Active }
+  });
 
-}
+  if (loading) {
+    return <p>Loading...</p>;
+  } else if (error) {
+    return <p>An error occurred.</p>;
+  }
+  const tasks = data?.tasks;
 
-interface TasksQueryVariables {
-    status: string
-}
-const IndexPage: NextPage<Props, InitialProps> = (props) => {
-    const {loading, error, data} = useTaskQuery({
-        variables: {status: TaskStatus.Active}
-    })
-    
-    if (loading) {
-        return (<p> Loading </p>)
-    } else if (error ){
-        return (<p> Error</p>)
-    }
+  return tasks && tasks.length ? (
+    <ul>
+      {tasks.map(task => {
+        return <li key={task.id}>{task.title}</li>;
+      })}
+    </ul>
+  ) : (
+    <p className="no-tasks-message">There are no tasks here.</p>
+  );
+};
 
-    const tasks = data?.tasks
-    return tasks ? (
-        <ul>
-        {tasks.map(task => {
-        return <li key={task.id}>{task.title}</li>
-        })}
-        </ul>) :
-        (
-            <p> No tasks</p>
-        )
-}
+const IndexPageWithApollo = withApollo(IndexPage);
 
-const IndexPageWithApollo = withApollo(IndexPage)
-export default IndexPageWithApollo
+export default IndexPageWithApollo;
