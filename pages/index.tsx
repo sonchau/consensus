@@ -4,6 +4,7 @@ import { withApollo } from '../lib/apollo';
 import { useTasksQuery, TaskStatus } from '../generated/graphql';
 import TaskList from '../components/TaskList';
 import CreateTaskForm from '../components/CreateTaskForm';
+import HorizontalLinearStepper from '../components/Stepper';
 
 interface InitialProps {}
 
@@ -23,6 +24,7 @@ const IndexPage: NextPage<Props, InitialProps> = props => {
 
   return (
     <>
+      <HorizontalLinearStepper />
       <CreateTaskForm onTaskCreated={refetch}/>
       {tasks && tasks.length ? (
         <TaskList tasks={tasks} />
