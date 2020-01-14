@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link'
 import {Task} from '../generated/graphql'
 import TaskListItem from './TaskListItem'
 
