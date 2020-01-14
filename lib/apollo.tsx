@@ -146,3 +146,6 @@ function createApolloClient(initialState: ApolloClientCache = {}) {
     cache: new InMemoryCache().restore(initialState),
   })
 }
+
+//uri: 'http://localhost:3001/graphql',
+//uri: 'https://consensus-graphql.herokuapp.com/graphql',

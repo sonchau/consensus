@@ -24,7 +24,6 @@ const IndexPage: NextPage<Props, InitialProps> = props => {
 
   return (
     <>
-      <HorizontalLinearStepper />
       <CreateTaskForm onTaskCreated={refetch}/>
       {tasks && tasks.length ? (
         <TaskList tasks={tasks} />
