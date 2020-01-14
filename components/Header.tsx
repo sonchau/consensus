@@ -19,8 +19,10 @@ const header__logo = {
   
   const Header: React.FC  = () => (
     <div style={header} >
-        <span style={header__text}>Consensus</span>
         <Link href="/">
+            <a style={header__text}>Consensus</a>
+        </Link>
+        <Link href="https://geografia.com.au">
             <a style={header__logo}>
                 <img src="/geografia-logo.png" alt="Logo" />
             </a>
