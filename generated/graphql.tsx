@@ -18,8 +18,18 @@ export enum CacheControlScope {
   Private = 'PRIVATE'
 }
 
+export type CreateIssue = {
+  issue: Scalars['String'],
+};
+
 export type CreateTaskInput = {
   title: Scalars['String'],
+};
+
+export type Issue = {
+   __typename?: 'Issue',
+  id: Scalars['Int'],
+  issue: Scalars['String'],
 };
 
 export type Mutation = {
@@ -28,6 +38,8 @@ export type Mutation = {
   updateTask?: Maybe<Task>,
   changeStatus?: Maybe<Task>,
   deleteTask?: Maybe<Task>,
+  createIssue?: Maybe<Issue>,
+  updateIssue?: Maybe<Issue>,
 };
 
 
@@ -51,11 +63,22 @@ export type MutationDeleteTaskArgs = {
   id: Scalars['Int']
 };
 
+
+export type MutationCreateIssueArgs = {
+  input: CreateIssue
+};
+
+
+export type MutationUpdateIssueArgs = {
+  input: UpdateIssue
+};
+
 export type Query = {
    __typename?: 'Query',
   hello?: Maybe<Scalars['String']>,
   tasks: Array<Task>,
   task?: Maybe<Task>,
+  issue?: Maybe<Issue>,
 };
 
 
@@ -65,6 +88,11 @@ export type QueryTasksArgs = {
 
 
 export type QueryTaskArgs = {
+  id: Scalars['Int']
+};
+
+
+export type QueryIssueArgs = {
   id: Scalars['Int']
 };
 
@@ -80,12 +108,30 @@ export enum TaskStatus {
   Completed = 'completed'
 }
 
+export type UpdateIssue = {
+  id: Scalars['Int'],
+  issue?: Maybe<Scalars['String']>,
+};
+
 export type UpdateTaskInput = {
   id: Scalars['Int'],
   title?: Maybe<Scalars['String']>,
   status?: Maybe<TaskStatus>,
 };
 
+
+export type CreateIssueMutationVariables = {
+  input: CreateIssue
+};
+
+
+export type CreateIssueMutation = (
+  { __typename?: 'Mutation' }
+  & { createIssue: Maybe<(
+    { __typename?: 'Issue' }
+    & Pick<Issue, 'id' | 'issue'>
+  )> }
+);
 
 export type CreateTaskMutationVariables = {
   input: CreateTaskInput
@@ -110,6 +156,19 @@ export type DeleteTaskMutation = (
   & { deleteTask: Maybe<(
     { __typename?: 'Task' }
     & Pick<Task, 'id' | 'title' | 'status'>
+  )> }
+);
+
+export type IssueQueryVariables = {
+  id: Scalars['Int']
+};
+
+
+export type IssueQuery = (
+  { __typename?: 'Query' }
+  & { issue: Maybe<(
+    { __typename?: 'Issue' }
+    & Pick<Issue, 'id' | 'issue'>
   )> }
 );
 
@@ -139,6 +198,19 @@ export type TasksQuery = (
   )> }
 );
 
+export type UpdateIssueMutationVariables = {
+  input: UpdateIssue
+};
+
+
+export type UpdateIssueMutation = (
+  { __typename?: 'Mutation' }
+  & { updateIssue: Maybe<(
+    { __typename?: 'Issue' }
+    & Pick<Issue, 'id' | 'issue'>
+  )> }
+);
+
 export type UpdateTaskMutationVariables = {
   input: UpdateTaskInput
 };
@@ -153,6 +225,39 @@ export type UpdateTaskMutation = (
 );
 
 
+export const CreateIssueDocument = gql`
+    mutation CreateIssue($input: CreateIssue!) {
+  createIssue(input: $input) {
+    id
+    issue
+  }
+}
+    `;
+export type CreateIssueMutationFn = ApolloReactCommon.MutationFunction<CreateIssueMutation, CreateIssueMutationVariables>;
+
+/**
+ * __useCreateIssueMutation__
+ *
+ * To run a mutation, you first call `useCreateIssueMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateIssueMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createIssueMutation, { data, loading, error }] = useCreateIssueMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateIssueMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateIssueMutation, CreateIssueMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateIssueMutation, CreateIssueMutationVariables>(CreateIssueDocument, baseOptions);
+      }
+export type CreateIssueMutationHookResult = ReturnType<typeof useCreateIssueMutation>;
+export type CreateIssueMutationResult = ApolloReactCommon.MutationResult<CreateIssueMutation>;
+export type CreateIssueMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateIssueMutation, CreateIssueMutationVariables>;
 export const CreateTaskDocument = gql`
     mutation CreateTask($input: CreateTaskInput!) {
   createTask(input: $input) {
@@ -221,6 +326,40 @@ export function useDeleteTaskMutation(baseOptions?: ApolloReactHooks.MutationHoo
 export type DeleteTaskMutationHookResult = ReturnType<typeof useDeleteTaskMutation>;
 export type DeleteTaskMutationResult = ApolloReactCommon.MutationResult<DeleteTaskMutation>;
 export type DeleteTaskMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteTaskMutation, DeleteTaskMutationVariables>;
+export const IssueDocument = gql`
+    query Issue($id: Int!) {
+  issue(id: $id) {
+    id
+    issue
+  }
+}
+    `;
+
+/**
+ * __useIssueQuery__
+ *
+ * To run a query within a React component, call `useIssueQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIssueQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIssueQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useIssueQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<IssueQuery, IssueQueryVariables>) {
+        return ApolloReactHooks.useQuery<IssueQuery, IssueQueryVariables>(IssueDocument, baseOptions);
+      }
+export function useIssueLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<IssueQuery, IssueQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<IssueQuery, IssueQueryVariables>(IssueDocument, baseOptions);
+        }
+export type IssueQueryHookResult = ReturnType<typeof useIssueQuery>;
+export type IssueLazyQueryHookResult = ReturnType<typeof useIssueLazyQuery>;
+export type IssueQueryResult = ApolloReactCommon.QueryResult<IssueQuery, IssueQueryVariables>;
 export const TaskDocument = gql`
     query Task($id: Int!) {
   task(id: $id) {
@@ -291,6 +430,39 @@ export function useTasksLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOp
 export type TasksQueryHookResult = ReturnType<typeof useTasksQuery>;
 export type TasksLazyQueryHookResult = ReturnType<typeof useTasksLazyQuery>;
 export type TasksQueryResult = ApolloReactCommon.QueryResult<TasksQuery, TasksQueryVariables>;
+export const UpdateIssueDocument = gql`
+    mutation UpdateIssue($input: UpdateIssue!) {
+  updateIssue(input: $input) {
+    id
+    issue
+  }
+}
+    `;
+export type UpdateIssueMutationFn = ApolloReactCommon.MutationFunction<UpdateIssueMutation, UpdateIssueMutationVariables>;
+
+/**
+ * __useUpdateIssueMutation__
+ *
+ * To run a mutation, you first call `useUpdateIssueMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateIssueMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateIssueMutation, { data, loading, error }] = useUpdateIssueMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateIssueMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateIssueMutation, UpdateIssueMutationVariables>) {
+        return ApolloReactHooks.useMutation<UpdateIssueMutation, UpdateIssueMutationVariables>(UpdateIssueDocument, baseOptions);
+      }
+export type UpdateIssueMutationHookResult = ReturnType<typeof useUpdateIssueMutation>;
+export type UpdateIssueMutationResult = ApolloReactCommon.MutationResult<UpdateIssueMutation>;
+export type UpdateIssueMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateIssueMutation, UpdateIssueMutationVariables>;
 export const UpdateTaskDocument = gql`
     mutation UpdateTask($input: UpdateTaskInput!) {
   updateTask(input: $input) {

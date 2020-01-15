@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../../lib/apollo';
-import { useTasksQuery, TaskStatus } from '../../generated/graphql';
+import { useIssueQuery } from '../../generated/graphql';
 import TaskList from '../../components/TaskList';
 import CreateTaskForm from '../../components/CreateTaskForm';
 import Issue from '../../components/quick/Issue';
@@ -11,8 +11,8 @@ interface InitialProps {}
 interface Props extends InitialProps {}
 
 const IssuePage: NextPage<Props, InitialProps> = props => {
-  const { loading, error, data, refetch } = useTasksQuery({
-    variables: { status: TaskStatus.Active }
+  const { loading, error, data, refetch } = useIssueQuery({
+    variables: { id: 0 }
   });
 
   if (loading) {
@@ -20,10 +20,10 @@ const IssuePage: NextPage<Props, InitialProps> = props => {
   } else if (error) {
     return <p>An error occurred.</p>;
   }
-  const tasks = data?.tasks;
+  const tasks = data?.issue;
 
   return (
-      <Issue />
+    <Issue onIssueCreated={refetch}/>
   );
 };
 
