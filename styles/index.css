@@ -1,11 +1,11 @@
 :root {
   --border-color: #e2e8f0;
   --border-focus-color: #cbd5e0;
-  --brand-color: #3182ce;
+  --brand-color: #0C3D56;
   --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
     0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --default-space: 2rem;
-  --default-radius: 0.25rem;
+  --default-radius: 2rem;
   --bg-highlight: #f7fafc;
   --text-color: #4a5568;
   --text-light-color: #718096;
@@ -46,6 +46,7 @@ button {
   border: 0;
   cursor: pointer;
   padding: 0;
+
 }
 
 
@@ -91,6 +92,18 @@ button {
   border-radius: var(--default-radius);
   color: white;
   padding: 0.75rem 1.5rem;
+  text-align: center;
+}
+
+.next:after {
+  content: 'Next >'
+}
+.back:after {
+  content: '< Back'
+}
+
+.medium {
+  width: 10rem
 }
 
 .task-list {

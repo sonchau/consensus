@@ -25,7 +25,7 @@ const Dashboard: React.FC  = () => (
         <h2> Find the best solution to a specific problem.</h2>
         <div style={dashboard__selection}>
             <h3 style={dashboard__heading}> Choose between ... </h3>
-            <DashboardSelection link="/quick" img="/quick.png" heading="Quick Session"
+            <DashboardSelection link="/quick/issue" img="/quick.png" heading="Quick Session"
                 text1 = "Where individual participants cam voice opinions and be heard by the group"
                 text2 = "Use when you have a small group where everyone can discuss and agree on the answer and then inut them together"
             />

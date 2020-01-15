@@ -16,7 +16,7 @@ const selection = {
     'text-align': 'center',
     'padding': '1rem 0.5rem'
 }
-//170x130
+
 const DashboardSelection: React.FC<Props>  = ({img, heading, text1, text2, link}) => (
     <div style={selection}>
         <Link href={link}>
