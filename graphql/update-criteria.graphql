@@ -1,0 +1,7 @@
+mutation UpdateCriteria($input: UpdateCriteriaInput!) {
+  updateCriteria(input: $input) {
+    id
+    name
+    score
+  }
+}

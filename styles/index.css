@@ -93,6 +93,7 @@ button {
   color: white;
   padding: 0.75rem 1.5rem;
   text-align: center;
+  font-size: inherit;
 }
 
 .next:after {
@@ -161,20 +162,7 @@ button {
   display: block;
 }
 
-.task-list-item-title {
-  color: var(--text-color);
-}
 
-.task-list-item-delete {
-  color: var(--text-light-color);
-  font-size: 1.25rem;
-  margin: 0 0 0 auto;
-  padding: 0 0.5rem;
-}
-
-.task-list-item-delete:hover {
-  color: var(--text-color);
-}
 
 .task-filter {
   display: flex;

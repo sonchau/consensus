@@ -4,7 +4,7 @@ import Link from 'next/link';
 const header = {
     background: '#0C3D56',
     display: 'grid',
-    'grid-template-columns': '1fr 1fr',
+    'gridTemplateColumns': '1fr 1fr',
     padding: '1rem'
   };
 const header__text = {

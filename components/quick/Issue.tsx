@@ -6,11 +6,11 @@ import BackNext from '../common/BackNext';
 
 const issueStyle = {
     'border': '1px solid #e2e8f0',
-    'border-radius': '1rem',
+    'borderRadius': '1rem',
     'outline': 'none',
     padding: '1rem',
     width: '100%',
-    'font-size': 'inherit'
+    'fontSize': 'inherit'
   };
 
   interface Props {
@@ -57,7 +57,7 @@ const issueStyle = {
                 onChange={handleChange}
                 />
             </p>
-            <BackNext backHref="/" nextHref="/quick/issue/definition" />
+            <BackNext backHref="/" nextHref="/quick/criteria" />
         </form>
       );
   }

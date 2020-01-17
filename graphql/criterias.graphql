@@ -1,0 +1,7 @@
+query Criterias {
+  criterias {
+    id
+    name
+    score
+  }
+}

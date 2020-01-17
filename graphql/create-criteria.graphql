@@ -1,0 +1,7 @@
+mutation CreateCriteria($input: CreateCriteriaInput!) {
+  createCriteria(input: $input) {
+    id
+    name
+    score
+  }
+}

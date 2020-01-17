@@ -12,7 +12,7 @@ const selection = {
     width: '15rem',
     height: '25rem',
     border: '1px solid #ccc',
-    'border-radius': '1rem',
+    'borderRadius': '1rem',
     'text-align': 'center',
     'padding': '1rem 0.5rem'
 }

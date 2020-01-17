@@ -7,7 +7,7 @@ interface Props {
 }
 const backnext = {
     display: 'grid',
-    'grid-template-columns': '1fr 1fr',
+    'gridTemplateColumns': '1fr 1fr',
 
 };
 const last = {

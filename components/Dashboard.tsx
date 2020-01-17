@@ -7,13 +7,13 @@ const dashboard = {
 }
 const dashboard__selection = {
     border: '1px solid #ccc',
-    'border-radius': '1rem',
+    'borderRadius': '1rem',
     padding: '1rem 0 2rem',
     //'text-align': 'center'
     display: 'grid',
-    'grid-template-rows': '5rem 1fr',
-    'grid-template-columns': '1fr 1fr 1fr',
-    'justify-items': 'center'
+    'gridTemplateRows': '5rem 1fr',
+    'gridTemplateColumns': '1fr 1fr 1fr',
+    'justifyItems': 'center'
 }
 
 const dashboard__heading = {

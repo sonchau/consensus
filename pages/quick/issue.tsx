@@ -2,8 +2,6 @@ import React from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../../lib/apollo';
 import { useIssueQuery } from '../../generated/graphql';
-import TaskList from '../../components/TaskList';
-import CreateTaskForm from '../../components/CreateTaskForm';
 import Issue from '../../components/quick/Issue';
 
 interface InitialProps {}

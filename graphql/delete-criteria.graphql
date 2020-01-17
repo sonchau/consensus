@@ -1,0 +1,7 @@
+mutation DeleteCriteria($id: Int!) {
+  deleteCriteria(id: $id) {
+    id
+    name
+    score
+  }
+}

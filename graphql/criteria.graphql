@@ -1,0 +1,7 @@
+query Criteria ($id: Int!) {
+  criteria(id: $id) {
+    id
+    name
+    score
+  }
+}
