@@ -2,8 +2,6 @@ import React from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../lib/apollo';
 import { useTasksQuery, TaskStatus } from '../generated/graphql';
-import TaskList from '../components/TaskList';
-import CreateTaskForm from '../components/CreateTaskForm';
 import Dashboard from '../components/Dashboard';
 
 interface InitialProps {}
@@ -23,15 +21,7 @@ const IndexPage: NextPage<Props, InitialProps> = props => {
   const tasks = data?.tasks;
 
   return (
-    <>
       <Dashboard />
-      <CreateTaskForm onTaskCreated={refetch}/>
-      {tasks && tasks.length ? (
-        <TaskList tasks={tasks} />
-      ) : (
-        <p className="no-tasks-message">There are no tasks here.</p>
-      )}
-    </>
   );
 };
 

@@ -7,7 +7,7 @@ import {
   TasksQueryVariables,
   TasksDocument,
   TaskStatus
-} from '../generated/graphql';
+} from '../../../generated/graphql';
 
 interface Props {
   task: Task;
@@ -45,7 +45,7 @@ const TaskListItem: React.FC<Props> = ({ task }) => {
 
   return (
     <li className="task-list-item" key={task.id}>
-      <Link href="/update/[id]" as={`/update/${task.id}`}>
+      <Link href="/quick/task/update/[id]" as={`/quick/task/update/${task.id}`}>
         <a className="task-list-item-title">{task.title}</a>
       </Link>
       <button

@@ -1,9 +1,9 @@
 import React from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { withApollo } from '../../lib/apollo';
-import { useTaskQuery } from '../../generated/graphql';
-import UpdateTaskForm from '../../components/UpdateTaskForm'
+import { withApollo } from '../../../../lib/apollo';
+import { useTaskQuery } from '../../../../generated/graphql';
+import UpdateTaskForm from '../../../../components/quick/task/UpdateTaskForm'
 
 const UpdatePage: NextPage = () => {
   const router = useRouter();

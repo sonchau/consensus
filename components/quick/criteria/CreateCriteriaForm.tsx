@@ -7,16 +7,6 @@ interface Props {
   onCriteriaCreated: () => void
 }
 
-const form = {
-  'display': 'grid',
-  'gridTemplateColumns': '80% 3rem 1fr',
-  padding: '1rem',
-  'border': '1px solid #e2e8f0',
-  'borderRadius': '1rem',
-  'marginBottom': '1rem',
-  'gridGap': '1rem'
-}
-
 const select = {
   'fontSize': 'inherit'
 }

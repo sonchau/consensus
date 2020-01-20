@@ -29,7 +29,8 @@ body {
 
 p,
 ul {
-  margin: 0 0 var(--default-space);
+  margin: var(--default-space);
+  padding: 0;
 }
 
 img {
@@ -127,9 +128,17 @@ button {
 
 .task-list-item:last-child {
   border-bottom: 0;
-  border-radius: 0 0 var(--default-radius) var(--default-radius);
+}
+.task-list-item-delete {
+  color: var(--text-light-color);
+  font-size: 1.25rem;
+  margin: 0 0 0 auto;
+  padding: 0 0.5rem;
 }
 
+.task-list-item-delete:hover {
+  color: var(--text-color);
+}
 .no-tasks-message {
   margin-top: 1rem;
   text-align: center;

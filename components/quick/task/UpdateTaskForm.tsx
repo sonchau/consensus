@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useUpdateTaskMutation } from '../generated/graphql';
+import { useUpdateTaskMutation } from '../../../generated/graphql';
 import { useRouter } from 'next/router';
-
+import Input from '../../common/Input'
 interface Values {
     id: number;
   title: string;
@@ -35,29 +35,30 @@ const UpdateTaskForm: React.FC<Props> = ({ initialValues }) => {
 
   useEffect(()=> {
       if(data && data.updateTask) {
-        router.push('/')
+        router.push('/quick/task')
       }
   }, [data])
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+     <h4>Update your task</h4>
+
+    <form onSubmit={handleSubmit} className="form">
         {error && <p> an error</p>}
-      <p>
-        <label className="field-label">Title</label>
-        <input
-          type="text"
-          name="title"
-          className="text-input"
-          value={values.title}
-          onChange={handleChange}
-        />
-      </p>
-      <p>
+
+         <Input
+            name="title"
+            placeholder="Your criteria"
+            value={values.title}
+            onChange={handleChange}
+            
+          />
+        <span>&nbsp;</span>
         <button disabled={loading} type="submit" className="button">
           {loading? "Loading" : "Save"}
         </button>
-      </p>
     </form>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import {useCreateTaskMutation} from '../generated/graphql'
+import {useCreateTaskMutation} from '../../../generated/graphql'
+import Input from '../../common/Input'
 
 interface Props {
     onTaskCreated: () => void
@@ -13,7 +14,7 @@ const CreateTaskForm: React.FC<Props> = ({onTaskCreated}) => {
       }
   })
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
 
@@ -31,19 +32,23 @@ const CreateTaskForm: React.FC<Props> = ({onTaskCreated}) => {
 
   }
   return (
-    <form onSubmit={handleSubmit}>
-        {error && <p className="alert-error"> Some error </p>}
+    <>
+      <h2>What are your potential solutions</h2>
+      <form onSubmit={handleSubmit}  className="form">
+          {error && <p className="alert-error"> Some error </p>}
+        <Input
+          name="title"
+          placeholder="Your solution"
+          value={title}
+          onChange={onInputChange}
+        />   
+        <span>&nbsp;</span>     
+        <button disabled={loading} type="submit" className="button">
+          {loading? "Loading" : "Add"}
+      </button>
 
-      <input
-        type="text"
-        name="title"
-        placeholder="What would you like to get done?"
-        autoComplete="off"
-        className="text-input new-task-text-input"
-        value={title}
-        onChange={handleChange}
-      />
-    </form>
+      </form>
+    </>  
   );
 };
 

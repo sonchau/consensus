@@ -8,6 +8,7 @@ interface Props {
 const backnext = {
     display: 'grid',
     'gridTemplateColumns': '1fr 1fr',
+    'margin': '1rem 0'
 
 };
 const last = {
