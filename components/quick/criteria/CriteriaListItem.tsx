@@ -65,7 +65,32 @@ const criteriaItem = {
 // }
 
 const CriteriaListItem: React.FC<Props> = ({ criteria }) => {
-console.log('criteria', criteria)
+  const [deleteCriteria, { loading, error }] = useDeleteCriteriaMutation({
+    update: (cache, result) => {
+      const data = cache.readQuery<CriteriasQuery, CriteriasQueryVariables>({
+        query: CriteriasDocument,
+      });
+      if (data) {
+        cache.writeQuery<CriteriasQuery, CriteriasQueryVariables>({
+          query: CriteriasDocument,
+          data: {
+            criterias: data.criterias.filter(
+              ({ id }) => id !== result.data?.deleteCriteria?.id
+            )
+          }
+        });
+      }
+    }
+  });
+  const handleDeleteClick = () => {
+    deleteCriteria({ variables: { id: criteria.id } });
+  };
+
+  useEffect(() => {
+    if (error) {
+      alert('An error occurred.');
+    }
+  }, [error]);
   return (
     <li style={criteriaItem} key={criteria.id}>
       <Link href="/quick/criteria/update/[criteriaid]" as={`/quick/criteria/update/${criteria.id}`}>
@@ -78,7 +103,10 @@ console.log('criteria', criteria)
           <span style={score}>{criteria.score}</span>
         </a>
       </Link>
-      <button style={deleteButton}>
+      <button 
+        disabled={loading}
+        onClick={handleDeleteClick}
+        style={deleteButton}>
         &times;
       </button>
     </li>

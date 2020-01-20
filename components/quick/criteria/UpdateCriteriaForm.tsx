@@ -64,7 +64,7 @@ const UpdateCriteriaForm: React.FC<Props> = ({ initialValues }) => {
           />
           <Select name="score"  
             values={['1','2','3','4','5','6','7','8','9','10']} 
-            selectedItem={values.score.toString()} 
+            defaultValue={values.score.toString()} 
             onChange={handleScoreChange}
             />
           <button disabled={loading} type="submit" className="button">

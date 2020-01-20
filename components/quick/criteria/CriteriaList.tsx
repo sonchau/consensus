@@ -9,7 +9,7 @@ const CriteriaList: React.FC<Props> = ({criterias}) => {
   return (
     <ul>
     {criterias.map(criteria => {
-      return <CriteriaListItem criteria = {criteria} />
+      return <CriteriaListItem key={criteria.id} criteria = {criteria} />
     })}
   </ul>
   );

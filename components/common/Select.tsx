@@ -1,20 +1,20 @@
 interface Props {
     name: string,
     values: string[],
-    selectedItem?: string,
+    defaultValue?: string,
     onChange?: (e: React.FormEvent<HTMLSelectElement>) => void 
 }
 
-const select = {
+const selectStyle = {
     'fontSize': 'inherit'
 }
 
-const Select:  React.FC<Props> = ({name, values, selectedItem, onChange}) => {
+const Select:  React.FC<Props> = ({name, values, defaultValue, onChange}) => {
     return (
-        <select style={select} name={name} onChange={onChange}>
-            { values.map( item => {
+        <select style={selectStyle} name={name} onChange={onChange} defaultValue={defaultValue}>
+            { values.map( (item, index) => {
                 return (<option value={item}
-                            selected={selectedItem === item ? true : false}
+                            key={index}
                         > {item} </option>)
             })}
         </select>
