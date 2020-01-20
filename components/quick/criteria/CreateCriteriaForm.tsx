@@ -61,7 +61,7 @@ const CreateCriteriaForm: React.FC<Props> = ({onCriteriaCreated}) => {
       <h2> How will you define success? </h2>
       <p>Create a list of criteria by which your proposed solutions will be mesured.</p>
       <p>Give each criteria a weighting out of 10, with 1 the least important and 10 the most important</p>
-      <form onSubmit={handleSubmit} style={form}>
+      <form onSubmit={handleSubmit} className="form">
           {error && <p className="alert-error"> Some error </p>}
 
         <Input

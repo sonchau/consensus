@@ -183,3 +183,14 @@ button {
 .task-filter a:hover {
   color: var(--text-color);
 }
+
+.form {
+  display: grid;
+  grid-template-columns: 80% 3rem 1fr;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+  grid-gap: 1rem;
+}
+
