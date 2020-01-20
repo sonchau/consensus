@@ -22,11 +22,9 @@ const header__logo = {
         <Link href="/">
             <a style={header__text}>Consensus</a>
         </Link>
-        <Link href="https://geografia.com.au">
-            <a style={header__logo}>
-                <img src="/geografia-logo.png" alt="Logo" />
-            </a>
-        </Link>
+        <a style={header__logo} href="https://geografia.com.au">
+            <img src="/geografia-logo.png" alt="Logo" />
+        </a>
     </div>
   );
   
