@@ -1,0 +1,7 @@
+query TaskTitle($title: String!) {
+  taskTitle(title: $title) {
+    id
+    title
+    status
+  }
+}

@@ -9,8 +9,7 @@ interface Props {
     link: string
 }
 const selection = {
-    width: '15rem',
-    height: '25rem',
+    width: '20rem',
     border: '1px solid #ccc',
     'borderRadius': '1rem',
     'text-align': 'center',

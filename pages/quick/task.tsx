@@ -1,7 +1,7 @@
 import React from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../../lib/apollo';
-import { useTasksQuery } from '../../generated/graphql';
+import { useTasksQuery, TaskStatus } from '../../generated/graphql';
 import TaskList from '../../components/quick/task/TaskList';
 import CreateTaskForm from '../../components/quick/task/CreateTaskForm';
 import BackNext from '../../components/common/BackNext';
@@ -18,7 +18,7 @@ const criteriasContainer = {
 
 const TaskPage: NextPage<Props, InitialProps> = props => {
   const { loading, error, data, refetch } = useTasksQuery({
-
+    variables: {status: TaskStatus.Active}
   });
 
   if (loading) {
@@ -39,7 +39,7 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
       ) : (
         <p className="no-tasks-message">There are no tasks here.</p>
       )}
-      <BackNext backHref="/quick/issue" nextHref="/quick/task" /> 
+      <BackNext backHref="/quick/criteria" nextHref="/quick/task" /> 
     </>
   );
 };
@@ -47,3 +47,4 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
 const TaskPageWithApollo = withApollo(TaskPage);
 
 export default TaskPageWithApollo;
+//<Link href="/quick/criteria/update/[criteriaid]" as={`/quick/criteria/update/${criteria.id}`}>

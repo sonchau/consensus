@@ -108,6 +108,7 @@ export type Query = {
   hello?: Maybe<Scalars['String']>,
   tasks: Array<Task>,
   task?: Maybe<Task>,
+  taskTitle?: Maybe<Task>,
   issue?: Maybe<Issue>,
   criteria?: Maybe<Criteria>,
   criterias: Array<Criteria>,
@@ -121,6 +122,11 @@ export type QueryTasksArgs = {
 
 export type QueryTaskArgs = {
   id: Scalars['Int']
+};
+
+
+export type QueryTaskTitleArgs = {
+  title: Scalars['String']
 };
 
 
@@ -273,6 +279,19 @@ export type TaskQueryVariables = {
 export type TaskQuery = (
   { __typename?: 'Query' }
   & { task: Maybe<(
+    { __typename?: 'Task' }
+    & Pick<Task, 'id' | 'title' | 'status'>
+  )> }
+);
+
+export type TaskTitleQueryVariables = {
+  title: Scalars['String']
+};
+
+
+export type TaskTitleQuery = (
+  { __typename?: 'Query' }
+  & { taskTitle: Maybe<(
     { __typename?: 'Task' }
     & Pick<Task, 'id' | 'title' | 'status'>
   )> }
@@ -638,6 +657,41 @@ export function useTaskLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOpt
 export type TaskQueryHookResult = ReturnType<typeof useTaskQuery>;
 export type TaskLazyQueryHookResult = ReturnType<typeof useTaskLazyQuery>;
 export type TaskQueryResult = ApolloReactCommon.QueryResult<TaskQuery, TaskQueryVariables>;
+export const TaskTitleDocument = gql`
+    query TaskTitle($title: String!) {
+  taskTitle(title: $title) {
+    id
+    title
+    status
+  }
+}
+    `;
+
+/**
+ * __useTaskTitleQuery__
+ *
+ * To run a query within a React component, call `useTaskTitleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTaskTitleQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTaskTitleQuery({
+ *   variables: {
+ *      title: // value for 'title'
+ *   },
+ * });
+ */
+export function useTaskTitleQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TaskTitleQuery, TaskTitleQueryVariables>) {
+        return ApolloReactHooks.useQuery<TaskTitleQuery, TaskTitleQueryVariables>(TaskTitleDocument, baseOptions);
+      }
+export function useTaskTitleLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TaskTitleQuery, TaskTitleQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<TaskTitleQuery, TaskTitleQueryVariables>(TaskTitleDocument, baseOptions);
+        }
+export type TaskTitleQueryHookResult = ReturnType<typeof useTaskTitleQuery>;
+export type TaskTitleLazyQueryHookResult = ReturnType<typeof useTaskTitleLazyQuery>;
+export type TaskTitleQueryResult = ApolloReactCommon.QueryResult<TaskTitleQuery, TaskTitleQueryVariables>;
 export const TasksDocument = gql`
     query Tasks($status: TaskStatus) {
   tasks(status: $status) {

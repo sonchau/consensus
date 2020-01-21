@@ -4,6 +4,8 @@ import Link from 'next/link';
 interface Props {
     backHref: string,
     nextHref: string,
+    asBackHref?: string,
+    asNextHref?: string
 }
 const backnext = {
     display: 'grid',
@@ -15,12 +17,12 @@ const last = {
     'justifySelf': 'end'
 }
   
-const BackNext:  React.FC<Props> = ({backHref, nextHref}) => (
+const BackNext:  React.FC<Props> = ({backHref, nextHref, asBackHref, asNextHref}) => (
 <div style={backnext} >
-    <Link href={backHref}>
+    <Link href={backHref} as={asBackHref !== '' ? asBackHref : ''}>
         <a className="button back medium"></a>
     </Link>
-    <Link href={nextHref}>
+    <Link href={nextHref} as={asNextHref !== '' ? asNextHref : ''}>
         <a style={last} className="button next medium"></a>
     </Link>
 </div>

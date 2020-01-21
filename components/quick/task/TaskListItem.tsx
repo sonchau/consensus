@@ -15,6 +15,7 @@ interface Props {
 
 const TaskListItem: React.FC<Props> = ({ task }) => {
   const [deleteTask, { loading, error }] = useDeleteTaskMutation({
+    
     update: (cache, result) => {
       const data = cache.readQuery<TasksQuery, TasksQueryVariables>({
         query: TasksDocument,
