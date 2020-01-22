@@ -1,0 +1,8 @@
+query Setting ($id: Int!) {
+  setting(id: $id) {
+    id
+    task
+    criteria
+    score
+  }
+}

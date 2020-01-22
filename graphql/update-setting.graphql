@@ -1,0 +1,8 @@
+mutation UpdateSetting($input: UpdateSettingInput!) {
+  updateSetting(input: $input) {
+    id
+    task
+    criteria
+    score
+  }
+}

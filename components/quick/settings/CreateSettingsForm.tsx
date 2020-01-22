@@ -1,41 +1,70 @@
 import React, { useState } from 'react';
-import {useCreateTaskMutation} from '../../../generated/graphql'
-import Input from '../../common/Input'
+import {Criteria, useCreateSettingMutation} from '../../../generated/graphql'
+import SettingsListItem from './SettingsListItem';
 
 interface Props {
-    onTaskCreated: () => void
+    onSettingsCreated: () => void
+    criterias: Criteria[]
+    task: string 
 }
-const CreateSettingsForm: React.FC<Props> = ({onTaskCreated}) => {
-  // const [title, setTitle] = useState('');
-  // const [createTask, {loading, error, data}] = useCreateTaskMutation( {
-  //     onCompleted: ()=> {
-  //       onTaskCreated()
-  //       setTitle('')
-  //     }
-  // })
 
+const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, task}) => {
+
+  let items = criterias.map(criteria => {
+    return {
+      task,
+      criteria: criteria.name,
+      'score': 1
+    }
+  })
+  const [settings, setSettings] = useState(items);
+  const [createSetting, {loading, error, data}] = useCreateSettingMutation( {
+      onCompleted: ()=> {
+        onSettingsCreated()
+      }
+  })
+
+  const onSettingItemCreated = (item: any ) => {
+    
+    const objIndex = settings.findIndex(obj => obj.criteria === item.criteria)
+    const updatedObj = { ...settings[objIndex], score: parseInt(item.score, 10)}
+    const updatedItems = [
+      ...settings.slice(0, objIndex),
+      updatedObj,
+      ...settings.slice(objIndex+1)
+    ]
+    console.log('onSettingItemCreated parent', item.criteria, item.score, 'updatedItems', updatedItems)
+    setSettings(updatedItems)
+  }
   // const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   setTitle(e.target.value);
   // };
 
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault()
-  //   if(!loading && title) {
-  //       createTask({
-  //           variables: {
-  //               input: {
-  //                   title
-  //               }
-  //           }
-  //       })
-  //   }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // if(!loading && task) {
+    //     createSetting({
+    //         variables: {
+    //             input: {
+    //                 "criteria": task
+    //             }
+    //         }
+    //     })
+    // }
 
-  // }
+  }
   return (
-    <>
-      <h2>Task settings form</h2>
+    <form onSubmit={handleSubmit}>
+      <ul>
+        {criterias.map(criteria => {
+          return <SettingsListItem key={criteria.id} criteria={criteria} onSettingItemCreated= {onSettingItemCreated}/>
+        })}
+      </ul>
+      <button disabled={loading} type="submit" className="button">
+          {loading? "Loading" : "Add"}
+        </button>
+    </form>
 
-    </>  
   );
 };
 

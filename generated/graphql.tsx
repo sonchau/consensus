@@ -27,6 +27,12 @@ export type CreateIssue = {
   issue: Scalars['String'],
 };
 
+export type CreateSettingInput = {
+  task: Scalars['String'],
+  criteria: Scalars['String'],
+  score: Scalars['Int'],
+};
+
 export type CreateTaskInput = {
   title: Scalars['String'],
 };
@@ -55,6 +61,9 @@ export type Mutation = {
   createCriteria?: Maybe<Criteria>,
   updateCriteria?: Maybe<Criteria>,
   deleteCriteria?: Maybe<Criteria>,
+  createSetting?: Maybe<Setting>,
+  updateSetting?: Maybe<Setting>,
+  deleteSetting?: Maybe<Setting>,
 };
 
 
@@ -103,6 +112,21 @@ export type MutationDeleteCriteriaArgs = {
   id: Scalars['Int']
 };
 
+
+export type MutationCreateSettingArgs = {
+  input: CreateSettingInput
+};
+
+
+export type MutationUpdateSettingArgs = {
+  input: UpdateSettingInput
+};
+
+
+export type MutationDeleteSettingArgs = {
+  id: Scalars['Int']
+};
+
 export type Query = {
    __typename?: 'Query',
   hello?: Maybe<Scalars['String']>,
@@ -112,6 +136,8 @@ export type Query = {
   issue?: Maybe<Issue>,
   criteria?: Maybe<Criteria>,
   criterias: Array<Criteria>,
+  setting?: Maybe<Setting>,
+  settings: Array<Setting>,
 };
 
 
@@ -139,6 +165,19 @@ export type QueryCriteriaArgs = {
   id: Scalars['Int']
 };
 
+
+export type QuerySettingArgs = {
+  id: Scalars['Int']
+};
+
+export type Setting = {
+   __typename?: 'Setting',
+  id: Scalars['Int'],
+  task: Scalars['String'],
+  criteria: Scalars['String'],
+  score: Scalars['Int'],
+};
+
 export type Task = {
    __typename?: 'Task',
   id: Scalars['Int'],
@@ -160,6 +199,13 @@ export type UpdateCriteriaInput = {
 export type UpdateIssue = {
   id: Scalars['Int'],
   issue?: Maybe<Scalars['String']>,
+};
+
+export type UpdateSettingInput = {
+  id: Scalars['Int'],
+  task: Scalars['String'],
+  criteria: Scalars['String'],
+  score: Scalars['Int'],
 };
 
 export type UpdateTaskInput = {
@@ -192,6 +238,19 @@ export type CreateIssueMutation = (
   & { createIssue: Maybe<(
     { __typename?: 'Issue' }
     & Pick<Issue, 'id' | 'issue'>
+  )> }
+);
+
+export type CreateSettingMutationVariables = {
+  input: CreateSettingInput
+};
+
+
+export type CreateSettingMutation = (
+  { __typename?: 'Mutation' }
+  & { createSetting: Maybe<(
+    { __typename?: 'Setting' }
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
   )> }
 );
 
@@ -245,6 +304,19 @@ export type DeleteCriteriaMutation = (
   )> }
 );
 
+export type DeleteSettingMutationVariables = {
+  id: Scalars['Int']
+};
+
+
+export type DeleteSettingMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteSetting: Maybe<(
+    { __typename?: 'Setting' }
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
+  )> }
+);
+
 export type DeleteTaskMutationVariables = {
   id: Scalars['Int']
 };
@@ -268,6 +340,30 @@ export type IssueQuery = (
   & { issue: Maybe<(
     { __typename?: 'Issue' }
     & Pick<Issue, 'id' | 'issue'>
+  )> }
+);
+
+export type SettingQueryVariables = {
+  id: Scalars['Int']
+};
+
+
+export type SettingQuery = (
+  { __typename?: 'Query' }
+  & { setting: Maybe<(
+    { __typename?: 'Setting' }
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
+  )> }
+);
+
+export type SettingsQueryVariables = {};
+
+
+export type SettingsQuery = (
+  { __typename?: 'Query' }
+  & { settings: Array<(
+    { __typename?: 'Setting' }
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
   )> }
 );
 
@@ -333,6 +429,19 @@ export type UpdateIssueMutation = (
   & { updateIssue: Maybe<(
     { __typename?: 'Issue' }
     & Pick<Issue, 'id' | 'issue'>
+  )> }
+);
+
+export type UpdateSettingMutationVariables = {
+  input: UpdateSettingInput
+};
+
+
+export type UpdateSettingMutation = (
+  { __typename?: 'Mutation' }
+  & { updateSetting: Maybe<(
+    { __typename?: 'Setting' }
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
   )> }
 );
 
@@ -417,6 +526,41 @@ export function useCreateIssueMutation(baseOptions?: ApolloReactHooks.MutationHo
 export type CreateIssueMutationHookResult = ReturnType<typeof useCreateIssueMutation>;
 export type CreateIssueMutationResult = ApolloReactCommon.MutationResult<CreateIssueMutation>;
 export type CreateIssueMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateIssueMutation, CreateIssueMutationVariables>;
+export const CreateSettingDocument = gql`
+    mutation CreateSetting($input: CreateSettingInput!) {
+  createSetting(input: $input) {
+    id
+    task
+    criteria
+    score
+  }
+}
+    `;
+export type CreateSettingMutationFn = ApolloReactCommon.MutationFunction<CreateSettingMutation, CreateSettingMutationVariables>;
+
+/**
+ * __useCreateSettingMutation__
+ *
+ * To run a mutation, you first call `useCreateSettingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSettingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSettingMutation, { data, loading, error }] = useCreateSettingMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateSettingMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateSettingMutation, CreateSettingMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateSettingMutation, CreateSettingMutationVariables>(CreateSettingDocument, baseOptions);
+      }
+export type CreateSettingMutationHookResult = ReturnType<typeof useCreateSettingMutation>;
+export type CreateSettingMutationResult = ApolloReactCommon.MutationResult<CreateSettingMutation>;
+export type CreateSettingMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateSettingMutation, CreateSettingMutationVariables>;
 export const CreateTaskDocument = gql`
     mutation CreateTask($input: CreateTaskInput!) {
   createTask(input: $input) {
@@ -554,6 +698,41 @@ export function useDeleteCriteriaMutation(baseOptions?: ApolloReactHooks.Mutatio
 export type DeleteCriteriaMutationHookResult = ReturnType<typeof useDeleteCriteriaMutation>;
 export type DeleteCriteriaMutationResult = ApolloReactCommon.MutationResult<DeleteCriteriaMutation>;
 export type DeleteCriteriaMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteCriteriaMutation, DeleteCriteriaMutationVariables>;
+export const DeleteSettingDocument = gql`
+    mutation DeleteSetting($id: Int!) {
+  deleteSetting(id: $id) {
+    id
+    task
+    criteria
+    score
+  }
+}
+    `;
+export type DeleteSettingMutationFn = ApolloReactCommon.MutationFunction<DeleteSettingMutation, DeleteSettingMutationVariables>;
+
+/**
+ * __useDeleteSettingMutation__
+ *
+ * To run a mutation, you first call `useDeleteSettingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteSettingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteSettingMutation, { data, loading, error }] = useDeleteSettingMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteSettingMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteSettingMutation, DeleteSettingMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteSettingMutation, DeleteSettingMutationVariables>(DeleteSettingDocument, baseOptions);
+      }
+export type DeleteSettingMutationHookResult = ReturnType<typeof useDeleteSettingMutation>;
+export type DeleteSettingMutationResult = ApolloReactCommon.MutationResult<DeleteSettingMutation>;
+export type DeleteSettingMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteSettingMutation, DeleteSettingMutationVariables>;
 export const DeleteTaskDocument = gql`
     mutation DeleteTask($id: Int!) {
   deleteTask(id: $id) {
@@ -622,6 +801,77 @@ export function useIssueLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOp
 export type IssueQueryHookResult = ReturnType<typeof useIssueQuery>;
 export type IssueLazyQueryHookResult = ReturnType<typeof useIssueLazyQuery>;
 export type IssueQueryResult = ApolloReactCommon.QueryResult<IssueQuery, IssueQueryVariables>;
+export const SettingDocument = gql`
+    query Setting($id: Int!) {
+  setting(id: $id) {
+    id
+    task
+    criteria
+    score
+  }
+}
+    `;
+
+/**
+ * __useSettingQuery__
+ *
+ * To run a query within a React component, call `useSettingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSettingQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSettingQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSettingQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SettingQuery, SettingQueryVariables>) {
+        return ApolloReactHooks.useQuery<SettingQuery, SettingQueryVariables>(SettingDocument, baseOptions);
+      }
+export function useSettingLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SettingQuery, SettingQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<SettingQuery, SettingQueryVariables>(SettingDocument, baseOptions);
+        }
+export type SettingQueryHookResult = ReturnType<typeof useSettingQuery>;
+export type SettingLazyQueryHookResult = ReturnType<typeof useSettingLazyQuery>;
+export type SettingQueryResult = ApolloReactCommon.QueryResult<SettingQuery, SettingQueryVariables>;
+export const SettingsDocument = gql`
+    query Settings {
+  settings {
+    id
+    task
+    criteria
+    score
+  }
+}
+    `;
+
+/**
+ * __useSettingsQuery__
+ *
+ * To run a query within a React component, call `useSettingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSettingsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSettingsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSettingsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SettingsQuery, SettingsQueryVariables>) {
+        return ApolloReactHooks.useQuery<SettingsQuery, SettingsQueryVariables>(SettingsDocument, baseOptions);
+      }
+export function useSettingsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SettingsQuery, SettingsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<SettingsQuery, SettingsQueryVariables>(SettingsDocument, baseOptions);
+        }
+export type SettingsQueryHookResult = ReturnType<typeof useSettingsQuery>;
+export type SettingsLazyQueryHookResult = ReturnType<typeof useSettingsLazyQuery>;
+export type SettingsQueryResult = ApolloReactCommon.QueryResult<SettingsQuery, SettingsQueryVariables>;
 export const TaskDocument = gql`
     query Task($id: Int!) {
   task(id: $id) {
@@ -794,6 +1044,41 @@ export function useUpdateIssueMutation(baseOptions?: ApolloReactHooks.MutationHo
 export type UpdateIssueMutationHookResult = ReturnType<typeof useUpdateIssueMutation>;
 export type UpdateIssueMutationResult = ApolloReactCommon.MutationResult<UpdateIssueMutation>;
 export type UpdateIssueMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateIssueMutation, UpdateIssueMutationVariables>;
+export const UpdateSettingDocument = gql`
+    mutation UpdateSetting($input: UpdateSettingInput!) {
+  updateSetting(input: $input) {
+    id
+    task
+    criteria
+    score
+  }
+}
+    `;
+export type UpdateSettingMutationFn = ApolloReactCommon.MutationFunction<UpdateSettingMutation, UpdateSettingMutationVariables>;
+
+/**
+ * __useUpdateSettingMutation__
+ *
+ * To run a mutation, you first call `useUpdateSettingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateSettingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateSettingMutation, { data, loading, error }] = useUpdateSettingMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateSettingMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateSettingMutation, UpdateSettingMutationVariables>) {
+        return ApolloReactHooks.useMutation<UpdateSettingMutation, UpdateSettingMutationVariables>(UpdateSettingDocument, baseOptions);
+      }
+export type UpdateSettingMutationHookResult = ReturnType<typeof useUpdateSettingMutation>;
+export type UpdateSettingMutationResult = ApolloReactCommon.MutationResult<UpdateSettingMutation>;
+export type UpdateSettingMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateSettingMutation, UpdateSettingMutationVariables>;
 export const UpdateTaskDocument = gql`
     mutation UpdateTask($input: UpdateTaskInput!) {
   updateTask(input: $input) {

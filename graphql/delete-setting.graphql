@@ -1,0 +1,8 @@
+mutation DeleteSetting($id: Int!) {
+  deleteSetting(id: $id) {
+    id
+    task
+    criteria
+    score
+  }
+}

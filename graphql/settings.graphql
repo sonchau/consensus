@@ -1,0 +1,8 @@
+query Settings  {
+    settings {
+      id
+      task
+      criteria
+      score
+    }
+  }

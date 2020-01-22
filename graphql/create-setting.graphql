@@ -1,0 +1,8 @@
+mutation CreateSetting($input: CreateSettingInput!) {
+  createSetting(input: $input) {
+    id
+    task
+    criteria
+    score
+  }
+}
