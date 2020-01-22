@@ -30,16 +30,20 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
 
   return (
     <>
+    
       <CreateTaskForm onTaskCreated={refetch}/>
       {tasks && tasks.length ? (
         <div style={criteriasContainer}>
             <h4>Your solutions</h4>    
             <TaskList tasks={tasks} />
+            <BackNext backHref="/quick/criteria" 
+            nextHref="/quick/task/[id]/settings" 
+            asNextHref={`/quick/task/${tasks[0].id}/settings`} /> 
         </div>
+        
       ) : (
         <p className="no-tasks-message">There are no tasks here.</p>
       )}
-      <BackNext backHref="/quick/criteria" nextHref="/quick/task" /> 
     </>
   );
 };
@@ -47,4 +51,3 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
 const TaskPageWithApollo = withApollo(TaskPage);
 
 export default TaskPageWithApollo;
-//<Link href="/quick/criteria/update/[criteriaid]" as={`/quick/criteria/update/${criteria.id}`}>

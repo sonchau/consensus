@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Criteria, useCreateSettingMutation} from '../../../generated/graphql'
 import SettingsListItem from './SettingsListItem';
+import BackNext from '../../common/BackNext';
 
 interface Props {
     onSettingsCreated: () => void
@@ -42,15 +43,17 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // if(!loading && task) {
-    //     createSetting({
-    //         variables: {
-    //             input: {
-    //                 "criteria": task
-    //             }
-    //         }
-    //     })
-    // }
+    if(!loading && settings) {
+      settings.map(setting => {
+        console.log('setting', setting)
+        createSetting({
+          variables: {
+              input: setting
+          }
+       })
+      })
+
+    }
 
   }
   return (
@@ -69,3 +72,6 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
 };
 
 export default CreateSettingsForm;
+{/* <BackNext backHref="/quick/criteria" 
+nextHref="/quick/task/[id]/settings" 
+asNextHref={`/quick/task/${tasks[0].id}/settings`} />  */}

@@ -5,7 +5,7 @@ interface Props {
     backHref: string,
     nextHref: string,
     asBackHref?: string,
-    asNextHref?: string
+    asNextHref?: string,
 }
 const backnext = {
     display: 'grid',
@@ -22,7 +22,7 @@ const BackNext:  React.FC<Props> = ({backHref, nextHref, asBackHref, asNextHref}
     <Link href={backHref} as={asBackHref !== '' ? asBackHref : ''}>
         <a className="button back medium"></a>
     </Link>
-    <Link href={nextHref} as={asNextHref !== '' ? asNextHref : ''}>
+    <Link href={nextHref} as={asNextHref !== '' ? asNextHref : ''} >
         <a style={last} className="button next medium"></a>
     </Link>
 </div>

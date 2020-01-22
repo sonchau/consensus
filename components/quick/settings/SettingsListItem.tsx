@@ -39,8 +39,8 @@ const SettingsListItem: React.FC<Props> = ({ criteria, onSettingItemCreated }) =
   }
   return (
     <li className="task-list-item" key={criteria.id}>
-        <span>{criteria.name}</span> 
-        <Select name="score" 
+        <span className="task-list-item-title">{criteria.name}</span> 
+        <Select name="score" className="task-list-item-delete"
         onChange={handleScoreChange} 
         values={['1','2','3','4','5','6','7','8','9','10']} />
     </li>
