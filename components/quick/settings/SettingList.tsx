@@ -1,7 +1,7 @@
 import React from 'react';
 import {Setting, useSettingByTaskNameQuery, Criteria} from '../../../generated/graphql'
 import SettingListItemRaw from './SettingListItemRaw'
-import BackNext from '../../common/BackNext'
+import SettingBackNext from './SettingBackNext'
 
 interface Props {
   task: string
@@ -29,10 +29,7 @@ const SettingList: React.FC<Props> = ({task, criterias}) => {
             {settings.map(setting => {
               return <SettingListItemRaw key={setting.id} setting = {setting} />
             })}
-            <BackNext backHref="/quick/task/[id]/settings" 
-            asBackHref={`/quick/task/anumber/settings`} 
-            nextHref="/quick/task/[id]/settings" 
-            asNextHref={`/quick/task/anumber/settings`} /> 
+            <SettingBackNext currentTask={task} /> 
           </>
         ): (
           <p className="no-tasks-message"> No settings</p>
