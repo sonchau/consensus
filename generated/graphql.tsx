@@ -137,6 +137,7 @@ export type Query = {
   criteria?: Maybe<Criteria>,
   criterias: Array<Criteria>,
   setting?: Maybe<Setting>,
+  settingByTaskName: Array<Setting>,
   settings: Array<Setting>,
 };
 
@@ -168,6 +169,11 @@ export type QueryCriteriaArgs = {
 
 export type QuerySettingArgs = {
   id: Scalars['Int']
+};
+
+
+export type QuerySettingByTaskNameArgs = {
+  task: Scalars['String']
 };
 
 export type Setting = {
@@ -340,6 +346,19 @@ export type IssueQuery = (
   & { issue: Maybe<(
     { __typename?: 'Issue' }
     & Pick<Issue, 'id' | 'issue'>
+  )> }
+);
+
+export type SettingByTaskNameQueryVariables = {
+  task: Scalars['String']
+};
+
+
+export type SettingByTaskNameQuery = (
+  { __typename?: 'Query' }
+  & { settingByTaskName: Array<(
+    { __typename?: 'Setting' }
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
   )> }
 );
 
@@ -801,6 +820,42 @@ export function useIssueLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOp
 export type IssueQueryHookResult = ReturnType<typeof useIssueQuery>;
 export type IssueLazyQueryHookResult = ReturnType<typeof useIssueLazyQuery>;
 export type IssueQueryResult = ApolloReactCommon.QueryResult<IssueQuery, IssueQueryVariables>;
+export const SettingByTaskNameDocument = gql`
+    query settingByTaskName($task: String!) {
+  settingByTaskName(task: $task) {
+    id
+    task
+    criteria
+    score
+  }
+}
+    `;
+
+/**
+ * __useSettingByTaskNameQuery__
+ *
+ * To run a query within a React component, call `useSettingByTaskNameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSettingByTaskNameQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSettingByTaskNameQuery({
+ *   variables: {
+ *      task: // value for 'task'
+ *   },
+ * });
+ */
+export function useSettingByTaskNameQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SettingByTaskNameQuery, SettingByTaskNameQueryVariables>) {
+        return ApolloReactHooks.useQuery<SettingByTaskNameQuery, SettingByTaskNameQueryVariables>(SettingByTaskNameDocument, baseOptions);
+      }
+export function useSettingByTaskNameLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SettingByTaskNameQuery, SettingByTaskNameQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<SettingByTaskNameQuery, SettingByTaskNameQueryVariables>(SettingByTaskNameDocument, baseOptions);
+        }
+export type SettingByTaskNameQueryHookResult = ReturnType<typeof useSettingByTaskNameQuery>;
+export type SettingByTaskNameLazyQueryHookResult = ReturnType<typeof useSettingByTaskNameLazyQuery>;
+export type SettingByTaskNameQueryResult = ApolloReactCommon.QueryResult<SettingByTaskNameQuery, SettingByTaskNameQueryVariables>;
 export const SettingDocument = gql`
     query Setting($id: Int!) {
   setting(id: $id) {

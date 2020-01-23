@@ -5,6 +5,7 @@ import { useCriteriasQuery } from '../../../generated/graphql';
 import {useCreateTaskMutation} from '../../../generated/graphql'
 import Input from '../../common/Input'
 import CreateSettingsForm from './CreateSettingsForm';
+import SettingList from './SettingList';
 
 interface InitialProps {
   task: string
@@ -27,8 +28,6 @@ const CreateSettingsPage: NextPage<Props, InitialProps> = props => {
     return <p>An error occurred.</p>;
   }
   const criterias = data?.criterias;
-  console.log('criterias', criterias, 'props', props)
- 
   
   return (
     <>
@@ -36,6 +35,7 @@ const CreateSettingsPage: NextPage<Props, InitialProps> = props => {
         <div style={criteriasSettingsContainer}>
             <h5>Give each solution a score out of 10 for how well it solves your problem</h5>    
             <CreateSettingsForm criterias={criterias} onSettingsCreated={refetch} task={props.task}/>
+            <SettingList criterias={criterias} task={props.task}/>
         </div>
        
       ) : (

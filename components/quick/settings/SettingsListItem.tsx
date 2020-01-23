@@ -32,7 +32,6 @@ const SettingsListItem: React.FC<Props> = ({ criteria, onSettingItemCreated }) =
       ...settingItem, 
       [e.currentTarget.name]: e.currentTarget.value
     }
-    console.log('item', item)
     setSettingItem(item)
     onSettingItemCreated(item)
     

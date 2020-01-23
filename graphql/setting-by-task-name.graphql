@@ -1,0 +1,8 @@
+query settingByTaskName($task: String!) {
+  settingByTaskName(task: $task) {
+    id
+    task
+    criteria
+    score
+  }
+}

@@ -45,7 +45,6 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
     e.preventDefault()
     if(!loading && settings) {
       settings.map(setting => {
-        console.log('setting', setting)
         createSetting({
           variables: {
               input: setting
@@ -72,6 +71,3 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
 };
 
 export default CreateSettingsForm;
-{/* <BackNext backHref="/quick/criteria" 
-nextHref="/quick/task/[id]/settings" 
-asNextHref={`/quick/task/${tasks[0].id}/settings`} />  */}
