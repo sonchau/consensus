@@ -3,6 +3,10 @@ import { NextPage } from 'next';
 import { withApollo } from '../../../lib/apollo';
 import { useIssuesQuery } from '../../../generated/graphql';
 
+const center = {
+    'margin': '1rem auto',
+    'text-align': 'center'
+}
 const LastestIssue = () => {
     const {loading, error, data} = useIssuesQuery({
         // refetch after 500ms to get updated data
@@ -15,7 +19,7 @@ const LastestIssue = () => {
       }
     const lastestIssue = data?.issues[data.issues.length - 1]
     return (
-        <h2>Your issue: {lastestIssue?.issue}</h2>
+        <h2 style={center}>"{lastestIssue?.issue}"</h2>
     )
 }
 

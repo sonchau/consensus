@@ -26,16 +26,16 @@ const Dashboard: React.FC  = () => (
         <div style={dashboard__selection}>
             <h3 style={dashboard__heading}> Choose between ... </h3>
             <DashboardSelection link="/quick/issue" img="/quick.png" heading="Quick Session"
-                text1 = "Where individual participants cam voice opinions and be heard by the group"
-                text2 = "Use when you have a small group where everyone can discuss and agree on the answer and then inut them together"
+                text1 = "Where individual participants can voice opinions and be heard by the group."
+                text2 = "Use when you have a small group where everyone can discuss and agree on the answer and then input them together."
             />
-            <DashboardSelection link="/private" img="/private.png" heading="Private Voting"
-                text1 = "Where participants would like individual votes"
-                text2 = "Use when you have a large group or when participants can not openly discuss their opinions"
+            <DashboardSelection link="/" img="/private.png" heading="Private Voting"
+                text1 = "Where participants would like individual votes."
+                text2 = "Use when you have a large group or when participants can not openly discuss their opinions."
             />
-            <DashboardSelection link="/online" img="/online.png" heading="Online Voting"
-                text1 = "Responeses are open for a defined timeframe. Participants are given links to complete their answers"
-                text2 = "Use when participants are not able to be in the same room to complete their answer or are spread geographically"
+            <DashboardSelection link="/" img="/online.png" heading="Online Voting"
+                text1 = "Responses are open for a defined timeframe. Participants are given links to complete their answers."
+                text2 = "Use when participants are not able to be in the same room to complete their answer or are spread geographically."
             />
 
         </div>
