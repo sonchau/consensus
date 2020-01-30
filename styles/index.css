@@ -215,3 +215,12 @@ button {
   border-left: 1px solid var(--border-color);
   border-bottom: 1px solid var(--border-color);
 }
+.backnext {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 1rem 0;
+
+}
+.last {
+  justify-self: end;
+}

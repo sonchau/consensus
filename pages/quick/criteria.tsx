@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../../lib/apollo';
 import { useCriteriasQuery } from '../../generated/graphql';
 import CriteriaList from '../../components/quick/criteria/CriteriaList';
 import CreateCriteriaForm from '../../components/quick/criteria/CreateCriteriaForm';
 import BackNext from '../../components/common/BackNext';
+import {IssueContext} from '../../interface/common';
+import LastestIssue from '../../components/quick/issue/LatestIssue';
 
 interface InitialProps {}
 
@@ -17,9 +19,11 @@ const criteriasContainer = {
 }
 
 const CriteriaPage: NextPage<Props, InitialProps> = props => {
-  const { loading, error, data, refetch } = useCriteriasQuery({
 
+  const { loading, error, data, refetch } = useCriteriasQuery({
+      
   });
+
 
   if (loading) {
     return <p>Loading...</p>;
@@ -27,9 +31,11 @@ const CriteriaPage: NextPage<Props, InitialProps> = props => {
     return <p>An error occurred.</p>;
   }
   const criterias = data?.criterias;
-
+  
   return (
     <>
+      <LastestIssue />
+      
       <CreateCriteriaForm onCriteriaCreated={refetch}/>
       {criterias && criterias.length ? (
         <div style={criteriasContainer}>
@@ -48,3 +54,4 @@ const CriteriaPage: NextPage<Props, InitialProps> = props => {
 const CriteriaPageWithApollo = withApollo(CriteriaPage);
 
 export default CriteriaPageWithApollo;
+

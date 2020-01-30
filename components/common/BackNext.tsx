@@ -1,5 +1,6 @@
 
 import Link from 'next/link';
+import React, {forwardRef} from 'react';
 
 interface Props {
     backHref: string,
@@ -7,25 +8,16 @@ interface Props {
     asBackHref?: string,
     asNextHref?: string,
 }
-const backnext = {
-    display: 'grid',
-    'gridTemplateColumns': '1fr 1fr',
-    'margin': '1rem 0'
 
-};
-const last = {
-    'justifySelf': 'end'
-}
-  
-const BackNext:  React.FC<Props> = ({backHref, nextHref, asBackHref, asNextHref}) => (
-<div style={backnext} >
+const BackNext:  React.FC<Props> = ({backHref, nextHref, asBackHref, asNextHref, }) => (
+<div className="backnext" >
     <Link href={backHref} as={asBackHref !== '' ? asBackHref : ''}>
         <a className="button back medium"></a>
     </Link>
     <Link href={nextHref} as={asNextHref !== '' ? asNextHref : ''} >
-        <a style={last} className="button next medium"></a>
+        <a className="button next medium last"></a>
     </Link>
 </div>
 );
   
-  export default BackNext;
+export default BackNext;

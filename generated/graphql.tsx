@@ -23,7 +23,7 @@ export type CreateCriteriaInput = {
   score: Scalars['Int'],
 };
 
-export type CreateIssue = {
+export type CreateIssueInput = {
   issue: Scalars['String'],
 };
 
@@ -58,6 +58,7 @@ export type Mutation = {
   deleteTask?: Maybe<Task>,
   createIssue?: Maybe<Issue>,
   updateIssue?: Maybe<Issue>,
+  deleteIssue?: Maybe<Issue>,
   createCriteria?: Maybe<Criteria>,
   updateCriteria?: Maybe<Criteria>,
   deleteCriteria?: Maybe<Criteria>,
@@ -89,12 +90,17 @@ export type MutationDeleteTaskArgs = {
 
 
 export type MutationCreateIssueArgs = {
-  input: CreateIssue
+  input: CreateIssueInput
 };
 
 
 export type MutationUpdateIssueArgs = {
-  input: UpdateIssue
+  input: UpdateIssueInput
+};
+
+
+export type MutationDeleteIssueArgs = {
+  id: Scalars['Int']
 };
 
 
@@ -134,6 +140,7 @@ export type Query = {
   task?: Maybe<Task>,
   taskTitle?: Maybe<Task>,
   issue?: Maybe<Issue>,
+  issues: Array<Maybe<Issue>>,
   criteria?: Maybe<Criteria>,
   criterias: Array<Criteria>,
   setting?: Maybe<Setting>,
@@ -202,7 +209,7 @@ export type UpdateCriteriaInput = {
   score: Scalars['Int'],
 };
 
-export type UpdateIssue = {
+export type UpdateIssueInput = {
   id: Scalars['Int'],
   issue?: Maybe<Scalars['String']>,
 };
@@ -235,7 +242,7 @@ export type CreateCriteriaMutation = (
 );
 
 export type CreateIssueMutationVariables = {
-  input: CreateIssue
+  input: CreateIssueInput
 };
 
 
@@ -310,6 +317,19 @@ export type DeleteCriteriaMutation = (
   )> }
 );
 
+export type DeleteIssueMutationVariables = {
+  id: Scalars['Int']
+};
+
+
+export type DeleteIssueMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteIssue: Maybe<(
+    { __typename?: 'Issue' }
+    & Pick<Issue, 'id' | 'issue'>
+  )> }
+);
+
 export type DeleteSettingMutationVariables = {
   id: Scalars['Int']
 };
@@ -347,6 +367,17 @@ export type IssueQuery = (
     { __typename?: 'Issue' }
     & Pick<Issue, 'id' | 'issue'>
   )> }
+);
+
+export type IssuesQueryVariables = {};
+
+
+export type IssuesQuery = (
+  { __typename?: 'Query' }
+  & { issues: Array<Maybe<(
+    { __typename?: 'Issue' }
+    & Pick<Issue, 'id' | 'issue'>
+  )>> }
 );
 
 export type SettingByTaskNameQueryVariables = {
@@ -439,7 +470,7 @@ export type UpdateCriteriaMutation = (
 );
 
 export type UpdateIssueMutationVariables = {
-  input: UpdateIssue
+  input: UpdateIssueInput
 };
 
 
@@ -513,7 +544,7 @@ export type CreateCriteriaMutationHookResult = ReturnType<typeof useCreateCriter
 export type CreateCriteriaMutationResult = ApolloReactCommon.MutationResult<CreateCriteriaMutation>;
 export type CreateCriteriaMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateCriteriaMutation, CreateCriteriaMutationVariables>;
 export const CreateIssueDocument = gql`
-    mutation CreateIssue($input: CreateIssue!) {
+    mutation CreateIssue($input: CreateIssueInput!) {
   createIssue(input: $input) {
     id
     issue
@@ -717,6 +748,39 @@ export function useDeleteCriteriaMutation(baseOptions?: ApolloReactHooks.Mutatio
 export type DeleteCriteriaMutationHookResult = ReturnType<typeof useDeleteCriteriaMutation>;
 export type DeleteCriteriaMutationResult = ApolloReactCommon.MutationResult<DeleteCriteriaMutation>;
 export type DeleteCriteriaMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteCriteriaMutation, DeleteCriteriaMutationVariables>;
+export const DeleteIssueDocument = gql`
+    mutation DeleteIssue($id: Int!) {
+  deleteIssue(id: $id) {
+    id
+    issue
+  }
+}
+    `;
+export type DeleteIssueMutationFn = ApolloReactCommon.MutationFunction<DeleteIssueMutation, DeleteIssueMutationVariables>;
+
+/**
+ * __useDeleteIssueMutation__
+ *
+ * To run a mutation, you first call `useDeleteIssueMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteIssueMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteIssueMutation, { data, loading, error }] = useDeleteIssueMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteIssueMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteIssueMutation, DeleteIssueMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteIssueMutation, DeleteIssueMutationVariables>(DeleteIssueDocument, baseOptions);
+      }
+export type DeleteIssueMutationHookResult = ReturnType<typeof useDeleteIssueMutation>;
+export type DeleteIssueMutationResult = ApolloReactCommon.MutationResult<DeleteIssueMutation>;
+export type DeleteIssueMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteIssueMutation, DeleteIssueMutationVariables>;
 export const DeleteSettingDocument = gql`
     mutation DeleteSetting($id: Int!) {
   deleteSetting(id: $id) {
@@ -820,6 +884,39 @@ export function useIssueLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOp
 export type IssueQueryHookResult = ReturnType<typeof useIssueQuery>;
 export type IssueLazyQueryHookResult = ReturnType<typeof useIssueLazyQuery>;
 export type IssueQueryResult = ApolloReactCommon.QueryResult<IssueQuery, IssueQueryVariables>;
+export const IssuesDocument = gql`
+    query Issues {
+  issues {
+    id
+    issue
+  }
+}
+    `;
+
+/**
+ * __useIssuesQuery__
+ *
+ * To run a query within a React component, call `useIssuesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useIssuesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIssuesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useIssuesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<IssuesQuery, IssuesQueryVariables>) {
+        return ApolloReactHooks.useQuery<IssuesQuery, IssuesQueryVariables>(IssuesDocument, baseOptions);
+      }
+export function useIssuesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<IssuesQuery, IssuesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<IssuesQuery, IssuesQueryVariables>(IssuesDocument, baseOptions);
+        }
+export type IssuesQueryHookResult = ReturnType<typeof useIssuesQuery>;
+export type IssuesLazyQueryHookResult = ReturnType<typeof useIssuesLazyQuery>;
+export type IssuesQueryResult = ApolloReactCommon.QueryResult<IssuesQuery, IssuesQueryVariables>;
 export const SettingByTaskNameDocument = gql`
     query settingByTaskName($task: String!) {
   settingByTaskName(task: $task) {
@@ -1067,7 +1164,7 @@ export type UpdateCriteriaMutationHookResult = ReturnType<typeof useUpdateCriter
 export type UpdateCriteriaMutationResult = ApolloReactCommon.MutationResult<UpdateCriteriaMutation>;
 export type UpdateCriteriaMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateCriteriaMutation, UpdateCriteriaMutationVariables>;
 export const UpdateIssueDocument = gql`
-    mutation UpdateIssue($input: UpdateIssue!) {
+    mutation UpdateIssue($input: UpdateIssueInput!) {
   updateIssue(input: $input) {
     id
     issue

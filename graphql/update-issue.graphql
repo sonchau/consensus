@@ -1,4 +1,4 @@
-mutation UpdateIssue($input: UpdateIssue!) {
+mutation UpdateIssue($input: UpdateIssueInput!) {
   updateIssue(input: $input) {
     id
     issue    

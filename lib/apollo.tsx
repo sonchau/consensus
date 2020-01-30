@@ -28,8 +28,10 @@ interface WithApolloProps extends WithApolloInitialProps {
  */
 export function withApollo<PageProps extends object, PageInitialProps = PageProps>
     (PageComponent: NextPage<PageProps, PageInitialProps>, { ssr = true } = {}) {
-  const WithApollo: NextPage<PageProps & WithApolloProps, PageInitialProps & WithApolloInitialProps> = ({ apolloClient, apolloState, ...pageProps }) => {
+  const WithApollo: NextPage<PageProps & WithApolloProps, PageInitialProps & WithApolloInitialProps> = 
+  ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState)
+    console.log('client', client)
     return (
       <ApolloProvider client={client}>
         <PageComponent {...pageProps as PageProps} />
@@ -115,7 +117,7 @@ export function withApollo<PageProps extends object, PageInitialProps = PageProp
  * Creates or reuses apollo client in the browser.
  * @param  {Object} initialState
  */
-function initApolloClient(initialState?: ApolloClientCache) {
+export function initApolloClient(initialState?: ApolloClientCache) {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (typeof window === 'undefined') {
