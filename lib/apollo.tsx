@@ -31,7 +31,7 @@ export function withApollo<PageProps extends object, PageInitialProps = PageProp
   const WithApollo: NextPage<PageProps & WithApolloProps, PageInitialProps & WithApolloInitialProps> = 
   ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState)
-    console.log('client', client)
+    //console.log('client', client)
     return (
       <ApolloProvider client={client}>
         <PageComponent {...pageProps as PageProps} />

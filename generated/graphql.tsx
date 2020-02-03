@@ -216,8 +216,8 @@ export type UpdateIssueInput = {
 
 export type UpdateSettingInput = {
   id: Scalars['Int'],
-  task: Scalars['String'],
-  criteria: Scalars['String'],
+  task?: Maybe<Scalars['String']>,
+  criteria?: Maybe<Scalars['String']>,
   score: Scalars['Int'],
 };
 

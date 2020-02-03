@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import {useUpdateSettingMutation} from '../../../generated/graphql';
 
+import Select from '../../common/Select';
 interface Props {
   items: string[];
 }
@@ -11,12 +13,49 @@ const tableData = {
 }
 
 const SettingSummaryItemRaw: React.FC<Props> = ({ items }) => {
-//console.log('items', items)
+  const [updateSettingMutation, { data, loading, error }] = useUpdateSettingMutation();
+
+  const handleScoreItemChange = (e: React.FormEvent<HTMLSelectElement>) => {
+    const { name, value } = e.currentTarget;
+    const {id} = e.currentTarget.dataset
+    const inputId = typeof id === 'string' ? parseInt(id, 10) : 1;
+    const score = typeof value === 'string' ? parseInt(value, 10) : 1;
+    //console.log('handleScoreItemChange', id, 'name', name, 'value', value, 'id', inputId)
+    updateSettingMutation( {
+      variables: {
+        input: {
+          'id': inputId,
+          score
+        }
+      }
+    }
+
+    )
+    
+  }
   return (
     <tr>
         {
-          items.map((item, index) => {
-            return <td style={tableData}>{item}</td>
+          items.map((item: any, index) => {
+            let tmp
+            {Object.keys(item).forEach(key => {
+              if(key === 'score') {
+                //console.log('if key', key, 'value', item)
+                tmp =  <Select name="score" className="task-list-item-delete"
+                 onChange={handleScoreItemChange}
+                 defaultValue= {item[key]}
+                 values={['1','2','3','4','5','6','7','8','9','10']} 
+                 dataId={item['id']}
+                 /> 
+              } else {
+                //console.log('else key', key, 'value', item[key])
+                tmp = 
+                item[key]
+              }
+            })}
+            return <td style={tableData}>
+              {tmp}
+              </td>
           })
         }
     </tr>

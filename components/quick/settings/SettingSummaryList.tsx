@@ -23,8 +23,9 @@ const SettingSummaryList: React.FC<Props> = ({settings}) => {
         {settings && settings.length ? (
           <table style={tableGrid}>
             { 
-              summaries.map((summary, index) => {
-                return <SettingSummaryItem items={summary} />
+               summaries.map((summary: [], index: number) => {
+                //console.log('summary', summary)
+                 return <SettingSummaryItem items={summary} />
               })
             }
           </table>

@@ -4,25 +4,26 @@ import _ from 'underscore'
 
 export interface Settings extends Array<Setting>{}
 
-export const makeSummary = (input: Settings): string[][] => {
+export const makeSummary = (input: Settings): any => {
     let output = []
-    let tasks = _.keys(_.indexBy(input, 'task'))
-    tasks.unshift('')
+    let tasks = _.uniq(input.map(item => {
+        return _.pick(item, 'task')
+    }), 'task')
+
+    tasks.unshift({'task': ''})
     output.push(tasks)
-    const criterias = _.keys(_.indexBy(input, 'criteria'))
+
+    let criterias = _.uniq(input.map(item => {
+        return _.pick(item, 'criteria')
+    }), 'criteria')
     criterias.map(criteria => {
-        //TODO tmp: string | number => fix any
         let tmp: any = [criteria]
-        const where = _.where(input, {criteria})
-        const scores = _.map(where, function(o) { 
-            tmp.push(_.pick(o, 'score')['score'])
-            return _.pick(o, 'score')['score']
-        });
-        output.push(tmp)
-        //console.log('where', where, 'scores', scores, tmp)
-        
+        let where = _.where(input, criteria)
+        let union = _.union(tmp, where)
+        output.push(union)
+        //console.log('tmp', tmp, 'where', where)     
+
     })
     //console.log('output', output)
     return output
-
 }
