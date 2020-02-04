@@ -22,12 +22,14 @@ const SettingSummaryList: React.FC<Props> = ({settings}) => {
         <h5> Your selection</h5>
         {settings && settings.length ? (
           <table style={tableGrid}>
+            <tbody>
             { 
                summaries.map((summary: [], index: number) => {
-                //console.log('summary', summary)
-                 return <SettingSummaryItem items={summary} />
+                console.log('summary', summary)
+                 return <SettingSummaryItem items={summary} key={index}/>
               })
             }
+            </tbody>
           </table>
         ): (
           <p className="no-tasks-message"> No settings</p>

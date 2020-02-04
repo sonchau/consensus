@@ -15,8 +15,10 @@ const selectStyle = {
     'fontSize': 'inherit'
 }
 
-const Select:  React.FC<Props> = ({name, values, defaultValue, onChange, 
-    className, dataId}) => {
+const Select:  React.FC<Props> = ({name, values, defaultValue, onChange, className, dataId}) => {
+    
+    console.log('in Select name', name)
+    
     return (
         <select title="aaa"  data-id={dataId} style={selectStyle} name={name} 
         onChange={onChange} defaultValue={defaultValue}

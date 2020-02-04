@@ -23,7 +23,7 @@ const SettingPage: NextPage = () => {
       ) : task ? (
         <>
           <p> How does "{task.title}" score against your criteria?</p>
-            <CreateSettingsPage task={task.title} />
+            <CreateSettingsPage task={task.title} taskId={task.id} />
           </>
       ) : (
         <p>Task not found.</p>

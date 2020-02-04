@@ -8,7 +8,8 @@ import CreateSettingsForm from './CreateSettingsForm';
 import SettingList from './SettingList';
 
 interface InitialProps {
-  task: string
+  task: string,
+  taskId: number,
 }
 
 interface Props extends InitialProps {}
@@ -33,16 +34,11 @@ const CreateSettingsPage: NextPage<Props, InitialProps> = props => {
     <>
         {criterias && criterias.length ? (
         <div style={criteriasSettingsContainer}>
-            <h5>Give each solution a score out of 10 for how well it solves your problem</h5>    
-            <CreateSettingsForm criterias={criterias} onSettingsCreated={refetch} task={props.task}/>
-            <SettingList criterias={criterias} task={props.task}/>
+            <SettingList criterias={criterias} task={props.task} taskId={props.taskId}/>
         </div>
-       
       ) : (
         <p className="no-tasks-message">There are no tasks here.</p>
       )}
-
-
     </>  
   );
 };

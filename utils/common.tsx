@@ -18,8 +18,11 @@ export const makeSummary = (input: Settings): any => {
     }), 'criteria')
     criterias.map(criteria => {
         let tmp: any = [criteria]
-        let where = _.where(input, criteria)
-        let union = _.union(tmp, where)
+        const where = _.where(input, criteria)
+        const whereScore = where.map(item => {
+            return {'score': item}
+        })
+        const union = _.union(tmp, whereScore);
         output.push(union)
         //console.log('tmp', tmp, 'where', where)     
 
@@ -27,3 +30,4 @@ export const makeSummary = (input: Settings): any => {
     //console.log('output', output)
     return output
 }
+//{'score': }

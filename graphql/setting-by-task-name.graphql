@@ -4,5 +4,7 @@ query settingByTaskName($task: String!) {
     task
     criteria
     score
+    taskId
+    criteriaId
   }
 }

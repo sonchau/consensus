@@ -4,5 +4,7 @@ mutation UpdateSetting($input: UpdateSettingInput!) {
     task
     criteria
     score
+    taskId
+    criteriaId
   }
 }

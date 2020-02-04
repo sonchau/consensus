@@ -2,14 +2,15 @@ import React from 'react';
 import {Setting, useSettingByTaskNameQuery, Criteria} from '../../../generated/graphql'
 import SettingListItemRaw from './SettingListItemRaw'
 import SettingBackNext from './SettingBackNext'
-
+import CreateSettingsForm from './CreateSettingsForm';
 interface Props {
   task: string
   criterias: Criteria[]
+  taskId: number
 }
 
-const SettingList: React.FC<Props> = ({task, criterias}) => {
-  const {loading, error, data} = useSettingByTaskNameQuery({
+const SettingList: React.FC<Props> = ({task, criterias, taskId}) => {
+  const {loading, error, data, refetch} = useSettingByTaskNameQuery({
     variables: { task },
     // refetch after 500ms to get updated data
     pollInterval: 500, 
@@ -17,7 +18,7 @@ const SettingList: React.FC<Props> = ({task, criterias}) => {
   if (loading) {
     return <p>Loading...</p>;
   } else if (error) {
-    return <p>An error occurred.</p>;
+    return <p>An error occurred 111.</p>;
   }
 
   const settings = data?.settingByTaskName;
@@ -32,7 +33,8 @@ const SettingList: React.FC<Props> = ({task, criterias}) => {
             <SettingBackNext currentTask={task} /> 
           </>
         ): (
-          <p className="no-tasks-message"> No settings</p>
+          <CreateSettingsForm criterias={criterias} onSettingsCreated={refetch} task={task} taskId={taskId}/>
+
         )}
     </ul>
   );

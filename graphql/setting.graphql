@@ -4,5 +4,7 @@ query Setting ($id: Int!) {
     task
     criteria
     score
+    taskId
+    criteriaId
   }
 }

@@ -31,6 +31,8 @@ export type CreateSettingInput = {
   task: Scalars['String'],
   criteria: Scalars['String'],
   score: Scalars['Int'],
+  taskId: Scalars['Int'],
+  criteriaId: Scalars['Int'],
 };
 
 export type CreateTaskInput = {
@@ -189,6 +191,8 @@ export type Setting = {
   task: Scalars['String'],
   criteria: Scalars['String'],
   score: Scalars['Int'],
+  taskId: Scalars['Int'],
+  criteriaId: Scalars['Int'],
 };
 
 export type Task = {
@@ -219,6 +223,8 @@ export type UpdateSettingInput = {
   task?: Maybe<Scalars['String']>,
   criteria?: Maybe<Scalars['String']>,
   score: Scalars['Int'],
+  taskId?: Maybe<Scalars['Int']>,
+  criteriaId?: Maybe<Scalars['Int']>,
 };
 
 export type UpdateTaskInput = {
@@ -263,7 +269,7 @@ export type CreateSettingMutation = (
   { __typename?: 'Mutation' }
   & { createSetting: Maybe<(
     { __typename?: 'Setting' }
-    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score' | 'taskId' | 'criteriaId'>
   )> }
 );
 
@@ -389,7 +395,7 @@ export type SettingByTaskNameQuery = (
   { __typename?: 'Query' }
   & { settingByTaskName: Array<(
     { __typename?: 'Setting' }
-    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score' | 'taskId' | 'criteriaId'>
   )> }
 );
 
@@ -402,7 +408,7 @@ export type SettingQuery = (
   { __typename?: 'Query' }
   & { setting: Maybe<(
     { __typename?: 'Setting' }
-    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score' | 'taskId' | 'criteriaId'>
   )> }
 );
 
@@ -413,7 +419,7 @@ export type SettingsQuery = (
   { __typename?: 'Query' }
   & { settings: Array<(
     { __typename?: 'Setting' }
-    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score' | 'taskId' | 'criteriaId'>
   )> }
 );
 
@@ -491,7 +497,7 @@ export type UpdateSettingMutation = (
   { __typename?: 'Mutation' }
   & { updateSetting: Maybe<(
     { __typename?: 'Setting' }
-    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score'>
+    & Pick<Setting, 'id' | 'task' | 'criteria' | 'score' | 'taskId' | 'criteriaId'>
   )> }
 );
 
@@ -583,6 +589,8 @@ export const CreateSettingDocument = gql`
     task
     criteria
     score
+    taskId
+    criteriaId
   }
 }
     `;
@@ -924,6 +932,8 @@ export const SettingByTaskNameDocument = gql`
     task
     criteria
     score
+    taskId
+    criteriaId
   }
 }
     `;
@@ -960,6 +970,8 @@ export const SettingDocument = gql`
     task
     criteria
     score
+    taskId
+    criteriaId
   }
 }
     `;
@@ -996,6 +1008,8 @@ export const SettingsDocument = gql`
     task
     criteria
     score
+    taskId
+    criteriaId
   }
 }
     `;
@@ -1203,6 +1217,8 @@ export const UpdateSettingDocument = gql`
     task
     criteria
     score
+    taskId
+    criteriaId
   }
 }
     `;
