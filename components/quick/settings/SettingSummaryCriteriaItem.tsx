@@ -19,7 +19,7 @@ const SettingSummaryCriteriaItem: React.FC<Props> = ({ criteriaId }) => {
   } else if (error) {
     return <p>An error occurred in SettingSummaryCriteriaItem</p>;
   }
-  console.log('data', data)
+  //console.log('data', data)
   const criteria = data?.criteria
 
   return (

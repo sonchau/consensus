@@ -17,7 +17,7 @@ const selectStyle = {
 
 const Select:  React.FC<Props> = ({name, values, defaultValue, onChange, className, dataId}) => {
     
-    console.log('in Select name', name)
+    //console.log('in Select name', name)
     
     return (
         <select title="aaa"  data-id={dataId} style={selectStyle} name={name} 

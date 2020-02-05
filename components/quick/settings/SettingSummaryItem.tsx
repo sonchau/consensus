@@ -20,7 +20,7 @@ const SettingSummaryItem: React.FC<Props> = ({ items }) => {
     const {id} = e.currentTarget.dataset
     const inputId = typeof id === 'string' ? parseInt(id, 10) : 1;
     const score = typeof value === 'string' ? parseInt(value, 10) : 1;
-    console.log('handleScoreItemChange', id, 'name', name, 'value', value, 'id', inputId)
+    //console.log('handleScoreItemChange', id, 'name', name, 'value', value, 'id', inputId)
 
     updateSettingMutation( {
       variables: {
@@ -49,7 +49,7 @@ const SettingSummaryItem: React.FC<Props> = ({ items }) => {
                   dataId={item[key].id}
                   /> 
               } else if (key === 'criteria') {
-                console.log('else key', key, 'value', item[key])
+                //console.log('else key', key, 'value', item[key])
                 tmp = <SettingSummaryCriteriaItem criteriaId={item[key].criteriaId}/>
               } else {
                 tmp = <span>{item[key]}</span>

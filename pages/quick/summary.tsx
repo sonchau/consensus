@@ -4,6 +4,7 @@ import { withApollo } from '../../lib/apollo';
 import { useSettingsQuery } from '../../generated/graphql';
 import SettingSummaryList from '../../components/quick/settings/SettingSummaryList';
 import BackNext from '../../components/common/BackNext';
+import _ from 'underscore';
 
 interface InitialProps {}
 
@@ -26,7 +27,13 @@ const SummaryPage: NextPage<Props, InitialProps> = props => {
     return <p>An error occurred.</p>;
   }
   const settings = data?.settings;
-    //console.log('settings', settings)
+  let lastTaskId, backHref = ''
+  if (settings && settings.length) {
+    lastTaskId = _.last(settings)?.taskId
+    backHref = `/quick/task/${lastTaskId}/settings`
+  }
+  
+  //console.log('settings', settings, 'lastTaskId', lastTaskId)
   return (
     <>
       <h4>Finalise your scores</h4>
@@ -37,7 +44,7 @@ const SummaryPage: NextPage<Props, InitialProps> = props => {
       ) : (
         <p className="no-tasks-message">There are no settings here.</p>
       )}
-      <BackNext backHref="/quick/issue" nextHref="/quick/task" /> 
+      <BackNext backHref={backHref} nextHref="/quick/result" /> 
     </>
   );
 };

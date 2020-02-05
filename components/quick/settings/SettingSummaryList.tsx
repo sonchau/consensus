@@ -25,7 +25,7 @@ const SettingSummaryList: React.FC<Props> = ({settings}) => {
             <tbody>
             { 
                summaries.map((summary: [], index: number) => {
-                console.log('summary', summary)
+                //console.log('summary', summary)
                  return <SettingSummaryItem items={summary} key={index}/>
               })
             }
