@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useUpdateSettingMutation} from '../../../generated/graphql';
-
+import SettingSummaryCriteriaItem from './SettingSummaryCriteriaItem';
 import Select from '../../common/Select';
 interface Props {
   items: string[];
@@ -48,9 +48,12 @@ const SettingSummaryItem: React.FC<Props> = ({ items }) => {
                   values={['1','2','3','4','5','6','7','8','9','10']} 
                   dataId={item[key].id}
                   /> 
-              } else if (key === 'criteria' || key === 'task') {
-                //console.log('else key', key, 'value', item[key])
-                tmp = item[key]
+              } else if (key === 'criteria') {
+                console.log('else key', key, 'value', item[key])
+                tmp = <SettingSummaryCriteriaItem criteriaId={item[key].criteriaId}/>
+              } else {
+                tmp = <span>{item[key]}</span>
+               
               }
 
             })}

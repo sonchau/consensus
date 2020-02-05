@@ -21,7 +21,7 @@ describe("Test itils common", () => {
 
         const expectOutput = [
             [ {'task': ''}, {'task':'solution 1'}, {'task':'solution 2'}, {'task':'solution 3'} ],
-            [ {'criteria':'Criteria 1'}, 
+            [ {'criteria': {'criteria':'Criteria 1', criteriaId: 1}}, 
               {'score': {
                 '__typename': 'Setting',
                 'criteria': 'Criteria 1',
@@ -51,7 +51,7 @@ describe("Test itils common", () => {
               }}
               
             ],
-            [ {'criteria':'Criteria 2'}, 
+            [ {'criteria':{'criteria':'Criteria 2', criteriaId: 1}}, 
             {'score':{
                 '__typename': 'Setting',
                 'criteria': 'Criteria 2',
@@ -78,7 +78,7 @@ describe("Test itils common", () => {
               }}
             ],
             
-            [ {'criteria':'Criteria 3'}, 
+            [ {'criteria':{'criteria':'Criteria 3', criteriaId: 1}}, 
             {'score':{
                 '__typename': 'Setting',
                 'criteria': 'Criteria 3',

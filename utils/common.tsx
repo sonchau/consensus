@@ -14,10 +14,12 @@ export const makeSummary = (input: Settings): any => {
     output.push(tasks)
 
     let criterias = _.uniq(input.map(item => {
-        return _.pick(item, 'criteria')
+        return _.pick(item, 'criteria', 'criteriaId')
     }), 'criteria')
     criterias.map(criteria => {
-        let tmp: any = [criteria]
+        //console.log('cr', criteria)
+        const criteriaObj = {'criteria': criteria}
+        let tmp: any = [criteriaObj]
         const where = _.where(input, criteria)
         const whereScore = where.map(item => {
             return {'score': item}

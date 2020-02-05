@@ -18,7 +18,7 @@ const SettingList: React.FC<Props> = ({task, criterias, taskId}) => {
   if (loading) {
     return <p>Loading...</p>;
   } else if (error) {
-    return <p>An error occurred 111.</p>;
+    return <p>An error occurred in SettingList</p>;
   }
 
   const settings = data?.settingByTaskName;
