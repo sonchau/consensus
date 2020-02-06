@@ -5,7 +5,7 @@ import { useSettingsQuery } from '../../generated/graphql';
 import SettingSummaryList from '../../components/quick/settings/SettingSummaryList';
 import BackNext from '../../components/common/BackNext';
 import _ from 'underscore';
-
+import LastestIssue from '../../components/quick/issue/LatestIssue';
 interface InitialProps {}
 
 interface Props extends InitialProps {}
@@ -36,6 +36,7 @@ const SummaryPage: NextPage<Props, InitialProps> = props => {
   //console.log('settings', settings, 'lastTaskId', lastTaskId)
   return (
     <>
+      <LastestIssue />
       <h4>Finalise your scores</h4>
       {settings && settings.length ? (
         <div style={criteriasContainer}>

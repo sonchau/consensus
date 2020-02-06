@@ -5,7 +5,7 @@ import { useTasksQuery, TaskStatus } from '../../generated/graphql';
 import TaskList from '../../components/quick/task/TaskList';
 import CreateTaskForm from '../../components/quick/task/CreateTaskForm';
 import BackNext from '../../components/common/BackNext';
-
+import LastestIssue from '../../components/quick/issue/LatestIssue';
 interface InitialProps {}
 
 interface Props extends InitialProps {}
@@ -30,7 +30,7 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
 
   return (
     <>
-    
+      <LastestIssue />
       <CreateTaskForm onTaskCreated={refetch}/>
       {tasks && tasks.length ? (
         <div style={criteriasContainer}>
