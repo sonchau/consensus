@@ -63,14 +63,20 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
     <form onSubmit={handleSubmit}>
       <h5>Give each solution a score out of 10 for how well it solves your problem</h5>    
       <ul>
+        <li className="task-list-heading">
+          <span> Your objective</span>
+          <span className="last"> Weighting</span>
+        </li>
         {criterias.map(criteria => {
           return <SettingsListItem key={criteria.id} criteria={criteria} onSettingItemCreated= {onSettingItemCreated}/>
         })}
       </ul>
       <input type="hidden" value={taskId} name="taskId"/>
-      <button disabled={loading} type="submit" className="button">
+      <div className="button-container">
+        <button disabled={loading} type="submit" className="button">
           {loading? "Loading" : "Add"}
         </button>
+      </div>  
     </form>
 
   );

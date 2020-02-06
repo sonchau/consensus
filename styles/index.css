@@ -33,6 +33,9 @@ ul {
   padding: 0;
   
 }
+li {
+  list-style-type:none
+}
 p {
   line-height: 2rem;
 }
@@ -226,4 +229,16 @@ button {
 }
 .last {
   justify-self: end;
+}
+
+.task-list-heading {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #ccc;
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+.button-container {
+  text-align: center;
 }

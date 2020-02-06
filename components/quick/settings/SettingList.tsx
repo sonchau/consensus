@@ -27,6 +27,10 @@ const SettingList: React.FC<Props> = ({task, criterias, taskId}) => {
         {settings && settings.length ? (
           <>
             <h5> Your selection</h5>
+            <div className="task-list-heading">
+              <span> Your objective</span>
+              <span className="last"> Weighting</span>
+            </div>
             {settings.map(setting => {
               return <SettingListItemRaw key={setting.id} setting = {setting} />
             })}

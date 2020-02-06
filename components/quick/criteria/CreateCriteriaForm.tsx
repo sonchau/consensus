@@ -7,9 +7,6 @@ interface Props {
   onCriteriaCreated: () => void
 }
 
-const select = {
-  'fontSize': 'inherit'
-}
 
 const CreateCriteriaForm: React.FC<Props> = ({onCriteriaCreated}) => {
   const [name, setName] = useState('');

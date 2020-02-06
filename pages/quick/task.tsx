@@ -42,7 +42,7 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
         </div>
         
       ) : (
-        <p className="no-tasks-message">There are no tasks here.</p>
+        <p className="no-tasks-message"></p>
       )}
     </>
   );

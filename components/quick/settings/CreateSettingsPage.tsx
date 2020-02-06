@@ -37,7 +37,7 @@ const CreateSettingsPage: NextPage<Props, InitialProps> = props => {
             <SettingList criterias={criterias} task={props.task} taskId={props.taskId}/>
         </div>
       ) : (
-        <p className="no-tasks-message">There are no tasks here.</p>
+        <p className="no-tasks-message"></p>
       )}
     </>  
   );
