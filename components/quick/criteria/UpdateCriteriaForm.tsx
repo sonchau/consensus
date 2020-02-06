@@ -51,7 +51,7 @@ const UpdateCriteriaForm: React.FC<Props> = ({ initialValues }) => {
 
   return (
     <>
-      <h4>Update your criteria</h4>
+      <h4>Update your objective</h4>
       <form onSubmit={handleSubmit} className="form">
           {error && <p> an error</p>}
         

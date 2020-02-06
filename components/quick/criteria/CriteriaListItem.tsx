@@ -32,37 +32,7 @@ const criteriaItem = {
   'gridTemplateColumns': '90% 1rem 1fr',
   'borderBottom': '1px solid #e2e8f0',
   'padding': '1rem',
-
-  // css pseudo class does not seem working with jss, properly switch back to gloabal css
-  // '&:nth-child(odd)': {
-  //   background: 'red'
-  // },
-
-  // '&:last-child': {
-  //   'borderBottom': 0
-  // }
-
 }
-// .task-list-item-delete:hover {
-//   color: var(--text-color);
-// }
-
-
-// .task-list-item {
-//   align-items: center;
-//   border-bottom: 1px solid var(--border-color);
-//   display: flex;
-//   padding: 1rem;
-// }
-
-// .task-list-item:nth-child(odd) {
-//   background: var(--bg-highlight);
-// }
-
-// .task-list-item:last-child {
-//   border-bottom: 0;
-//   border-radius: 0 0 var(--default-radius) var(--default-radius);
-// }
 
 const CriteriaListItem: React.FC<Props> = ({ criteria }) => {
   const [deleteCriteria, { loading, error }] = useDeleteCriteriaMutation({

@@ -31,8 +31,11 @@ p,
 ul {
   margin: var(--default-space);
   padding: 0;
+  
 }
-
+p {
+  line-height: 2rem;
+}
 img {
   max-width: 100%;
 }
@@ -195,7 +198,7 @@ button {
 
 .form {
   display: grid;
-  grid-template-columns: 80% 3rem 1fr;
+  grid-template-columns: 80% 7rem 1fr;
   padding: 1rem;
   border: 1px solid var(--border-color);
   border-radius: 1rem;

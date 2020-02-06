@@ -39,7 +39,7 @@ const CriteriaPage: NextPage<Props, InitialProps> = props => {
       <CreateCriteriaForm onCriteriaCreated={refetch}/>
       {criterias && criterias.length ? (
         <div style={criteriasContainer}>
-            <h4> Your criterias</h4>    
+            <h4> Your objectives</h4>    
             <CriteriaList criterias={criterias} />
         </div>
        

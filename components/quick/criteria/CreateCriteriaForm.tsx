@@ -13,12 +13,15 @@ const select = {
 
 const CreateCriteriaForm: React.FC<Props> = ({onCriteriaCreated}) => {
   const [name, setName] = useState('');
-  const [score, setScore] = useState('1');
+  const [score, setScore] = useState('');
+  const [hasError, setHasError] = useState(false)
+
   const [createCriteria, {loading, error, data}] = useCreateCriteriaMutation( {
       onCompleted: ()=> {
         onCriteriaCreated()
         setName('')
-        setScore('1')
+        setScore('')
+        setHasError(false)
       }
   })
 
@@ -33,6 +36,11 @@ const CreateCriteriaForm: React.FC<Props> = ({onCriteriaCreated}) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if(score === '' || score === 'Weighting') {
+      setHasError(true)
+      return
+    }
+
     if(!loading && name) {
       const inputScore = typeof score === 'string' ? parseInt(score, 10) : 1;
         createCriteria({
@@ -48,22 +56,23 @@ const CreateCriteriaForm: React.FC<Props> = ({onCriteriaCreated}) => {
   }
   return (
     <>
-      <h3> How will you define success? </h3>
-      <p>Create a list of criteria by which your proposed solutions will be measured.</p>
-      <p>Give each criteria a weighting out of 10, with 1 the least important and 10 the most important.</p>
+      <h3> How will you measure success? </h3>
+      <p>List the objectives you hope to achieve by solving this problem and then give each objective a relative weighting (out of 10), where 1 means it is relatively less important and 10 is very important.</p>
+      {error && <p className="alert-error"> Some error </p>}
+      {hasError && <p className="alert-error"> Please select weighting</p>}
       <form onSubmit={handleSubmit} className="form">
-          {error && <p className="alert-error"> Some error </p>}
 
         <Input
           name="name"
-          placeholder="Your criteria"
+          placeholder="Your objective"
           value={name}
           onChange={onInputChange}
         />
-        <Select name="score" onChange={handleScoreChange} values={['1','2','3','4','5','6','7','8','9','10']} />
+        <Select name="score" onChange={handleScoreChange} values={['Weighting','1','2','3','4','5','6','7','8','9','10']} />
         <button disabled={loading} type="submit" className="button">
           {loading? "Loading" : "Add"}
         </button>
+
       </form>
     </>
   );
