@@ -33,7 +33,7 @@ const CreateTaskForm: React.FC<Props> = ({onTaskCreated}) => {
   }
   return (
     <>
-      <h2>What are your potential solutions</h2>
+      <h2>What are your potential solutions?</h2>
       <p>Describe your solution/s in simple, short and clear language</p>
       <form onSubmit={handleSubmit}  className="form">
           {error && <p className="alert-error"> Some error </p>}

@@ -28,7 +28,7 @@ const ResultPage: NextPage<Props, InitialProps> = props => {
   } else if (error) {
     return <p>An error occurred on result page.</p>;
   }
-  const settings = data?.settings;
+  const settings = data?.settings 
   //console.log('settings', settings, 'lastTaskId', lastTaskId)
   return (
     <>
