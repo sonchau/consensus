@@ -14,7 +14,8 @@ interface Props extends InitialProps {}
 const criteriasContainer = {
     'border': '1px solid #e2e8f0',
     'borderRadius': '1rem',
-    'padding': '1rem'
+    'padding': '1rem',
+    'marginBottom': '1rem'
 }
 
 const ResultPage: NextPage<Props, InitialProps> = props => {
@@ -40,7 +41,9 @@ const ResultPage: NextPage<Props, InitialProps> = props => {
       ) : (
         <p className="no-tasks-message">There are no result here.</p>
       )}
-      <BackNext backHref="/quick/summary" nextHref="/quick/end" /> 
+      <button disabled={loading} className="button">
+        Start Again
+      </button>
     </>
   );
 };
