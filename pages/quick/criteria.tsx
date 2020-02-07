@@ -41,12 +41,13 @@ const CriteriaPage: NextPage<Props, InitialProps> = props => {
         <div style={criteriasContainer}>
             <h4> Your objectives</h4>    
             <CriteriaList criterias={criterias} />
+            <BackNext backHref="/quick/issue" nextHref="/quick/task" /> 
         </div>
        
       ) : (
         <p className="no-tasks-message"></p>
       )}
-      <BackNext backHref="/quick/issue" nextHref="/quick/task" /> 
+      
     </>
   );
 };
