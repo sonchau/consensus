@@ -102,3 +102,40 @@ export const makeTotalArray = (input: number[][]) => {
     //console.log('output', output)
     return output
 }
+
+interface PrevNext {
+    prev: string,
+    next: string
+}
+
+export const getPrevNext = (currentTaskId: number, taskIds: string): PrevNext => {
+    let prev = '', next = ''
+    const taskIdList = taskIds.split('_')
+    if (taskIdList.length === 1) {
+        prev = '/quick/task'
+        next = '/quick/summary'
+    } else {
+        const index = _.indexOf(taskIdList, currentTaskId.toString())
+
+        if(index ===0) {
+            //console.log('first')
+            //first task
+            prev = '/quick/task'
+            next = `/quick/task/${taskIdList[index+1]}/${taskIds}`
+        } else if (index === taskIdList.length -1) {
+            //last task
+            //console.log('last')
+            prev = `/quick/task/${taskIdList[index-1]}/${taskIds}`
+            next = '/quick/summary'
+        } else {
+            //middle task
+            //console.log('middle')
+            prev = `/quick/task/${taskIdList[index-1]}/${taskIds}`
+            next = `/quick/task/${taskIdList[index+1]}/${taskIds}`
+        }
+    }
+    return {
+        prev,
+        next
+    }
+}

@@ -6,6 +6,8 @@ import TaskList from '../../components/quick/task/TaskList';
 import CreateTaskForm from '../../components/quick/task/CreateTaskForm';
 import BackNext from '../../components/common/BackNext';
 import LastestIssue from '../../components/quick/issue/LatestIssue';
+import _ from 'underscore';
+
 interface InitialProps {}
 
 interface Props extends InitialProps {}
@@ -27,7 +29,8 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
     return <p>An error occurred.</p>;
   }
   const tasks = data?.tasks;
-
+  const taskIds = (tasks && tasks.length) ?  _.pluck(tasks, 'id').join('_') : ''
+  console.log('tasks', taskIds)
   return (
     <>
       <LastestIssue />
@@ -36,9 +39,10 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
         <div style={criteriasContainer}>
             <h4>Your solutions</h4>    
             <TaskList tasks={tasks} />
+
             <BackNext backHref="/quick/criteria" 
-            nextHref="/quick/task/[id]/settings" 
-            asNextHref={`/quick/task/${tasks[0].id}/settings`} /> 
+            nextHref="/quick/task/[id]/[taskIds]" 
+            asNextHref={`/quick/task/${tasks[0].id}/${taskIds}`} /> 
         </div>
         
       ) : (

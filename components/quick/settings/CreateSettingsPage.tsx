@@ -7,6 +7,8 @@ import Input from '../../common/Input'
 import CreateSettingsForm from './CreateSettingsForm';
 import SettingList from './SettingList';
 
+import SettingBackNext from './SettingBackNext'
+
 interface InitialProps {
   task: string,
   taskId: number,
@@ -33,8 +35,10 @@ const CreateSettingsPage: NextPage<Props, InitialProps> = props => {
   return (
     <>
         {criterias && criterias.length ? (
-        <div style={criteriasSettingsContainer}>
-            <SettingList criterias={criterias} task={props.task} taskId={props.taskId}/>
+        <div style={criteriasSettingsContainer}> 
+            {/* <SettingList criterias={criterias} task={props.task} taskId={props.taskId}/> */}
+            <CreateSettingsForm criterias={criterias} onSettingsCreated={refetch} task={props.task} taskId={props.taskId}/>
+            
         </div>
       ) : (
         <p className="no-tasks-message"></p>

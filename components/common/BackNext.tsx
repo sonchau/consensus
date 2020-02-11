@@ -7,15 +7,16 @@ interface Props {
     nextHref: string,
     asBackHref?: string,
     asNextHref?: string,
+    //nextClick?(e: React.FormEvent<HTMLFormElement></HTMLFormElement>): void,
 }
 
-const BackNext:  React.FC<Props> = ({backHref, nextHref, asBackHref, asNextHref, }) => (
+const BackNext:  React.FC<Props> = ({backHref, nextHref, asBackHref, asNextHref}) => (
 <div className="backnext" >
     <Link href={backHref} as={asBackHref !== '' ? asBackHref : ''}>
         <a className="button back medium"></a>
     </Link>
     <Link href={nextHref} as={asNextHref !== '' ? asNextHref : ''} >
-        <a className="button next medium last"></a>
+        <a  className="button next medium last"></a>
     </Link>
 </div>
 );

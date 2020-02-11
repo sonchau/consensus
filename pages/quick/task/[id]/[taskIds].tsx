@@ -8,6 +8,7 @@ import LastestIssue from '../../../../components/quick/issue/LatestIssue';
 
 const SettingPage: NextPage = () => {
   const router = useRouter();
+  //console.log('router', router)
   const id =
     typeof router.query.id === 'string' ? parseInt(router.query.id, 10) : NaN;
   const { loading, error, data, refetch } = useTaskQuery({
@@ -25,7 +26,7 @@ const SettingPage: NextPage = () => {
       ) : task ? (
         <>
           <LastestIssue />
-          <p> How does "{task.title}" score against your criteria?</p>
+          <p> How does <strong>"{task.title}"</strong> score against your objective?</p>
             <CreateSettingsPage task={task.title} taskId={task.id} />
           </>
       ) : (

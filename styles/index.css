@@ -230,6 +230,9 @@ button {
 .last {
   justify-self: end;
 }
+.first {
+  justify-self: start;
+}
 
 .task-list-heading {
   display: grid;

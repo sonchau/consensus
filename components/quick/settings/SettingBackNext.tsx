@@ -4,10 +4,11 @@ import {useTasksQuery, TaskStatus} from '../../../generated/graphql'
 import BackNext from '../../common/BackNext'
 
 interface Props{
-    currentTask: string
+    currentTask: string,
+    nextClick?:(e: React.FormEvent<HTMLButtonElement>) => void,
 }
 
-const SettingBackNext: React.FC<Props> = ({currentTask}) => {
+const SettingBackNext: React.FC<Props> = ({currentTask, nextClick}) => {
 
     const { loading, error, data, refetch } = useTasksQuery({
         variables: { status: TaskStatus.Active }
@@ -50,12 +51,13 @@ const SettingBackNext: React.FC<Props> = ({currentTask}) => {
             }
         }
     }
-
+    
     return (
+
         <BackNext backHref= {backHref}
         asBackHref= {asBackHref} 
         nextHref= {nextHref}
-        asNextHref={asNextHref} /> 
+        asNextHref={asNextHref} nextClick={nextClick}/> 
     )
 }
 
