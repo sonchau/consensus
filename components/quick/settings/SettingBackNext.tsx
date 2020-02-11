@@ -5,10 +5,9 @@ import BackNext from '../../common/BackNext'
 
 interface Props{
     currentTask: string,
-    nextClick?:(e: React.FormEvent<HTMLButtonElement>) => void,
 }
 
-const SettingBackNext: React.FC<Props> = ({currentTask, nextClick}) => {
+const SettingBackNext: React.FC<Props> = ({currentTask}) => {
 
     const { loading, error, data, refetch } = useTasksQuery({
         variables: { status: TaskStatus.Active }
@@ -57,7 +56,7 @@ const SettingBackNext: React.FC<Props> = ({currentTask, nextClick}) => {
         <BackNext backHref= {backHref}
         asBackHref= {asBackHref} 
         nextHref= {nextHref}
-        asNextHref={asNextHref} nextClick={nextClick}/> 
+        asNextHref={asNextHref}/> 
     )
 }
 

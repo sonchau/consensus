@@ -7,7 +7,6 @@ interface Props {
     nextHref: string,
     asBackHref?: string,
     asNextHref?: string,
-    //nextClick?(e: React.FormEvent<HTMLFormElement></HTMLFormElement>): void,
 }
 
 const BackNext:  React.FC<Props> = ({backHref, nextHref, asBackHref, asNextHref}) => (

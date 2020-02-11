@@ -98,7 +98,6 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
           {loading? "Loading" : "Next"}
         </button>
       </div>
-      {/* <SettingBackNext currentTask={task} nextClick={handleSubmit}/>    */}
     </form>
 
   );
