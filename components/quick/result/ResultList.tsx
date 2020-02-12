@@ -11,7 +11,7 @@ interface Props {
 const tableGrid = {
   'borderTop': '1px solid #e2e8f0',
   'borderRight': '1px solid #e2e8f0',
-  'margin': '0 auto',
+  'margin': '3rem auto',
   'text-align': 'center'
 }
 
@@ -28,7 +28,10 @@ const ResultList: React.FC<Props> = ({settings}) => {
 
   return (
     <>
-        <h5> Your selection</h5>
+        <h4> Details</h4>
+        < hr />
+        <p>Here is a breakdown of your scores for each solution and objective.</p>
+        < hr />
         { (results && results.length) ? (
           <table style={tableGrid}>
           <tbody>

@@ -1,5 +1,5 @@
 
-import {Setting, Criteria } from '../generated/graphql'
+import {Setting, Criteria, TasksDocument } from '../generated/graphql'
 import _ from 'underscore'
 
 export interface Settings extends Array<Setting>{}
@@ -137,5 +137,21 @@ export const getPrevNext = (currentTaskId: number, taskIds: string): PrevNext =>
     return {
         prev,
         next
+    }
+}
+
+export interface ChartData {
+    labels: string[],
+    data: string[]
+}
+export const makeHorizontalChartData = (input : object[][]):  ChartData => {
+    let labels  = _.pluck(input[0], 'task')
+    labels.shift()
+
+    let data  = _.pluck(input[input.length - 1], 'total')
+    data.shift()
+    return {
+        labels,
+        data
     }
 }

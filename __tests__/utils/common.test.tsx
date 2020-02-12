@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, waitForElement } from "@testing-library/react";
-import {makeSummary, Settings, makeResult, Criterias, makeTotalArray } from '../../utils/common'
+import {makeSummary, Settings, makeResult, Criterias, makeTotalArray, makeHorizontalChartData } from '../../utils/common'
 import { Criteria } from "../../generated/graphql";
 
 
@@ -192,6 +192,59 @@ describe("Test itils common", () => {
 
         expect(output).toEqual(expectOutput)
         //console.log('expectOutput', expectOutput)
+      });
+
+      test("should make data for chart ", async () => {
+        
+        const input = [
+          [ {'task': ''}, {'task':'solution 1'}, {'task':'solution 2'}, {'task':'solution 3'} ],
+          [ {'criteria': {'criteria':'Criteria 1'}}, 
+            {'score': {
+              'multiplyScore': 1
+              }
+            }
+            ,
+            {'score': {
+              'multiplyScore': 4
+            }},
+            
+            {'score': {
+              'multiplyScore': 7
+            }}
+            
+          ],
+          [ {'criteria':{'criteria':'Criteria 2'}}, 
+          {'score':{
+            'multiplyScore': 2
+            }},
+            {'score':{
+              'multiplyScore': 5
+            }},
+            {'score':{
+              'multiplyScore': 8
+            }}
+          ],
+          
+          [ {'criteria':{'criteria':'Criteria 3'}}, 
+          {'score':{
+            'multiplyScore': 3
+            }},
+            {'score':{
+              'multiplyScore': 6
+            }},
+            {'score':{
+              'multiplyScore': 9
+            }}
+          ],
+          [ {'total': ''}, {'total': '6'}, {'total':'15'}, {'total':'24'} ],
+        ] 
+        const expectOutput = makeHorizontalChartData(input)
+        const output = {
+          labels: ['solution 1', 'solution 2', 'solution 3'],
+          data: ["6", "15", "24"]
+        }
+
+        expect(output).toEqual(expectOutput)
       });
 
   });

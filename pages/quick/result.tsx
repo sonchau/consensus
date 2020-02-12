@@ -6,15 +6,14 @@ import ResultList from '../../components/quick/result/ResultList';
 import BackNext from '../../components/common/BackNext';
 import _ from 'underscore';
 import LastestIssue from '../../components/quick/issue/LatestIssue';
+import ResultChart from '../../components/quick/result/ResultChart'
 
 interface InitialProps {}
 
 interface Props extends InitialProps {}
 
 const criteriasContainer = {
-    'border': '1px solid #e2e8f0',
-    'borderRadius': '1rem',
-    'padding': '1rem',
+
     'marginBottom': '1rem'
 }
 
@@ -33,9 +32,13 @@ const ResultPage: NextPage<Props, InitialProps> = props => {
   return (
     <>
       <LastestIssue />
-      <h4>Your result</h4>
+      <h4>Results</h4>
+      <hr />
+      <p>Base on your evaluation, the best solution is </p>
+      <hr />
       {settings && settings.length ? (
         <div style={criteriasContainer}>
+            <ResultChart settings={settings} />
             <ResultList settings={settings} />    
         </div>
       ) : (
