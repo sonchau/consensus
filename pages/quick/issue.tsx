@@ -3,6 +3,9 @@ import { NextPage } from 'next';
 import { withApollo } from '../../lib/apollo';
 import { useIssueQuery } from '../../generated/graphql';
 import CreateIssueForm from '../../components/quick/issue/CreateIssueForm';
+import Drawer from '../../components/quick/issue/Drawer';
+
+
 interface InitialProps {}
 
 interface Props extends InitialProps {}
@@ -19,7 +22,10 @@ const IssuePage: NextPage<Props, InitialProps> = props => {
   const issue = data?.issue;
 
   return (
+    <>
+    <Drawer />
     <CreateIssueForm />
+    </>
   );
 };
 
