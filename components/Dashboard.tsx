@@ -1,6 +1,8 @@
 
 import Link from 'next/link';
 import DashboardSelection from './DashboardSelection';
+import Drawer from './common/Drawer'
+import DashboardHelp from './DashboardHelp'
 
 const dashboard = {
 
@@ -23,6 +25,7 @@ const Dashboard: React.FC  = () => (
     <div style={dashboard} >
         <h1>Consensus</h1>
         <h2> Find the best solution to a specific problem.</h2>
+        <Drawer buttonText="Help" component= {<DashboardHelp />} /> 
         <div style={dashboard__selection}>
             <h3 style={dashboard__heading}> Choose between ... </h3>
             <DashboardSelection link="/quick/issue" img="/quick.png" heading="Quick Session"

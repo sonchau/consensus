@@ -7,14 +7,19 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import DrawerContent from './DrawerContent';
+
 
 const drawerContainer = {
     'text-align': 'right',
     marginBottom: '1rem'
 }
+interface Props {
+  buttonText: string
+  component: JSX.Element[] | JSX.Element
+}
+//const BackNext:  React.FC<Props> = ({backHref, nextHref, asBackHref, asNextHref}) => (
 
-export default function TemporaryDrawer() {
+const DrawerComponent:React.FC<Props> = ({buttonText, component}) => {
   
   const [state, setState] = React.useState({
     top: false,
@@ -40,10 +45,11 @@ export default function TemporaryDrawer() {
 
   return (
     <div style={drawerContainer}>
-      <button className="button" onClick={toggleDrawer('right', true)}>Click for help</button>
+      <button className="button" onClick={toggleDrawer('right', true)}>{buttonText}</button>
       <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
-            <DrawerContent />
+        {component}
       </Drawer>
     </div>
   );
 }
+export default DrawerComponent;
