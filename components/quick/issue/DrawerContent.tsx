@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
 
-const container = {
-    'margin': '2rem',
-    width: '60rem'
-}
 const bullet = {
     listStyleType: 'inherit',
     lineHeight: '2rem',
@@ -19,7 +15,7 @@ const dot = {
 const DrawerContent = () => {
 
     return (
-        <div style={container}>
+        <div className="drawer-container">
             <strong>So you've got a choice to make.</strong>
             <p>You're in danger of going in circles when really you want to make an evidence-based decision.</p>
             <p>ChoozeE will help to guide you through the decision-making process. Flexible enough to be used by individuals or groups, the tool will act as a digital facilitator, offering you tips along the way and keeping a record of your progress and results.</p>

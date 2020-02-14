@@ -245,3 +245,8 @@ button {
 .button-container {
   text-align: center;
 }
+
+.drawer-container {
+  margin: 2rem;
+  width: 60rem;
+}

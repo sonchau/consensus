@@ -3,14 +3,10 @@ import Link from 'next/link';
 import DashboardSelection from './DashboardSelection';
 import Drawer from './common/Drawer'
 
-const dashboard__help = {
-
-}
-
-const Dashboard: React.FC  = () => (
-    <div style={dashboard__help} >
+const DashboardHelp: React.FC  = () => (
+    <div className="drawer-container">
         <h1>Dash board help</h1>
     </div>
 );
-  
-export default Dashboard;
+
+export default DashboardHelp;
