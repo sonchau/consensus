@@ -7,7 +7,8 @@ import CreateTaskForm from '../../components/quick/task/CreateTaskForm';
 import BackNext from '../../components/common/BackNext';
 import LastestIssue from '../../components/quick/issue/LatestIssue';
 import _ from 'underscore';
-
+import Drawer from '../../components/common/Drawer'
+import DrawerContent from '../../components/quick/task/DrawerContent';
 interface InitialProps {}
 
 interface Props extends InitialProps {}
@@ -30,9 +31,10 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
   }
   const tasks = data?.tasks;
   const taskIds = (tasks && tasks.length) ?  _.pluck(tasks, 'id').join('_') : ''
-  console.log('tasks', taskIds)
+  //console.log('tasks', taskIds)
   return (
     <>
+      <Drawer buttonText="Help" component={<DrawerContent />} />
       <LastestIssue />
       <CreateTaskForm onTaskCreated={refetch}/>
       {tasks && tasks.length ? (

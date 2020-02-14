@@ -7,6 +7,8 @@ import CreateCriteriaForm from '../../components/quick/criteria/CreateCriteriaFo
 import BackNext from '../../components/common/BackNext';
 import {IssueContext} from '../../interface/common';
 import LastestIssue from '../../components/quick/issue/LatestIssue';
+import Drawer from '../../components/common/Drawer'
+import DrawerContent from '../../components/quick/criteria/DrawerContent';
 
 interface InitialProps {}
 
@@ -34,6 +36,7 @@ const CriteriaPage: NextPage<Props, InitialProps> = props => {
   
   return (
     <>
+      <Drawer buttonText="Help" component={<DrawerContent />} />
       <LastestIssue />
       
       <CreateCriteriaForm onCriteriaCreated={refetch}/>

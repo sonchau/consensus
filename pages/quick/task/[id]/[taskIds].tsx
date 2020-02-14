@@ -5,6 +5,8 @@ import { withApollo } from '../../../../lib/apollo';
 import { useTaskQuery, useCriteriasQuery } from '../../../../generated/graphql';
 import CreateSettingsPage from '../../../../components/quick/settings/CreateSettingsPage'
 import LastestIssue from '../../../../components/quick/issue/LatestIssue';
+import Drawer from '../../../../components/common/Drawer'
+import DrawerContent from '../../../../components/quick/task/DrawerContent';
 
 const SettingPage: NextPage = () => {
   const router = useRouter();
@@ -19,6 +21,7 @@ const SettingPage: NextPage = () => {
   const task = data?.task;
   return (
     <>
+      <Drawer buttonText="Help" component={<DrawerContent />} />
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
