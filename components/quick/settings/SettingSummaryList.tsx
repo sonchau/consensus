@@ -19,7 +19,7 @@ const SettingSummaryList: React.FC<Props> = ({settings}) => {
   //console.log(summaries)
   return (
     <>
-        <h5> Your selection</h5>
+        <h3>Step 5: Consider all of your scores here for each option against each solution and make sure you are satisfied they are a fair evaluation.</h3>
         {settings && settings.length ? (
           <table style={tableGrid}>
             <tbody>

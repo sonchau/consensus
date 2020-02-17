@@ -34,7 +34,7 @@ const ResultPage: NextPage<Props, InitialProps> = props => {
       <LastestIssue />
       <h4>Results</h4>
       <hr />
-      <p>Base on your evaluation, the best solution is </p>
+      <p>Base on your evaluation, the highest scoring option is</p>
       <hr />
       {settings && settings.length ? (
         <div style={criteriasContainer}>

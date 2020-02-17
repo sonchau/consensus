@@ -55,7 +55,7 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
     e.preventDefault()
     if(!loading && settings) {
       settings.map(setting => {
-        console.log('setting', setting)
+        //console.log('setting', setting)
         createSetting({
           variables: {
               input: setting
@@ -63,24 +63,23 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
        })
       })
     }
-
   }
-
-
   useEffect(()=> {
     if(data && data.createSetting) {
-      console.log('effect')
+      //console.log('effect')
       router.push(prevNext.next)
     }
 }, [data])
 
   return (
+
     <form onSubmit={handleSubmit}>
-      <h5>Give each solution a score out of 10 (where 10 is the highest) for how well it addresses each objective.</h5>    
+      <h3> Step 4: How does <strong className={prevNext.displayColor}>"{task}"</strong> score against your objective?</h3>
+      <p>Give each option a score out of 10 (where 10 is the highest) for how well it addresses each objective.</p>    
       <ul>
         <li className="task-list-heading">
           <span> Your objective</span>
-          <span className="last"> Weighting</span>
+          <span className="last">Score</span>
         </li>
         {criterias.map(criteria => {
           return <SettingsListItem key={criteria.id} criteria={criteria} onSettingItemCreated= {onSettingItemCreated}/>
@@ -91,7 +90,7 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
 
       <div className="backnext">
         <Link href={prevNext.prev} >
-          <button className="button first"> Prev </button>
+          <button className="button first"> Back </button>
         </Link>
 
         <button disabled={loading} type="submit" className="button last">

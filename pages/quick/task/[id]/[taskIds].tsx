@@ -10,13 +10,13 @@ import DrawerContent from '../../../../components/quick/task/DrawerContent';
 
 const SettingPage: NextPage = () => {
   const router = useRouter();
-  //console.log('router', router)
+  console.log('router', router)
   const id =
     typeof router.query.id === 'string' ? parseInt(router.query.id, 10) : NaN;
   const { loading, error, data, refetch } = useTaskQuery({
     variables: { id }
   });
-  //console.log('data', data)
+  console.log('data', data)
 
   const task = data?.task;
   return (
@@ -29,8 +29,7 @@ const SettingPage: NextPage = () => {
       ) : task ? (
         <>
           <LastestIssue />
-          <p> How does <strong>"{task.title}"</strong> score against your objective?</p>
-            <CreateSettingsPage task={task.title} taskId={task.id} />
+          <CreateSettingsPage task={task.title} taskId={task.id} />
           </>
       ) : (
         <p>Task not found.</p>

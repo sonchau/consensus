@@ -105,11 +105,22 @@ export const makeTotalArray = (input: number[][]) => {
 
 interface PrevNext {
     prev: string,
-    next: string
+    next: string,
+    displayColor: string
 }
 
+const indexColor = [
+     'red',
+     'blue',
+     'green',
+     'purple',
+     'yellow',
+     'indigo',
+     'violet'
+]
+
 export const getPrevNext = (currentTaskId: number, taskIds: string): PrevNext => {
-    let prev = '', next = ''
+    let prev = '', next = '', displayColor = 'red'
     const taskIdList = taskIds.split('_')
     if (taskIdList.length === 1) {
         prev = '/quick/task'
@@ -133,10 +144,16 @@ export const getPrevNext = (currentTaskId: number, taskIds: string): PrevNext =>
             prev = `/quick/task/${taskIdList[index-1]}/${taskIds}`
             next = `/quick/task/${taskIdList[index+1]}/${taskIds}`
         }
+
+        if (index < 6) {
+            displayColor = indexColor[index]
+        }
     }
+
     return {
         prev,
-        next
+        next,
+        displayColor
     }
 }
 

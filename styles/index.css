@@ -202,13 +202,19 @@ button {
 .form {
   display: grid;
   grid-template-columns: 80% 7rem 1fr;
-  padding: 1rem;
-  border: 1px solid var(--border-color);
-  border-radius: 1rem;
-  margin-bottom: 1rem;
   grid-gap: 1rem;
 }
 
+.form-container {
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  outline: none;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  font-size: inherit
+
+}
 .table-gird {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -249,4 +255,31 @@ button {
 .drawer-container {
   margin: 2rem;
   width: 60rem;
+}
+
+.red {
+  color: red
+}
+.blue {
+  color: blue
+}
+
+.green {
+  color: green
+}
+
+.purple {
+  color: purple
+}
+
+.yellow {
+  color: yellow
+}
+
+.indigo {
+  color: indigo
+}
+
+.violet {
+  color: violet
 }

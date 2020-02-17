@@ -37,7 +37,6 @@ const SummaryPage: NextPage<Props, InitialProps> = props => {
   return (
     <>
       <LastestIssue />
-      <h4>Finalise your scores</h4>
       {settings && settings.length ? (
         <div style={criteriasContainer}>
             <SettingSummaryList settings={settings} />    

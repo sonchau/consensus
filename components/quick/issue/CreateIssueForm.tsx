@@ -49,34 +49,34 @@ const CreateIssueForm: React.FC  = () => {
         }
     }
     return   (
-        <form onSubmit={handleSubmit} style={issueStyle} >
-            {error && <p className="alert-error"> Some error </p>}
+        <div className="form-container">
+            <form onSubmit={handleSubmit}>
+                {error && <p className="alert-error"> Some error </p>}
 
-            <h2>State your problem</h2>
-            <p>
-                <input
-                type="text"
-                name="issue"
-                style={issueStyle}
-                placeholder="Type in your problem here. Aim to state it clearly and in a way that defines the cause and the primary consequence of the problem."
-                autoComplete="off"
-                value={issue}
-                onChange={handleChange}
-                />
-            </p>
-            <p><span>For example: </span> 
-              <span style={red}>Our maternal and child health clinic is too small </span>
-              <span style={blue}>to meet growing local demand</span> 
-              </p>
-            <div className="backnext" >
-              <Link href='/'>
-                <a className="button back medium"></a>
-              </Link>
-              <button  type="submit" className="button medium last">
-              Next >
-              </button>
-            </div>
-        </form>
+                <h2>Step 1: State your problem</h2>
+                <p>Clearly state the problem you are here to solve. Try to state it in a way that defines the cause and primary consequence of the problem. </p>
+                <p>For example: Because our maternal and child health clinic is too small to meet demand (the cause), more residents are missing out on health services (the consequence).</p>
+                <p>
+                    <input
+                    type="text"
+                    name="issue"
+                    style={issueStyle}
+                    placeholder="Type in your problem here."
+                    autoComplete="off"
+                    value={issue}
+                    onChange={handleChange}
+                    />
+                </p>
+                <div className="backnext" >
+                <Link href='/'>
+                    <a className="button back medium"></a>
+                </Link>
+                <button  type="submit" className="button medium last">
+                Next >
+                </button>
+                </div>
+            </form>
+        </div>
       );
 }
 
