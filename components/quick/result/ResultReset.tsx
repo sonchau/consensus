@@ -14,7 +14,8 @@ const ResultReset: React.FC = () => {
   useEffect(()=> {
     if(data && data.reset) {
       //console.log('effect')
-      router.push('/')
+      //router.push('/')
+      window.location.href = '/quick/issue'
     }
 }, [data])
   
