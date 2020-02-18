@@ -1,6 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitForElement } from "@testing-library/react";
-import {makeSummary, Settings, makeResult, Criterias, makeTotalArray, makeHorizontalChartData } from '../../utils/common'
+import {makeSummary, Settings, makeResult, Criterias, makeTotalArray, 
+  makeHorizontalChartData, getTopTaskHeading } from '../../utils/common'
 import { Criteria } from "../../generated/graphql";
 
 
@@ -247,4 +248,18 @@ describe("Test itils common", () => {
         expect(output).toEqual(expectOutput)
       });
 
+      test("should get top task name", async () => {
+
+        const input = {
+          labels: ['solution 1', 'solution 2', 'solution 3'],
+          data: ["6", "15", "24"]
+        }
+
+        const expectOutput = getTopTaskHeading(input)
+        const output = {
+          task: 'solution 3',
+          score: 24
+        }
+        expect(output).toEqual(expectOutput)
+      });
   });

@@ -58,7 +58,6 @@ const ResultChart: React.FC<Props> = ({settings}) => {
     horizontalChartData = makeHorizontalChartData(results)
 
   }
-  console.log('results', results, 'horizontalChartData', horizontalChartData?.labels)
 
   const chartData = {
     labels: horizontalChartData?.labels,

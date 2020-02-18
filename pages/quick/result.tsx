@@ -7,6 +7,7 @@ import BackNext from '../../components/common/BackNext';
 import _ from 'underscore';
 import LastestIssue from '../../components/quick/issue/LatestIssue';
 import ResultChart from '../../components/quick/result/ResultChart'
+import ResultTop from '../../components/quick/result/ResultTop'
 
 interface InitialProps {}
 
@@ -33,14 +34,17 @@ const ResultPage: NextPage<Props, InitialProps> = props => {
     <>
       <LastestIssue />
       <h4>Results</h4>
-      <hr />
-      <p>Base on your evaluation, the highest scoring option is</p>
-      <hr />
+
       {settings && settings.length ? (
-        <div style={criteriasContainer}>
-            <ResultChart settings={settings} />
-            <ResultList settings={settings} />    
-        </div>
+        <>
+            <hr />
+            <ResultTop settings={settings} />
+            <hr />
+            <div style={criteriasContainer}>
+                <ResultChart settings={settings} />
+                <ResultList settings={settings} />    
+            </div>
+          </>
       ) : (
         <p className="no-tasks-message">There are no result here.</p>
       )}

@@ -172,3 +172,22 @@ export const makeHorizontalChartData = (input : object[][]):  ChartData => {
         data
     }
 }
+
+export interface TopHeading {
+    task: string,
+    score: number
+}
+export const getTopTaskHeading = (input: ChartData): TopHeading => {
+    let task = '', score = 0
+        const dataNumber = input.data.map(item => {
+            return parseInt(item, 10)
+        })
+        score = Math.max(...dataNumber)
+        const indexMax = _.indexOf(dataNumber, score)
+        task = input.labels[indexMax]
+        console.log('max', score)
+    return {
+        task,
+        score
+    }
+}
