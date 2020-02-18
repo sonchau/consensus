@@ -16,6 +16,11 @@ const tableGrid = {
   'text-align': 'center'
 }
 
+const chart = {
+  'width': '30rem',
+  'height': '10rem',
+  'margin': '5rem auto'
+}
 const chartOptions = {
   responsive: true,
   chartArea: {
@@ -77,7 +82,9 @@ const ResultChart: React.FC<Props> = ({settings}) => {
     <>
         <h5>Here is a summary of your scores:</h5>
         { (results && results.length) ? (
+          <div style={chart}>
           <HorizontalBar data={chartData} options={chartOptions} />
+          </div>
 
         ): (
           <p className="no-tasks-message"> No settings</p>
