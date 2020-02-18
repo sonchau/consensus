@@ -8,6 +8,7 @@ import _ from 'underscore';
 import LastestIssue from '../../components/quick/issue/LatestIssue';
 import ResultChart from '../../components/quick/result/ResultChart'
 import ResultTop from '../../components/quick/result/ResultTop'
+import ResultReset from '../../components/quick/result/ResultReset'
 
 interface InitialProps {}
 
@@ -48,9 +49,7 @@ const ResultPage: NextPage<Props, InitialProps> = props => {
       ) : (
         <p className="no-tasks-message">There are no result here.</p>
       )}
-      <button disabled={loading} className="button">
-        Start Again
-      </button>
+      <ResultReset />
     </>
   );
 };

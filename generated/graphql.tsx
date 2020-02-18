@@ -58,15 +58,20 @@ export type Mutation = {
   updateTask?: Maybe<Task>,
   changeStatus?: Maybe<Task>,
   deleteTask?: Maybe<Task>,
+  clearTasks?: Maybe<Scalars['Boolean']>,
   createIssue?: Maybe<Issue>,
   updateIssue?: Maybe<Issue>,
   deleteIssue?: Maybe<Issue>,
+  clearIssues?: Maybe<Scalars['Boolean']>,
   createCriteria?: Maybe<Criteria>,
   updateCriteria?: Maybe<Criteria>,
   deleteCriteria?: Maybe<Criteria>,
+  clearCriterias?: Maybe<Scalars['Boolean']>,
   createSetting?: Maybe<Setting>,
   updateSetting?: Maybe<Setting>,
   deleteSetting?: Maybe<Setting>,
+  clearSettings?: Maybe<Scalars['Boolean']>,
+  reset?: Maybe<Scalars['Boolean']>,
 };
 
 
@@ -384,6 +389,14 @@ export type IssuesQuery = (
     { __typename?: 'Issue' }
     & Pick<Issue, 'id' | 'issue'>
   )>> }
+);
+
+export type ResetMutationVariables = {};
+
+
+export type ResetMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'reset'>
 );
 
 export type SettingByTaskNameQueryVariables = {
@@ -925,6 +938,35 @@ export function useIssuesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookO
 export type IssuesQueryHookResult = ReturnType<typeof useIssuesQuery>;
 export type IssuesLazyQueryHookResult = ReturnType<typeof useIssuesLazyQuery>;
 export type IssuesQueryResult = ApolloReactCommon.QueryResult<IssuesQuery, IssuesQueryVariables>;
+export const ResetDocument = gql`
+    mutation Reset {
+  reset
+}
+    `;
+export type ResetMutationFn = ApolloReactCommon.MutationFunction<ResetMutation, ResetMutationVariables>;
+
+/**
+ * __useResetMutation__
+ *
+ * To run a mutation, you first call `useResetMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetMutation, { data, loading, error }] = useResetMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useResetMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ResetMutation, ResetMutationVariables>) {
+        return ApolloReactHooks.useMutation<ResetMutation, ResetMutationVariables>(ResetDocument, baseOptions);
+      }
+export type ResetMutationHookResult = ReturnType<typeof useResetMutation>;
+export type ResetMutationResult = ApolloReactCommon.MutationResult<ResetMutation>;
+export type ResetMutationOptions = ApolloReactCommon.BaseMutationOptions<ResetMutation, ResetMutationVariables>;
 export const SettingByTaskNameDocument = gql`
     query settingByTaskName($task: String!) {
   settingByTaskName(task: $task) {
