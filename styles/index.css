@@ -262,6 +262,9 @@ button {
   list-style-type: decimal;
   line-height: 1.5;
 }
+.drawer-container li.circle {
+  list-style-type: inherit;
+}
 
 .red {
   color: red
