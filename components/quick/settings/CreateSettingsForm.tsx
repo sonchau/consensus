@@ -75,6 +75,8 @@ const CreateSettingsForm: React.FC<Props> = ({ criterias, onSettingsCreated, tas
 
     <form onSubmit={handleSubmit}>
       <h3> Step 4: How does <strong className={prevNext.displayColor}>"{task}"</strong> score against your objective?</h3>
+      <p>"The time has come to measure your options against each of your objectives. the question you are asking is "How closely does this option meet this particular objective?"</p>
+      <p>Keep notes on the factors affecting your scoring of the options. They may come in useful if you decide to restart the process. For example, it may become apparent that one of more of your objectives were not as important as first thought, or there might be another option you'd like to put on the table.</p>
       <p>Give each option a score out of 10 (where 10 is the highest) for how well it addresses each objective.</p>    
       <ul>
         <li className="task-list-heading">
