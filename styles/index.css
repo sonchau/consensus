@@ -257,6 +257,11 @@ button {
   width: 60rem;
 }
 
+.drawer-container li {
+  margin: 0 0 1rem 1rem;
+  list-style-type: decimal;
+}
+
 .red {
   color: red
 }
