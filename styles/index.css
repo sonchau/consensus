@@ -260,6 +260,7 @@ button {
 .drawer-container li {
   margin: 0 0 1rem 1rem;
   list-style-type: decimal;
+  line-height: 1.5;
 }
 
 .red {
