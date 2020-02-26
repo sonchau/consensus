@@ -1,0 +1,6 @@
+query Note($id: Int!) {
+  note(id: $id) {
+    id
+    note
+  }
+}

@@ -28,22 +28,46 @@ const CreateIssueForm: React.FC  = () => {
     const [createIssue, {loading, error, data}] = useCreateIssueMutation( {
         onCompleted: ()=> {
           setIssue('')
+          console.log('complete data', data)
         }
     })
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIssue(e.target.value);
       };
   
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    //const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if(!loading && issue) {
-            createIssue({
-                variables: {
-                    input: {
-                        issue
+            // createIssue({
+            //     variables: {
+            //         input: {
+            //             issue
+            //         }
+            //     }
+            // }).then((result) =>{
+            //     console.log('then result', result)
+            // }).catch(() => {
+            //     console.log('can not create issue')
+            // })
+
+            // use ES8 async/await
+            let result
+            try {
+                result = await createIssue({
+                    variables: {
+                        input: {
+                            issue
+                        }
                     }
+                })
+                //console.log('result data', result)
+                if (result && result.data){
+                    localStorage.setItem('issueId', result.data.createIssue!.id.toString())
                 }
-            })
+            } catch {
+                console.log('can not create issue')
+            }
             //window.location.href='/quick/criteria'
             router.push('/quick/criteria')
         }

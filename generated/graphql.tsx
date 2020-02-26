@@ -27,6 +27,10 @@ export type CreateIssueInput = {
   issue: Scalars['String'],
 };
 
+export type CreateNoteInput = {
+  note: Scalars['String'],
+};
+
 export type CreateSettingInput = {
   task: Scalars['String'],
   criteria: Scalars['String'],
@@ -63,6 +67,10 @@ export type Mutation = {
   updateIssue?: Maybe<Issue>,
   deleteIssue?: Maybe<Issue>,
   clearIssues?: Maybe<Scalars['Boolean']>,
+  createNote?: Maybe<Note>,
+  updateNote?: Maybe<Note>,
+  deleteNote?: Maybe<Note>,
+  clearNotes?: Maybe<Scalars['Boolean']>,
   createCriteria?: Maybe<Criteria>,
   updateCriteria?: Maybe<Criteria>,
   deleteCriteria?: Maybe<Criteria>,
@@ -111,6 +119,21 @@ export type MutationDeleteIssueArgs = {
 };
 
 
+export type MutationCreateNoteArgs = {
+  input: CreateNoteInput
+};
+
+
+export type MutationUpdateNoteArgs = {
+  input: UpdateNoteInput
+};
+
+
+export type MutationDeleteNoteArgs = {
+  id: Scalars['Int']
+};
+
+
 export type MutationCreateCriteriaArgs = {
   input: CreateCriteriaInput
 };
@@ -140,6 +163,13 @@ export type MutationDeleteSettingArgs = {
   id: Scalars['Int']
 };
 
+export type Note = {
+   __typename?: 'Note',
+  id: Scalars['Int'],
+  note: Scalars['String'],
+  issue?: Maybe<Issue>,
+};
+
 export type Query = {
    __typename?: 'Query',
   hello?: Maybe<Scalars['String']>,
@@ -148,6 +178,8 @@ export type Query = {
   taskTitle?: Maybe<Task>,
   issue?: Maybe<Issue>,
   issues: Array<Maybe<Issue>>,
+  note?: Maybe<Note>,
+  notes: Array<Maybe<Note>>,
   criteria?: Maybe<Criteria>,
   criterias: Array<Criteria>,
   setting?: Maybe<Setting>,
@@ -173,6 +205,11 @@ export type QueryTaskTitleArgs = {
 
 export type QueryIssueArgs = {
   id: Scalars['Int']
+};
+
+
+export type QueryNoteArgs = {
+  id?: Maybe<Scalars['Int']>
 };
 
 
@@ -223,6 +260,11 @@ export type UpdateIssueInput = {
   issue?: Maybe<Scalars['String']>,
 };
 
+export type UpdateNoteInput = {
+  id: Scalars['Int'],
+  note?: Maybe<Scalars['String']>,
+};
+
 export type UpdateSettingInput = {
   id: Scalars['Int'],
   task?: Maybe<Scalars['String']>,
@@ -262,6 +304,23 @@ export type CreateIssueMutation = (
   & { createIssue: Maybe<(
     { __typename?: 'Issue' }
     & Pick<Issue, 'id' | 'issue'>
+  )> }
+);
+
+export type CreateNoteMutationVariables = {
+  input: CreateNoteInput
+};
+
+
+export type CreateNoteMutation = (
+  { __typename?: 'Mutation' }
+  & { createNote: Maybe<(
+    { __typename?: 'Note' }
+    & Pick<Note, 'id' | 'note'>
+    & { issue: Maybe<(
+      { __typename?: 'Issue' }
+      & Pick<Issue, 'id' | 'issue'>
+    )> }
   )> }
 );
 
@@ -341,6 +400,23 @@ export type DeleteIssueMutation = (
   )> }
 );
 
+export type DeleteNoteMutationVariables = {
+  id: Scalars['Int']
+};
+
+
+export type DeleteNoteMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteNote: Maybe<(
+    { __typename?: 'Note' }
+    & Pick<Note, 'id' | 'note'>
+    & { issue: Maybe<(
+      { __typename?: 'Issue' }
+      & Pick<Issue, 'id' | 'issue'>
+    )> }
+  )> }
+);
+
 export type DeleteSettingMutationVariables = {
   id: Scalars['Int']
 };
@@ -388,6 +464,30 @@ export type IssuesQuery = (
   & { issues: Array<Maybe<(
     { __typename?: 'Issue' }
     & Pick<Issue, 'id' | 'issue'>
+  )>> }
+);
+
+export type NoteQueryVariables = {
+  id: Scalars['Int']
+};
+
+
+export type NoteQuery = (
+  { __typename?: 'Query' }
+  & { note: Maybe<(
+    { __typename?: 'Note' }
+    & Pick<Note, 'id' | 'note'>
+  )> }
+);
+
+export type NotesQueryVariables = {};
+
+
+export type NotesQuery = (
+  { __typename?: 'Query' }
+  & { notes: Array<Maybe<(
+    { __typename?: 'Note' }
+    & Pick<Note, 'id' | 'note'>
   )>> }
 );
 
@@ -501,6 +601,23 @@ export type UpdateIssueMutation = (
   )> }
 );
 
+export type UpdateNoteMutationVariables = {
+  input: UpdateNoteInput
+};
+
+
+export type UpdateNoteMutation = (
+  { __typename?: 'Mutation' }
+  & { updateNote: Maybe<(
+    { __typename?: 'Note' }
+    & Pick<Note, 'id' | 'note'>
+    & { issue: Maybe<(
+      { __typename?: 'Issue' }
+      & Pick<Issue, 'id' | 'issue'>
+    )> }
+  )> }
+);
+
 export type UpdateSettingMutationVariables = {
   input: UpdateSettingInput
 };
@@ -595,6 +712,43 @@ export function useCreateIssueMutation(baseOptions?: ApolloReactHooks.MutationHo
 export type CreateIssueMutationHookResult = ReturnType<typeof useCreateIssueMutation>;
 export type CreateIssueMutationResult = ApolloReactCommon.MutationResult<CreateIssueMutation>;
 export type CreateIssueMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateIssueMutation, CreateIssueMutationVariables>;
+export const CreateNoteDocument = gql`
+    mutation CreateNote($input: CreateNoteInput!) {
+  createNote(input: $input) {
+    id
+    note
+    issue {
+      id
+      issue
+    }
+  }
+}
+    `;
+export type CreateNoteMutationFn = ApolloReactCommon.MutationFunction<CreateNoteMutation, CreateNoteMutationVariables>;
+
+/**
+ * __useCreateNoteMutation__
+ *
+ * To run a mutation, you first call `useCreateNoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateNoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createNoteMutation, { data, loading, error }] = useCreateNoteMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateNoteMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateNoteMutation, CreateNoteMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateNoteMutation, CreateNoteMutationVariables>(CreateNoteDocument, baseOptions);
+      }
+export type CreateNoteMutationHookResult = ReturnType<typeof useCreateNoteMutation>;
+export type CreateNoteMutationResult = ApolloReactCommon.MutationResult<CreateNoteMutation>;
+export type CreateNoteMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateNoteMutation, CreateNoteMutationVariables>;
 export const CreateSettingDocument = gql`
     mutation CreateSetting($input: CreateSettingInput!) {
   createSetting(input: $input) {
@@ -802,6 +956,43 @@ export function useDeleteIssueMutation(baseOptions?: ApolloReactHooks.MutationHo
 export type DeleteIssueMutationHookResult = ReturnType<typeof useDeleteIssueMutation>;
 export type DeleteIssueMutationResult = ApolloReactCommon.MutationResult<DeleteIssueMutation>;
 export type DeleteIssueMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteIssueMutation, DeleteIssueMutationVariables>;
+export const DeleteNoteDocument = gql`
+    mutation DeleteNote($id: Int!) {
+  deleteNote(id: $id) {
+    id
+    note
+    issue {
+      id
+      issue
+    }
+  }
+}
+    `;
+export type DeleteNoteMutationFn = ApolloReactCommon.MutationFunction<DeleteNoteMutation, DeleteNoteMutationVariables>;
+
+/**
+ * __useDeleteNoteMutation__
+ *
+ * To run a mutation, you first call `useDeleteNoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteNoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteNoteMutation, { data, loading, error }] = useDeleteNoteMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteNoteMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteNoteMutation, DeleteNoteMutationVariables>) {
+        return ApolloReactHooks.useMutation<DeleteNoteMutation, DeleteNoteMutationVariables>(DeleteNoteDocument, baseOptions);
+      }
+export type DeleteNoteMutationHookResult = ReturnType<typeof useDeleteNoteMutation>;
+export type DeleteNoteMutationResult = ApolloReactCommon.MutationResult<DeleteNoteMutation>;
+export type DeleteNoteMutationOptions = ApolloReactCommon.BaseMutationOptions<DeleteNoteMutation, DeleteNoteMutationVariables>;
 export const DeleteSettingDocument = gql`
     mutation DeleteSetting($id: Int!) {
   deleteSetting(id: $id) {
@@ -938,6 +1129,73 @@ export function useIssuesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookO
 export type IssuesQueryHookResult = ReturnType<typeof useIssuesQuery>;
 export type IssuesLazyQueryHookResult = ReturnType<typeof useIssuesLazyQuery>;
 export type IssuesQueryResult = ApolloReactCommon.QueryResult<IssuesQuery, IssuesQueryVariables>;
+export const NoteDocument = gql`
+    query Note($id: Int!) {
+  note(id: $id) {
+    id
+    note
+  }
+}
+    `;
+
+/**
+ * __useNoteQuery__
+ *
+ * To run a query within a React component, call `useNoteQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNoteQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNoteQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useNoteQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<NoteQuery, NoteQueryVariables>) {
+        return ApolloReactHooks.useQuery<NoteQuery, NoteQueryVariables>(NoteDocument, baseOptions);
+      }
+export function useNoteLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<NoteQuery, NoteQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<NoteQuery, NoteQueryVariables>(NoteDocument, baseOptions);
+        }
+export type NoteQueryHookResult = ReturnType<typeof useNoteQuery>;
+export type NoteLazyQueryHookResult = ReturnType<typeof useNoteLazyQuery>;
+export type NoteQueryResult = ApolloReactCommon.QueryResult<NoteQuery, NoteQueryVariables>;
+export const NotesDocument = gql`
+    query Notes {
+  notes {
+    id
+    note
+  }
+}
+    `;
+
+/**
+ * __useNotesQuery__
+ *
+ * To run a query within a React component, call `useNotesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useNotesQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNotesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useNotesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<NotesQuery, NotesQueryVariables>) {
+        return ApolloReactHooks.useQuery<NotesQuery, NotesQueryVariables>(NotesDocument, baseOptions);
+      }
+export function useNotesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<NotesQuery, NotesQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<NotesQuery, NotesQueryVariables>(NotesDocument, baseOptions);
+        }
+export type NotesQueryHookResult = ReturnType<typeof useNotesQuery>;
+export type NotesLazyQueryHookResult = ReturnType<typeof useNotesLazyQuery>;
+export type NotesQueryResult = ApolloReactCommon.QueryResult<NotesQuery, NotesQueryVariables>;
 export const ResetDocument = gql`
     mutation Reset {
   reset
@@ -1252,6 +1510,43 @@ export function useUpdateIssueMutation(baseOptions?: ApolloReactHooks.MutationHo
 export type UpdateIssueMutationHookResult = ReturnType<typeof useUpdateIssueMutation>;
 export type UpdateIssueMutationResult = ApolloReactCommon.MutationResult<UpdateIssueMutation>;
 export type UpdateIssueMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateIssueMutation, UpdateIssueMutationVariables>;
+export const UpdateNoteDocument = gql`
+    mutation UpdateNote($input: UpdateNoteInput!) {
+  updateNote(input: $input) {
+    id
+    note
+    issue {
+      id
+      issue
+    }
+  }
+}
+    `;
+export type UpdateNoteMutationFn = ApolloReactCommon.MutationFunction<UpdateNoteMutation, UpdateNoteMutationVariables>;
+
+/**
+ * __useUpdateNoteMutation__
+ *
+ * To run a mutation, you first call `useUpdateNoteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateNoteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateNoteMutation, { data, loading, error }] = useUpdateNoteMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateNoteMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateNoteMutation, UpdateNoteMutationVariables>) {
+        return ApolloReactHooks.useMutation<UpdateNoteMutation, UpdateNoteMutationVariables>(UpdateNoteDocument, baseOptions);
+      }
+export type UpdateNoteMutationHookResult = ReturnType<typeof useUpdateNoteMutation>;
+export type UpdateNoteMutationResult = ApolloReactCommon.MutationResult<UpdateNoteMutation>;
+export type UpdateNoteMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateNoteMutation, UpdateNoteMutationVariables>;
 export const UpdateSettingDocument = gql`
     mutation UpdateSetting($input: UpdateSettingInput!) {
   updateSetting(input: $input) {
