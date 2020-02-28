@@ -37,7 +37,7 @@ const LastestNote = () => {
     //console.log('data lastest note', data, 'currentIssue', currentIssue)
     return (
         <div style={note}>
-         <h2>Note</h2>
+         <h2>Notes</h2>
          <UpdateNoteForm 
             onNoteUpdate={refetch}
             initialValues={{issueId: currentIssue, note: data!.note!.note}} /> 
