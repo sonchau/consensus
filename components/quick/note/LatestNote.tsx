@@ -26,8 +26,8 @@ const LastestNote = () => {
         variables: {
             id: currentIssue
         },
-    }) 
-
+    })
+    
     if (loading) {
         return <p>Loading...</p>;
       } else if (error) {

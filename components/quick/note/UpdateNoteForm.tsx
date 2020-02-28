@@ -34,7 +34,7 @@ const UpdateNoteForm: React.FC<Props> = ({ initialValues, onNoteUpdate }) => {
       [name]: value
     }
     setValues(newValue)
-    console.log('change name', name, 'value', value, 'values', values, 'newValue', newValue)
+    //console.log('change name', name, 'value', value, 'values', values, 'newValue', newValue)
     updateNoteMutation(
       {
         variables: {

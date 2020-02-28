@@ -6,6 +6,7 @@ import SettingSummaryList from '../../components/quick/settings/SettingSummaryLi
 import BackNext from '../../components/common/BackNext';
 import _ from 'underscore';
 import LastestIssue from '../../components/quick/issue/LatestIssue';
+import Note from '../../components/quick/note/LatestNote';
 interface InitialProps {}
 
 interface Props extends InitialProps {}
@@ -36,6 +37,7 @@ const SummaryPage: NextPage<Props, InitialProps> = props => {
   //console.log('settings', settings, 'lastTaskId', lastTaskId)
   return (
     <>
+      <Note />
       <LastestIssue />
       {settings && settings.length ? (
         <div style={criteriasContainer}>

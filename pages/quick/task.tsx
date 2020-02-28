@@ -9,6 +9,7 @@ import LastestIssue from '../../components/quick/issue/LatestIssue';
 import _ from 'underscore';
 import Drawer from '../../components/common/Drawer'
 import DrawerContent from '../../components/quick/task/DrawerContent';
+import Note from '../../components/quick/note/LatestNote';
 interface InitialProps {}
 
 interface Props extends InitialProps {}
@@ -34,6 +35,7 @@ const TaskPage: NextPage<Props, InitialProps> = props => {
   //console.log('tasks', taskIds)
   return (
     <>
+      <Note />
       <Drawer buttonText="Help" component={<DrawerContent />} />
       <LastestIssue />
       <CreateTaskForm onTaskCreated={refetch}/>

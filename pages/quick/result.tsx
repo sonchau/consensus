@@ -9,7 +9,7 @@ import LastestIssue from '../../components/quick/issue/LatestIssue';
 import ResultChart from '../../components/quick/result/ResultChart'
 import ResultTop from '../../components/quick/result/ResultTop'
 import ResultReset from '../../components/quick/result/ResultReset'
-
+import Note from '../../components/quick/note/LatestNote';
 interface InitialProps {}
 
 interface Props extends InitialProps {}
@@ -33,6 +33,7 @@ const ResultPage: NextPage<Props, InitialProps> = props => {
   //console.log('settings', settings, 'lastTaskId', lastTaskId)
   return (
     <>
+      <Note />
       <LastestIssue />
       <h4>Results</h4>
 

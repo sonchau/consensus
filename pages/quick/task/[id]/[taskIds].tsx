@@ -7,6 +7,7 @@ import CreateSettingsPage from '../../../../components/quick/settings/CreateSett
 import LastestIssue from '../../../../components/quick/issue/LatestIssue';
 import Drawer from '../../../../components/common/Drawer'
 import DrawerContent from '../../../../components/quick/task/DrawerContent';
+import Note from '../../../../components/quick/note/LatestNote';
 
 const SettingPage: NextPage = () => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const SettingPage: NextPage = () => {
         <p>An error occurred.</p>
       ) : task ? (
         <>
+          <Note />
           <LastestIssue />
           <CreateSettingsPage task={task.title} taskId={task.id} />
           </>
