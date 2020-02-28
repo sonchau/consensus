@@ -9,6 +9,7 @@ import {IssueContext} from '../../interface/common';
 import LastestIssue from '../../components/quick/issue/LatestIssue';
 import Drawer from '../../components/common/Drawer'
 import DrawerContent from '../../components/quick/criteria/DrawerContent';
+import Note from '../../components/quick/note/LatestNote';
 
 interface InitialProps {}
 
@@ -36,6 +37,7 @@ const CriteriaPage: NextPage<Props, InitialProps> = props => {
   
   return (
     <>
+      <Note />
       <Drawer buttonText="Help" component={<DrawerContent />} />
       <LastestIssue />
       

@@ -2,9 +2,6 @@ mutation UpdateNote($input: UpdateNoteInput!) {
   updateNote(input: $input) {
     id
     note
-    issue {
-      id
-      issue
-    }    
+
   }
 }
