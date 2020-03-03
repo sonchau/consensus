@@ -29,8 +29,8 @@ const Dashboard: React.FC  = () => (
         <div style={dashboard__selection}>
             <h3 style={dashboard__heading}> Choose between ... </h3>
             <DashboardSelection link="/quick/issue" img="/quick.png" heading="Quick Session"
-                text1 = "Where individual participants can voice opinions and be heard by the group."
-                text2 = "Use when you have a small group where everyone can discuss and agree on the answer and then input them together."
+                text1 = "Where participants can voice opinions and be heard by the group."
+                text2 = "Use when you have a small group where everyone can discuss and agree on the problem, objectives and solutions and then enter the details together."
             />
             <DashboardSelection link="/" img="/private.png" heading="Private Voting"
                 text1 = "Where participants would like individual votes."
