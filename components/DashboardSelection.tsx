@@ -13,14 +13,7 @@ const selection = {
     border: '1px solid #ccc',
     'borderRadius': '1rem',
     'text-align': 'center',
-    'padding': '1rem 0.5rem',
-
-}
-
-const text = {
-    'text-align': 'justify',
-    'padding': '0',
-    'color': '#4a5568'
+    'padding': '1rem 0.5rem'
 }
 
 const DashboardSelection: React.FC<Props>  = ({img, heading, text1, text2, link}) => (
@@ -29,8 +22,8 @@ const DashboardSelection: React.FC<Props>  = ({img, heading, text1, text2, link}
             <a className="task-list-item-title">
                 <img src={img} alt={heading}/>
                 <h2>{heading}</h2>
-                <p style={text}>{text1}</p>
-                <p style={text}>{text2}</p>
+                <p>{text1}</p>
+                <p>{text2}</p>
             </a>
         </Link>
     </div>
