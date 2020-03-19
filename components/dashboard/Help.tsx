@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
-import DashboardSelection from './DashboardSelection';
-import Drawer from './common/Drawer'
+import DashboardSelection from './Selection';
+import Drawer from '../common/Drawer'
 
 const DashboardHelp: React.FC  = () => (
     <div className="drawer-container">

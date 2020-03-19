@@ -8,26 +8,18 @@ interface Props {
     text2: string,
     link: string
 }
-const selection = {
-    width: '20rem',
-    border: '1px solid #ccc',
-    'borderRadius': '1rem',
-    'text-align': 'center',
-    'padding': '1rem 0.5rem',
-    
-}
 const text = {
     'color': '#4a5568'
 }
 
 const DashboardSelection: React.FC<Props>  = ({img, heading, text1, text2, link}) => (
-    <div style={selection}>
+    <div className="dashboard-selection">
         <Link href={link}>
-            <a className="task-list-item-title">
+            <a>
                 <img src={img} alt={heading}/>
-                <h2 style={text}>{heading}</h2>
-                <p style={text}>{text1}</p>
-                <p style={text}>{text2}</p>
+                <h2>{heading}</h2>
+                <p>{text1}</p>
+                <p>{text2}</p>
             </a>
         </Link>
     </div>
