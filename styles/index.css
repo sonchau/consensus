@@ -301,4 +301,5 @@ button {
   text-align: center;
   padding: 1rem 0.5rem;
   min-height: 28rem;
+  cursor: pointer;
 }

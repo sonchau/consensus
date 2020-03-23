@@ -15,8 +15,15 @@ interface Props {
     text2: string,
 }
 const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
+  //const [email, setEmail] = useState<{email: null | string}>({email: null})
+  
+  //const [password, setPassword] = useState<{password: null | string}>({password: null})
+  const [error, setError] = useState(false)
   //const [submit, setSubmit] = useState(false);
+
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -29,25 +36,41 @@ const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
 
   const handleSubmit = () => {
     //setSubmit(true)
+    if (email === '' || password === '') {
+      setError(true)
+    } else {
+      setError(false)
+    }
+  }
+
+  const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('e', event.target.value)
+    setEmail(event.target.value)
+
+  }
+
+  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(event.target.value)
   }
 
   return (
     <div>
         <div className="dashboard-selection" onClick={handleClickOpen}>
-              <a>
-                  <img src={img} alt={heading}/>
-                  <h2>{heading}</h2>
-                  <p>{text1}</p>
-                  <p>{text2}</p>
-              </a>
-      </div>
+            <img src={img} alt={heading}/>
+            <h2>{heading}</h2>
+            <p>{text1}</p>
+            <p>{text2}</p>
+        </div>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Private and Online Voting Login</DialogTitle>
         <DialogContent>
           <DialogContentText>
           Please enter username and password to log in.
           </DialogContentText>
-          
+          { error && <p className="red">
+              Invalid username or password
+              </p>
+          }
             <>
             <TextField
               autoFocus
@@ -56,14 +79,16 @@ const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
               label="Username"
               type="email"
               fullWidth
+              onChange={onEmailChange}
             />
             <TextField
               autoFocus
               margin="dense"
               id="password"
               label="Password"
-              type="email"
+              type="password"
               fullWidth
+              onChange={onPasswordChange}
             />
             </>
           
