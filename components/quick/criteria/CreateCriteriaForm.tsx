@@ -55,14 +55,15 @@ const CreateCriteriaForm: React.FC<Props> = ({onCriteriaCreated}) => {
     <div className="form-container">
       <h3>Step 2: How will you measure success? </h3>
       <p>List the objectives you hope to achieve by solving this problem. Be sure they are clear to all participants. </p>
-      <p>For example an objective might be 'cost effectiveness' . You need to give each objective a relative weighting (out of 10), where 1 means it is less important relative to the other objectives and 10 means it is very important. </p>
+      <p>For example an objective might be 'cost effectiveness'.</p>
+      <p>You need to give each objective a relative weighting (out of 10), where 1 means it is less important relative to the other objectives and 10 means it is very important. </p>
       <p>Add as many objectives as you need.</p>
       {error && <p className="alert-error"> Some error </p>}
       {hasError && <p className="alert-error"> Please select weighting</p>}
       <form onSubmit={handleSubmit} className="form">
         <Input
           name="name"
-          placeholder="Type in your objectives here."
+          placeholder="Type in your objectives here and press return or click on the ‘Add’ button when ready."
           value={name}
           onChange={onInputChange}
         />
