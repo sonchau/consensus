@@ -1,7 +1,7 @@
 
 import {Setting, Criteria, TasksDocument } from '../generated/graphql'
 import _ from 'underscore'
-
+import axios from 'axios';
 export interface Settings extends Array<Setting>{}
 export interface Criterias extends Array<Criteria>{}
 export const makeSummary = (input: Settings): any => {
@@ -185,9 +185,40 @@ export const getTopTaskHeading = (input: ChartData): TopHeading => {
         score = Math.max(...dataNumber)
         const indexMax = _.indexOf(dataNumber, score)
         task = input.labels[indexMax]
-        console.log('max', score)
+        //console.log('max', score)
     return {
         task,
         score
     }
 }
+
+interface Authentication {
+    authentication: boolean,
+    client_name: string
+  }
+
+export const signIn = async (username: string, password: string): Promise<Authentication> =>  {
+    axios.defaults.baseURL =  process.env.AUTH_SERVER || "https://geografia-user-admin.herokuapp.com";
+    try {
+        const res = await axios.get("/api/spendmapp_user.json", {
+            auth: {
+              username: username,
+              password: password
+            }
+        })
+        const data = res.data
+        //console.log('data', data)  
+        return {
+            authentication: true,
+            client_name: data.name
+        }
+    } catch(err) {
+        //console.log('error', err)
+        return {
+            authentication: false,
+            client_name: username
+        }
+        
+    }
+
+  }

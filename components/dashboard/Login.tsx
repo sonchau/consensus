@@ -6,25 +6,21 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
-
+import {signIn} from '../../utils/common';
+import { useRouter } from 'next/router';
 interface Props {
     img: string,
     heading: string,
     text1: string,
     text2: string,
 }
-const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
-  const [open, setOpen] = useState(false)
-  //const [email, setEmail] = useState<{email: null | string}>({email: null})
-  
-  //const [password, setPassword] = useState<{password: null | string}>({password: null})
-  const [error, setError] = useState(false)
-  //const [submit, setSubmit] = useState(false);
 
+const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
+  const [open, setOpen] = useState(false)  
+  const [error, setError] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-
+  const router = useRouter()
   const handleClickOpen = () => {
     setOpen(true);
 
@@ -39,9 +35,22 @@ const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
     if (email === '' || password === '') {
       setError(true)
     } else {
-      setError(false)
+      
+      const signedInUser = signIn(email, password)
+      signedInUser.then( res => {
+        console.log('res', res)
+        if(res.authentication) {
+          //redirect
+          setError(false)
+          router.push('/online')
+        } else {
+          setError(true)
+        }
+      })
+      
     }
   }
+
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     console.log('e', event.target.value)
