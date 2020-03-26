@@ -7,7 +7,9 @@ import SnackbarContent from '@material-ui/core/SnackbarContent'
 import Button from '@material-ui/core/Button';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import UpdateNoteForm from './UpdateNoteForm';
+import Tooltip from '@material-ui/core/Tooltip';
 
+import BootstrapTooltip from '../../common/CustomTooltips'
 const note = {
     'margin': '1rem auto',
     'text-align': 'center',
@@ -46,11 +48,15 @@ const LastestNote = () => {
     console.log('open', open)
     return (
         <div style={note}>
-        <Button variant="contained" color="secondary" onClick={handleClick}>{open ? 'Close Notes' : 'Open Notes'}</Button>
-        <div className ={open ? 'show' : 'hide'}>
-            <UpdateNoteForm 
-                onNoteUpdate={refetch}
-                initialValues={{issueId: currentIssue, note: data!.note!.note}} /> 
+            <BootstrapTooltip arrow title="Take a record of any notes you want to make along the way. You can print this out at the end of your session so you have a permanent record of the discussion.">
+                <Button variant="contained" color="secondary" 
+                    onClick={handleClick}>{open ? 'Close Notes' : 'Open Notes'}
+                </Button>
+            </BootstrapTooltip>
+            <div className ={open ? 'show' : 'hide'}>
+                <UpdateNoteForm 
+                    onNoteUpdate={refetch}
+                    initialValues={{issueId: currentIssue, note: data!.note!.note}} /> 
             </div>
         </div>
     )
