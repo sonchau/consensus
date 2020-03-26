@@ -303,3 +303,11 @@ button {
   min-height: 28rem;
   cursor: pointer;
 }
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}

@@ -16,11 +16,16 @@ const note = {
     'right': '2rem',
     'border': '1px solid #ccc',
     'background': '#ccc',
-    'borderRadius': '5px'
+    'borderRadius': '5px',
+}
 
+const noteButton = {
+    'margin': '1rem 0 0'
 }
 const LastestNote = () => {
     const currentIssue = JSON.parse(localStorage.getItem('issueId') || '{}')
+    const [open, setOpen] = useState(false)
+
     //console.log('currentIssue', currentIssue)
     const {loading, error, data, refetch} = useNoteQuery({
         variables: {
@@ -28,6 +33,9 @@ const LastestNote = () => {
         },
     })
     
+    const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+        setOpen(!open)
+    }
     if (loading) {
         return <p>Loading...</p>;
       } else if (error) {
@@ -35,12 +43,15 @@ const LastestNote = () => {
       }
 
     //console.log('data lastest note', data, 'currentIssue', currentIssue)
+    console.log('open', open)
     return (
         <div style={note}>
-         <h2>Notes</h2>
-         <UpdateNoteForm 
-            onNoteUpdate={refetch}
-            initialValues={{issueId: currentIssue, note: data!.note!.note}} /> 
+        <Button variant="contained" color="secondary" onClick={handleClick}>{open ? 'Close Notes' : 'Open Notes'}</Button>
+        <div className ={open ? 'show' : 'hide'}>
+            <UpdateNoteForm 
+                onNoteUpdate={refetch}
+                initialValues={{issueId: currentIssue, note: data!.note!.note}} /> 
+            </div>
         </div>
     )
 }
