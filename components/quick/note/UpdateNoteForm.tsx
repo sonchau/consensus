@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef} from 'react';
 import { useUpdateNoteMutation } from '../../../generated/graphql';
 import { useRouter } from 'next/router';
 import Input from '../../common/Input'
 import Select from '../../common/Select'
-
+import ReactToPrint from 'react-to-print';
+import Button from '@material-ui/core/Button';
 const textArea = {
   'width': '15rem',
   'height': '30rem',
   'margin': '1rem'
+}
+const printContainer = {
+  'margin': '0 0 1rem 0'
 }
 interface Values {
   issueId: number;
@@ -45,14 +49,23 @@ const UpdateNoteForm: React.FC<Props> = ({ initialValues, onNoteUpdate }) => {
       }
     })
   };
-
+  const componentRef = useRef<HTMLTextAreaElement>(null);
   return (
-  <textarea style={textArea}
-      name="note"
-      placeholder="Your Note"
-      value={values.note}
-      onChange={handleTextareaChange}
-      ></textarea>
+    <>
+      <textarea style={textArea} ref={componentRef}
+          name="note"
+          placeholder="Your Note"
+          value={values.note}
+          onChange={handleTextareaChange}
+          ></textarea>
+      <div style={printContainer}>
+        <ReactToPrint
+          trigger={() => <Button variant="contained" color="primary">Print Notes</Button>}
+          content={() => componentRef.current}
+        />
+      </div> 
+
+      </>
   );
 };
 
