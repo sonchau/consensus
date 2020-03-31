@@ -5,9 +5,10 @@ import Input from '../../common/Input'
 import Select from '../../common/Select'
 import ReactToPrint from 'react-to-print';
 import Button from '@material-ui/core/Button';
+import LastestIssue from '../issue/LatestIssue';
 const textArea = {
-  'width': '15rem',
-  'height': '30rem',
+  'width': '25rem',
+  'height': '25rem',
   'margin': '1rem'
 }
 const printContainer = {
@@ -49,18 +50,31 @@ const UpdateNoteForm: React.FC<Props> = ({ initialValues, onNoteUpdate }) => {
       }
     })
   };
-  const componentRef = useRef<HTMLTextAreaElement>(null);
+  const componentRef = useRef<HTMLDivElement>(null);
   return (
     <>
-      <textarea style={textArea} ref={componentRef}
-          name="note"
-          placeholder="Your Note"
-          value={values.note}
-          onChange={handleTextareaChange}
-          ></textarea>
+      <div ref={componentRef} className="print-notes">
+        <h4>Consensus Descision Making Session: </h4>
+        <LastestIssue isPrint={true} />
+        <p>Date: {new Intl.DateTimeFormat('en-GB').format(new Date())} </p>
+        <textarea style={textArea} 
+            name="note"
+            placeholder="Your Note"
+            value={values.note}
+            onChange={handleTextareaChange}
+            ></textarea>
+      </div>    
       <div style={printContainer}>
         <ReactToPrint
           trigger={() => <Button variant="contained" color="primary">Print Notes</Button>}
+          pageStyle='
+              @media print {
+              body { 
+                -webkit-print-color-adjust: exact; 
+                padding: 20px !important; 
+                font: 12pt Arial, "Times New Roman", Times, serif;} 
+            }'
+          onBeforeGetContent={()=> {console.log('on before get content', componentRef.current)}}   
           content={() => componentRef.current}
         />
       </div> 

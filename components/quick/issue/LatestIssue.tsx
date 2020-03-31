@@ -7,7 +7,10 @@ const center = {
     'margin': '1rem auto',
     'text-align': 'center'
 }
-const LastestIssue = () => {
+interface Props {
+    isPrint?: boolean
+}
+const LastestIssue: React.FC<Props> = ({isPrint}) => {
     const currentIssue = JSON.parse(localStorage.getItem('issueId') || '{}')
     const {loading, error, data} = useIssueQuery({
         variables: {
@@ -21,7 +24,9 @@ const LastestIssue = () => {
       }
       //console.log('data lastest issue', data)
     return (
-        <h2 style={center}>{data!.issue!.issue}</h2>
+        isPrint? 
+            <p style={center}>{data!.issue!.issue}</p> : 
+            <h2 style={center}>{data!.issue!.issue}</h2>
     )
 }
 
