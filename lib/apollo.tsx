@@ -149,7 +149,7 @@ interface Definintion {
 };
 
 const wsLink = process.browser ? new WebSocketLink({
-  uri: `ws://consensus-graphql.herokuapp.com/graphql`,
+  uri: `wss://consensus-graphql.herokuapp.com/graphql`,
   options: {
     reconnect: true,
   },
