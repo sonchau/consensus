@@ -1,0 +1,6 @@
+subscription changeIssue {
+  changeIssue {
+    issue
+    id
+  }
+}

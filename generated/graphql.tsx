@@ -236,6 +236,11 @@ export type Setting = {
   criteriaId: Scalars['Int'],
 };
 
+export type Subscription = {
+   __typename?: 'Subscription',
+  changeIssue?: Maybe<Issue>,
+};
+
 export type Task = {
    __typename?: 'Task',
   id: Scalars['Int'],
@@ -498,6 +503,17 @@ export type SettingsQuery = (
   & { settings: Array<(
     { __typename?: 'Setting' }
     & Pick<Setting, 'id' | 'task' | 'criteria' | 'score' | 'taskId' | 'criteriaId'>
+  )> }
+);
+
+export type ChangeIssueSubscriptionVariables = {};
+
+
+export type ChangeIssueSubscription = (
+  { __typename?: 'Subscription' }
+  & { changeIssue: Maybe<(
+    { __typename?: 'Issue' }
+    & Pick<Issue, 'issue' | 'id'>
   )> }
 );
 
@@ -1225,6 +1241,35 @@ export function useSettingsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type SettingsQueryHookResult = ReturnType<typeof useSettingsQuery>;
 export type SettingsLazyQueryHookResult = ReturnType<typeof useSettingsLazyQuery>;
 export type SettingsQueryResult = ApolloReactCommon.QueryResult<SettingsQuery, SettingsQueryVariables>;
+export const ChangeIssueDocument = gql`
+    subscription changeIssue {
+  changeIssue {
+    issue
+    id
+  }
+}
+    `;
+
+/**
+ * __useChangeIssueSubscription__
+ *
+ * To run a query within a React component, call `useChangeIssueSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useChangeIssueSubscription` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useChangeIssueSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useChangeIssueSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<ChangeIssueSubscription, ChangeIssueSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<ChangeIssueSubscription, ChangeIssueSubscriptionVariables>(ChangeIssueDocument, baseOptions);
+      }
+export type ChangeIssueSubscriptionHookResult = ReturnType<typeof useChangeIssueSubscription>;
+export type ChangeIssueSubscriptionResult = ApolloReactCommon.SubscriptionResult<ChangeIssueSubscription>;
 export const TaskDocument = gql`
     query Task($id: Int!) {
   task(id: $id) {
