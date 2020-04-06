@@ -1,7 +1,18 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { ApolloProvider, ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+//v3 has some issue
+//import { WebSocketLink } from "@apollo/link-ws";
+
+//import { SubscriptionClient } from "subscriptions-transport-ws";
+
+// try v2
+import { WebSocketLink } from 'apollo-link-ws';
+import { getMainDefinition } from 'apollo-utilities';
+import { split } from 'apollo-link';
+import { HttpLink } from 'apollo-link-http';
+import ws from 'ws';
 
 import fetch from 'isomorphic-unfetch'
 import { NextPage } from 'next'
@@ -132,6 +143,36 @@ export function initApolloClient(initialState?: ApolloClientCache) {
   return globalApolloClient
 }
 
+interface Definintion {
+  kind: string;
+  operation?: string;
+};
+
+const wsLink = typeof window === 'undefined' ? new WebSocketLink({
+  uri: `ws://consensus-graphql.herokuapp.com/graphql`,
+  options: {
+    reconnect: true,
+  },
+  webSocketImpl: ws
+}) as any : null;
+
+const httpLink = new HttpLink({
+  uri: 'https://consensus-graphql.herokuapp.com/graphql', // Server URL (must be absolute)
+  //uri: 'http://localhost:3001/graphql',
+  credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
+  fetch,
+}) as any
+
+const link = typeof window === 'undefined' ? split( //only create the split in the browser
+  // split based on operation type
+  ({ query }) => {
+    const { kind, operation }: Definintion = getMainDefinition(query);
+    return kind === 'OperationDefinition' && operation === 'subscription';
+  },
+  wsLink,
+  httpLink,
+) : httpLink;
+
 /**
  * Creates and configures the ApolloClient
  * @param  {Object} [initialState={}]
@@ -140,12 +181,7 @@ function createApolloClient(initialState: ApolloClientCache = {}) {
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
   return new ApolloClient({
     ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
-    link: new HttpLink({
-      uri: 'https://consensus-graphql.herokuapp.com/graphql', // Server URL (must be absolute)
-      //uri: 'http://localhost:3001/graphql',
-      credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
-      fetch,
-    }),
+    link,
     cache: new InMemoryCache().restore(initialState),
   })
 }
