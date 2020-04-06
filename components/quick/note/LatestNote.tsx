@@ -46,7 +46,7 @@ const LastestNote = () => {
       }
 
     //console.log('data lastest note', data, 'currentIssue', currentIssue)
-    console.log('open', open, 'data lastest note', data,)
+    //console.log('open', open, 'data lastest note', data,)
     return (
         <div style={note}>
             <BootstrapTooltip arrow title="Take a record of any notes you want to make along the way. You can print this out at the end of your session so you have a permanent record of the discussion.">

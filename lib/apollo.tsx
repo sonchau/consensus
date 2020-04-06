@@ -148,12 +148,11 @@ interface Definintion {
   operation?: string;
 };
 
-const wsLink = typeof window === 'undefined' ? new WebSocketLink({
+const wsLink = process.browser ? new WebSocketLink({
   uri: `ws://consensus-graphql.herokuapp.com/graphql`,
   options: {
     reconnect: true,
   },
-  webSocketImpl: ws
 }) as any : null;
 
 const httpLink = new HttpLink({
@@ -163,10 +162,11 @@ const httpLink = new HttpLink({
   fetch,
 }) as any
 
-const link = typeof window === 'undefined' ? split( //only create the split in the browser
+const link = process.browser ? split( //only create the split in the browser
   // split based on operation type
   ({ query }) => {
     const { kind, operation }: Definintion = getMainDefinition(query);
+    //console.log('getMainDefinition(query)', getMainDefinition(query))
     return kind === 'OperationDefinition' && operation === 'subscription';
   },
   wsLink,

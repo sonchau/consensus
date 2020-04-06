@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../../../lib/apollo';
-import { useIssueQuery } from '../../../generated/graphql';
+import { useIssueQuery, useChangeIssueSubscription } from '../../../generated/graphql';
 
 const center = {
     'margin': '1rem auto',
@@ -11,6 +11,8 @@ interface Props {
     isPrint?: boolean
 }
 const LastestIssue: React.FC<Props> = ({isPrint}) => {
+    const change = useChangeIssueSubscription()
+
     const currentIssue = JSON.parse(localStorage.getItem('issueId') || '{}')
     const {loading, error, data} = useIssueQuery({
         variables: {
