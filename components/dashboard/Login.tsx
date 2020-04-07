@@ -8,6 +8,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {signIn} from '../../services/authentication';
 import { useRouter } from 'next/router';
+import Cookie from 'js-cookie';
+
+export const COOKIES = {
+  name: "consensus"
+};
+
 
 interface Props {
     img: string,
@@ -43,6 +49,7 @@ const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
         if(res.authentication) {
           //redirect
           setError(false)
+          Cookie.set(COOKIES.name, res.client_name)
           router.push('/online')
         } else {
           setError(true)
