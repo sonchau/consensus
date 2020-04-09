@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../lib/apollo';
 import Dashboard from '../components/Dashboard';

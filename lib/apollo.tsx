@@ -3,8 +3,10 @@ import Head from 'next/head'
 
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 import {link} from './link';
-import fetch from 'isomorphic-unfetch'
 import { NextPage } from 'next'
+import Cookie from 'js-cookie';
+import {COOKIES} from '../services/cookie';
+import ServerCookie from "next-cookies";
 
 type ApolloClientCache = any
 
@@ -31,7 +33,8 @@ export function withApollo<PageProps extends object, PageInitialProps = PageProp
   const WithApollo: NextPage<PageProps & WithApolloProps, PageInitialProps & WithApolloInitialProps> = 
   ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState)
-    //console.log('client', client)
+    console.log('client', client, 'apolloState', apolloState, 'pageProps', pageProps)
+
     return (
       <ApolloProvider client={client}>
         <PageComponent {...pageProps as PageProps} />
@@ -101,6 +104,7 @@ export function withApollo<PageProps extends object, PageInitialProps = PageProp
 
       // Extract query data from the Apollo store
       const apolloState = apolloClient.cache.extract()
+      console.log('before return pageProps:', pageProps, 'apolloState', apolloState)
 
       return {
         ...pageProps,

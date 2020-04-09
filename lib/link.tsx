@@ -7,6 +7,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { WebSocketLink } from 'apollo-link-ws';
 import { HttpLink } from 'apollo-link-http';
 import { split } from 'apollo-link';
+import fetch from 'isomorphic-unfetch';
 
 interface Definintion {
     kind: string;
