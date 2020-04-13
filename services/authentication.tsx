@@ -16,7 +16,7 @@ export const signIn = async (username: string, password: string): Promise<Authen
             }
         })
         const data = res.data
-        console.log('data', data)  
+        //console.log('data', data)  
         return {
             authentication: true,
             client_name: data.name

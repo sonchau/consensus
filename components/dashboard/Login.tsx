@@ -42,13 +42,13 @@ const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
       
       const signedInUser = signIn(email, password)
       signedInUser.then( res => {
-        console.log('res', res)
+        //console.log('res', res)
         if(res.authentication) {
           //redirect
           setError(false)
           //Cookie.set(COOKIES.name, {'authenticated': true})
           Cookie.set(COOKIES.name, "true")
-          router.push('/online')
+          router.push('/online/issue')
         } else {
           setError(true)
         }
@@ -59,7 +59,7 @@ const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
 
 
   const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('e', event.target.value)
+    //console.log('e', event.target.value)
     setEmail(event.target.value)
 
   }

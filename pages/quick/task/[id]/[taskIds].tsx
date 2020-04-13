@@ -11,13 +11,13 @@ import Note from '../../../../components/quick/note/LatestNote';
 
 const SettingPage: NextPage = () => {
   const router = useRouter();
-  console.log('router', router)
+  //console.log('router', router)
   const id =
     typeof router.query.id === 'string' ? parseInt(router.query.id, 10) : NaN;
   const { loading, error, data, refetch } = useTaskQuery({
     variables: { id }
   });
-  console.log('data', data)
+  //console.log('data', data)
 
   const task = data?.task;
   return (

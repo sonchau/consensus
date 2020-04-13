@@ -33,7 +33,7 @@ export function withApollo<PageProps extends object, PageInitialProps = PageProp
   const WithApollo: NextPage<PageProps & WithApolloProps, PageInitialProps & WithApolloInitialProps> = 
   ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState)
-    console.log('client', client, 'apolloState', apolloState, 'pageProps', pageProps )
+    //console.log('client', client, 'apolloState', apolloState, 'pageProps', pageProps )
 
     return (
       <ApolloProvider client={client}>
@@ -104,7 +104,7 @@ export function withApollo<PageProps extends object, PageInitialProps = PageProp
 
       // Extract query data from the Apollo store
       const apolloState = apolloClient.cache.extract()
-      console.log('before return pageProps:', pageProps, 'apolloState', apolloState)
+      //console.log('before return pageProps:', pageProps, 'apolloState', apolloState)
 
       return {
         ...pageProps,

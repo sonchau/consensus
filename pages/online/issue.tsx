@@ -14,7 +14,8 @@ const OnlinePage: NextPage<Props, InitialProps> = () => {
   
   return (
     <>
-      <p>Online page 111</p>
+      <Drawer buttonText="Help" component={<DrawerContent />} />
+      <CreateIssueForm /> 
     </>
   );
 };
