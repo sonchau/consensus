@@ -31,10 +31,12 @@ const Dashboard: React.FC  = () => (
                 text2 = "Use when you have a small group where everyone can discuss and agree on the problem, objectives and solutions and then enter the details together."
             />
             <Login img="/private.png" heading="Private Voting"
+                redirectUrl="/private/dashboard"
                 text1 = "Where participants would like individual votes."
                 text2 = "Use when you have a large group or when participants can not openly discuss their opinions."
             />
             <Login img="/online.png" heading="Online Voting"
+                redirectUrl="/online/dashboard"
                 text1 = "Responses are open for a defined timeframe. Participants are given links to complete their answers."
                 text2 = "Use when participants are not able to be in the same room to complete their answer or are spread geographically."
             />

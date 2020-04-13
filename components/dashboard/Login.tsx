@@ -17,9 +17,10 @@ interface Props {
     heading: string,
     text1: string,
     text2: string,
+    redirectUrl: string
 }
 
-const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
+const Login: React.FC<Props> = ({img, heading, text1, text2, redirectUrl}) => {
   const [open, setOpen] = useState(false)  
   const [error, setError] = useState(false)
   const [email, setEmail] = useState('')
@@ -48,7 +49,7 @@ const Login: React.FC<Props> = ({img, heading, text1, text2,}) => {
           setError(false)
           //Cookie.set(COOKIES.name, {'authenticated': true})
           Cookie.set(COOKIES.name, "true")
-          router.push('/online/issue')
+          router.push(redirectUrl)
         } else {
           setError(true)
         }
