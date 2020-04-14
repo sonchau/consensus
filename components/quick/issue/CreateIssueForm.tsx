@@ -14,44 +14,26 @@ const issueStyle = {
     'fontSize': 'inherit'
   };
 
-const red = {
-  'color': 'red'
+interface Props {
+    redirectUrl: string,
+    back: string
 }
-
-const blue = {
-  'color': 'blue'
-}
-  
-const CreateIssueForm: React.FC  = () => {
+const CreateIssueForm: React.FC<Props>  = ({redirectUrl, back}) => {
     const [issue, setIssue] = useState('')
     const router = useRouter()
     const [createIssue, {loading, error, data}] = useCreateIssueMutation( {
         onCompleted: ()=> {
           setIssue('')
-          console.log('complete data', data)
+          //console.log('complete data', data)
         }
     })
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setIssue(e.target.value);
       };
   
-    //const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         if(!loading && issue) {
-            // createIssue({
-            //     variables: {
-            //         input: {
-            //             issue
-            //         }
-            //     }
-            // }).then((result) =>{
-            //     console.log('then result', result)
-            // }).catch(() => {
-            //     console.log('can not create issue')
-            // })
-
-            // use ES8 async/await
             let result
             try {
                 result = await createIssue({
@@ -68,8 +50,7 @@ const CreateIssueForm: React.FC  = () => {
             } catch {
                 console.log('can not create issue')
             }
-            //window.location.href='/quick/criteria'
-            router.push('/quick/criteria')
+            router.push(redirectUrl)
         }
     }
     return   (
@@ -92,7 +73,7 @@ const CreateIssueForm: React.FC  = () => {
                     />
                 </p>
                 <div className="backnext" >
-                <Link href='/'>
+                <Link href={back}>
                     <a className="button back medium"></a>
                 </Link>
                 <button  type="submit" className="button medium last">

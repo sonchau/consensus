@@ -15,7 +15,7 @@ const IssuePage: NextPage<Props, InitialProps> = props => {
   return (
     <>
     <Drawer buttonText="Help" component={<DrawerContent />} />
-    <CreateIssueForm />
+    <CreateIssueForm back="/" redirectUrl="/quick/criteria" /> 
     </>
   );
 };
