@@ -22,7 +22,7 @@ const dashboard__heading = {
 const Dashboard: React.FC  = () => (
     <div>
         <h1>Consensus</h1>
-        <h2> Find the best solution to a specific problem.</h2>
+        <h2>Find the best solution to a specific problem.</h2>
         <Drawer buttonText="Help" component= {<DashboardHelp />} /> 
         <div style={dashboardContainer}>
             <h3 style={dashboard__heading}> Choose between ... </h3>

@@ -11,7 +11,15 @@
     "codegen": "graphql-codegen --config codegen.yml",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "cy:verify": "cypress verify",
+    "cy:version": "cypress version",
+    "cy:run:record": "cypress run --record",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "test:cypress:dev": "npm-run-all --parallel --race start 'cy:open -- --config baseUrl=http://localhost:3000'",
+    "test:cypress": "npm run build && npm run cy:start-server-and-test",
+    "cy:start-server-and-test": "npx start-server-and-test serve :3000 cy:run"
   },
   "repository": {
     "type": "git",
