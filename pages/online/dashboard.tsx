@@ -10,7 +10,7 @@ import { privateRoute } from "../../components/route/Private";
 interface InitialProps {}
 interface Props extends InitialProps {}
 
-const OnlinePage: NextPage<Props, InitialProps> = () => {
+const DashboardPage: NextPage<Props, InitialProps> = () => {
   
   return (
     <>
@@ -20,8 +20,8 @@ const OnlinePage: NextPage<Props, InitialProps> = () => {
   );
 };
 
-const OnlinePrivate = privateRoute(OnlinePage)
+const OnlinePrivate = privateRoute(DashboardPage)
 
-const OnlinePageWithApollo = withApollo(OnlinePrivate);
+const DashboardPageWithApollo = withApollo(OnlinePrivate);
 
-export default OnlinePageWithApollo;
+export default DashboardPageWithApollo;

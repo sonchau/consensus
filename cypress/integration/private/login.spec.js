@@ -9,5 +9,6 @@ describe('Private - Issue page', () => {
       cy.get('#password').type('sunshinecoast-test')
       cy.get('.MuiButton-label').click({ force: true })
       cy.url().should('include', '/private/dashboard')
+      cy.get('h2').should('contain', 'Group Voting')
     })
   })

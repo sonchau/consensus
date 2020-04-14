@@ -208,7 +208,7 @@ button {
 
 .form-container {
   border: 1px solid var(--border-color);
-  border-radius: 1rem;
+  border-radius: var(--default-radius);
   outline: none;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -297,7 +297,7 @@ button {
 .dashboard-selection {
   width: 20rem;
   border: 1px solid #ccc;
-  border-radius: 1rem;
+  border-radius: var(--default-radius);
   text-align: center;
   padding: 1rem 0.5rem;
   min-height: 28rem;

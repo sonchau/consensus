@@ -1,32 +1,27 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../../lib/apollo';
 import { useIssueQuery } from '../../generated/graphql';
 import CreateIssueForm from '../../components/quick/issue/CreateIssueForm';
 import Drawer from '../../components/common/Drawer';
 import DrawerContent from '../../components/quick/issue/DrawerContent';
+import { privateRoute } from "../../components/route/Private";
 
 interface InitialProps {}
-
 interface Props extends InitialProps {}
 
-const PrivatePage: NextPage<Props, InitialProps> = props => {
-  const { loading, error, data } = useIssueQuery({
-    variables: { id: 0 }
-  });
-  if (loading) {
-    return <p>Loading...</p>;
-  } else if (error) {
-    return <p>An error occurred.</p>;
-  }
-
+const IssuePage: NextPage<Props, InitialProps> = () => {
+  
   return (
     <>
-      <p>Private page</p>
+      <Drawer buttonText="Help" component={<DrawerContent />} />
+      <CreateIssueForm /> 
     </>
   );
 };
 
-const PrivatePageWithApollo = withApollo(PrivatePage);
+const OnlinePrivate = privateRoute(IssuePage)
 
-export default PrivatePageWithApollo;
+const DashboardPageWithApollo = withApollo(OnlinePrivate);
+
+export default DashboardPageWithApollo;
