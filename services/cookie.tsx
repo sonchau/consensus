@@ -1,4 +1,5 @@
 export const COOKIES = {
-    name: "consensus"
+    name: "consensus",
+    user: "consensus-user"
   };
   

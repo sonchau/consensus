@@ -4,6 +4,8 @@ import {useCreateIssueMutation} from '../../../generated/graphql'
 import Link from 'next/link';
 import BackNext from '../../common/BackNext';
 import {useRouter} from 'next/router';
+import Cookie from 'js-cookie';
+import { COOKIES } from "../../../services/cookie";
 
 const issueStyle = {
     'border': '1px solid #e2e8f0',
@@ -21,6 +23,8 @@ interface Props {
 const CreateIssueForm: React.FC<Props>  = ({redirectUrl, back}) => {
     const [issue, setIssue] = useState('')
     const router = useRouter()
+    const user = Cookie.get(COOKIES.user) ? Cookie.get(COOKIES.user) : 'public'
+
     const [createIssue, {loading, error, data}] = useCreateIssueMutation( {
         onCompleted: ()=> {
           setIssue('')
@@ -33,13 +37,14 @@ const CreateIssueForm: React.FC<Props>  = ({redirectUrl, back}) => {
   
     async function handleSubmit (e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        if(!loading && issue) {
+        if(!loading && issue && user) {
             let result
             try {
                 result = await createIssue({
                     variables: {
                         input: {
-                            issue
+                            issue,
+                            user
                         }
                     }
                 })

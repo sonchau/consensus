@@ -25,6 +25,7 @@ export type CreateCriteriaInput = {
 
 export type CreateIssueInput = {
   issue: Scalars['String'],
+  user: Scalars['String'],
 };
 
 export type CreateNoteInput = {
@@ -54,6 +55,7 @@ export type Issue = {
    __typename?: 'Issue',
   id: Scalars['Int'],
   issue: Scalars['String'],
+  user: Scalars['String'],
 };
 
 export type Mutation = {

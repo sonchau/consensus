@@ -49,6 +49,7 @@ const Login: React.FC<Props> = ({img, heading, text1, text2, redirectUrl}) => {
           setError(false)
           //Cookie.set(COOKIES.name, {'authenticated': true})
           Cookie.set(COOKIES.name, "true")
+          Cookie.set(COOKIES.user, res.client_name)
           router.push(redirectUrl)
         } else {
           setError(true)
