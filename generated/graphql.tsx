@@ -21,6 +21,7 @@ export enum CacheControlScope {
 export type CreateCriteriaInput = {
   name: Scalars['String'],
   score: Scalars['Int'],
+  issue: Scalars['Int'],
 };
 
 export type CreateIssueInput = {
@@ -49,6 +50,7 @@ export type Criteria = {
   id: Scalars['Int'],
   name: Scalars['String'],
   score: Scalars['Int'],
+  issue?: Maybe<Issue>,
 };
 
 export type Issue = {
@@ -297,6 +299,10 @@ export type CreateCriteriaMutation = (
   & { createCriteria: Maybe<(
     { __typename?: 'Criteria' }
     & Pick<Criteria, 'id' | 'name' | 'score'>
+    & { issue: Maybe<(
+      { __typename?: 'Issue' }
+      & Pick<Issue, 'id' | 'user' | 'issue'>
+    )> }
   )> }
 );
 
@@ -349,6 +355,10 @@ export type CriteriaQuery = (
   & { criteria: Maybe<(
     { __typename?: 'Criteria' }
     & Pick<Criteria, 'id' | 'name' | 'score'>
+    & { issue: Maybe<(
+      { __typename?: 'Issue' }
+      & Pick<Issue, 'id' | 'user' | 'issue'>
+    )> }
   )> }
 );
 
@@ -360,6 +370,10 @@ export type CriteriasQuery = (
   & { criterias: Array<(
     { __typename?: 'Criteria' }
     & Pick<Criteria, 'id' | 'name' | 'score'>
+    & { issue: Maybe<(
+      { __typename?: 'Issue' }
+      & Pick<Issue, 'id' | 'user' | 'issue'>
+    )> }
   )> }
 );
 
@@ -630,6 +644,11 @@ export const CreateCriteriaDocument = gql`
     id
     name
     score
+    issue {
+      id
+      user
+      issue
+    }
   }
 }
     `;
@@ -768,6 +787,11 @@ export const CriteriaDocument = gql`
     id
     name
     score
+    issue {
+      id
+      user
+      issue
+    }
   }
 }
     `;
@@ -803,6 +827,11 @@ export const CriteriasDocument = gql`
     id
     name
     score
+    issue {
+      id
+      user
+      issue
+    }
   }
 }
     `;

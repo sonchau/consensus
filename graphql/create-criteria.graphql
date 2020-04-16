@@ -3,5 +3,10 @@ mutation CreateCriteria($input: CreateCriteriaInput!) {
     id
     name
     score
+    issue {
+      id
+      user
+      issue
+    }
   }
 }

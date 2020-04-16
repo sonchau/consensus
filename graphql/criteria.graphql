@@ -3,5 +3,10 @@ query Criteria ($id: Int!) {
     id
     name
     score
+    issue {
+      id
+      user
+      issue
+    }
   }
 }
