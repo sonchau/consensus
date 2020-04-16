@@ -20,7 +20,7 @@ const Select:  React.FC<Props> = ({name, values, defaultValue, onChange, classNa
     //console.log('in Select name', name)
     
     return (
-        <select title="aaa"  data-id={dataId} style={selectStyle} name={name} 
+        <select data-id={dataId} style={selectStyle} name={name} 
         onChange={onChange} defaultValue={defaultValue}
         className={className}>
             { values.map( (item, index) => {
