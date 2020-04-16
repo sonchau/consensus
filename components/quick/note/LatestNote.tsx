@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import UpdateNoteForm from './UpdateNoteForm';
 import Tooltip from '@material-ui/core/Tooltip';
-
+import Cookie from 'js-cookie';
+import { COOKIES } from "../../../services/cookie";
 import BootstrapTooltip from '../../common/CustomTooltips'
 const note = {
     'margin': '1rem auto',
@@ -26,7 +27,7 @@ const noteButton = {
     'margin': '1rem 0 0'
 }
 const LastestNote = () => {
-    const currentIssue = JSON.parse(localStorage.getItem('issueId') || '{}')
+    const currentIssue = Number(Cookie.get(COOKIES.issue))
     const [open, setOpen] = useState(false)
 
     //console.log('currentIssue', currentIssue)

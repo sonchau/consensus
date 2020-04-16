@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { withApollo } from '../../../lib/apollo';
 import { useIssueQuery, useChangeIssueSubscription } from '../../../generated/graphql';
-
+import Cookie from 'js-cookie';
+import { COOKIES } from "../../../services/cookie";
 const center = {
     'margin': '1rem auto',
     'text-align': 'center'
@@ -13,7 +14,7 @@ interface Props {
 const LastestIssue: React.FC<Props> = ({isPrint}) => {
     const change = useChangeIssueSubscription()
 
-    const currentIssue = JSON.parse(localStorage.getItem('issueId') || '{}')
+    const currentIssue = Number(Cookie.get(COOKIES.issue))
     const {loading, error, data} = useIssueQuery({
         variables: {
             id: currentIssue

@@ -185,6 +185,7 @@ export type Query = {
   notes: Array<Maybe<Note>>,
   criteria?: Maybe<Criteria>,
   criterias: Array<Criteria>,
+  criteriasByIssueId: Array<Criteria>,
   setting?: Maybe<Setting>,
   settingByTaskName: Array<Setting>,
   settings: Array<Setting>,
@@ -218,6 +219,11 @@ export type QueryNoteArgs = {
 
 export type QueryCriteriaArgs = {
   id: Scalars['Int']
+};
+
+
+export type QueryCriteriasByIssueIdArgs = {
+  issueId: Scalars['Int']
 };
 
 
@@ -374,6 +380,19 @@ export type CriteriasQuery = (
       { __typename?: 'Issue' }
       & Pick<Issue, 'id' | 'user' | 'issue'>
     )> }
+  )> }
+);
+
+export type CriteriasByIssueIdQueryVariables = {
+  issueId: Scalars['Int']
+};
+
+
+export type CriteriasByIssueIdQuery = (
+  { __typename?: 'Query' }
+  & { criteriasByIssueId: Array<(
+    { __typename?: 'Criteria' }
+    & Pick<Criteria, 'id' | 'name' | 'score'>
   )> }
 );
 
@@ -860,6 +879,41 @@ export function useCriteriasLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHo
 export type CriteriasQueryHookResult = ReturnType<typeof useCriteriasQuery>;
 export type CriteriasLazyQueryHookResult = ReturnType<typeof useCriteriasLazyQuery>;
 export type CriteriasQueryResult = ApolloReactCommon.QueryResult<CriteriasQuery, CriteriasQueryVariables>;
+export const CriteriasByIssueIdDocument = gql`
+    query CriteriasByIssueId($issueId: Int!) {
+  criteriasByIssueId(issueId: $issueId) {
+    id
+    name
+    score
+  }
+}
+    `;
+
+/**
+ * __useCriteriasByIssueIdQuery__
+ *
+ * To run a query within a React component, call `useCriteriasByIssueIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCriteriasByIssueIdQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCriteriasByIssueIdQuery({
+ *   variables: {
+ *      issueId: // value for 'issueId'
+ *   },
+ * });
+ */
+export function useCriteriasByIssueIdQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CriteriasByIssueIdQuery, CriteriasByIssueIdQueryVariables>) {
+        return ApolloReactHooks.useQuery<CriteriasByIssueIdQuery, CriteriasByIssueIdQueryVariables>(CriteriasByIssueIdDocument, baseOptions);
+      }
+export function useCriteriasByIssueIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CriteriasByIssueIdQuery, CriteriasByIssueIdQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<CriteriasByIssueIdQuery, CriteriasByIssueIdQueryVariables>(CriteriasByIssueIdDocument, baseOptions);
+        }
+export type CriteriasByIssueIdQueryHookResult = ReturnType<typeof useCriteriasByIssueIdQuery>;
+export type CriteriasByIssueIdLazyQueryHookResult = ReturnType<typeof useCriteriasByIssueIdLazyQuery>;
+export type CriteriasByIssueIdQueryResult = ApolloReactCommon.QueryResult<CriteriasByIssueIdQuery, CriteriasByIssueIdQueryVariables>;
 export const DeleteCriteriaDocument = gql`
     mutation DeleteCriteria($id: Int!) {
   deleteCriteria(id: $id) {

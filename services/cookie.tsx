@@ -1,5 +1,6 @@
 export const COOKIES = {
     name: "consensus",
-    user: "consensus-user"
+    user: "consensus-user",
+    issue: "issueId"
   };
   

@@ -1,0 +1,7 @@
+query CriteriasByIssueId($issueId: Int!) {
+  criteriasByIssueId (issueId: $issueId) {
+    id
+    name
+    score
+  }
+}

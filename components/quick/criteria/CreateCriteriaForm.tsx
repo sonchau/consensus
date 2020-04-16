@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import {useCreateCriteriaMutation} from '../../../generated/graphql'
 import Input from '../../common/Input'
 import Select from '../../common/Select'
-
+import Cookie from 'js-cookie';
+import { COOKIES } from "../../../services/cookie";
 interface Props {
   onCriteriaCreated: () => void
 }
@@ -40,11 +41,14 @@ const CreateCriteriaForm: React.FC<Props> = ({onCriteriaCreated}) => {
 
     if(!loading && name) {
       const inputScore = typeof score === 'string' ? parseInt(score, 10) : 1;
+      const currentIssue = Number(Cookie.get(COOKIES.issue))
+    
         createCriteria({
             variables: {
                 input: {
                     name,
-                    score: inputScore
+                    score: inputScore,
+                    issue: currentIssue
                 }
             }
         })
@@ -52,6 +56,7 @@ const CreateCriteriaForm: React.FC<Props> = ({onCriteriaCreated}) => {
 
   }
   return (
+
     <div className="form-container">
       <h3>Step 2: How will you measure success? </h3>
       <p>List the objectives you hope to achieve by solving this problem. Be sure they are clear to all participants. </p>

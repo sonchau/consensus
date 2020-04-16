@@ -50,7 +50,8 @@ const CreateIssueForm: React.FC<Props>  = ({redirectUrl, back}) => {
                 })
                 //console.log('result data', result)
                 if (result && result.data){
-                    localStorage.setItem('issueId', result.data.createIssue!.id.toString())
+                    //localStorage.setItem('issueId', result.data.createIssue!.id.toString())
+                    Cookie.set(COOKIES.issue, result.data.createIssue!.id.toString())
                 }
             } catch {
                 console.log('can not create issue')
