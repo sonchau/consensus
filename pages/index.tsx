@@ -12,6 +12,7 @@ const IndexPage: NextPage<Props, InitialProps> = props => {
   //localStorage.removeItem('issueId')
   Cookie.remove(COOKIES.user)
   Cookie.remove(COOKIES.name)
+  Cookie.remove(COOKIES.issue)
   return (
       <Dashboard />
   );
