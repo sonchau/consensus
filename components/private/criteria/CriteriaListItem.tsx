@@ -3,9 +3,9 @@ import Link from 'next/link';
 import {
   Criteria,
   useDeleteCriteriaMutation,
-  CriteriasQuery,
-  CriteriasQueryVariables,
-  CriteriasDocument,
+  CriteriasByIssueIdQuery,
+  CriteriasByIssueIdQueryVariables,
+  CriteriasByIssueIdDocument,
   
 } from '../../../generated/graphql';
 
@@ -37,16 +37,24 @@ const criteriaItem = {
 const CriteriaListItem: React.FC<Props> = ({ criteria }) => {
   const [deleteCriteria, { loading, error }] = useDeleteCriteriaMutation({
     update: (cache, result) => {
-      const data = cache.readQuery<CriteriasQuery, CriteriasQueryVariables>({
-        query: CriteriasDocument,
+      const data = cache.readQuery<CriteriasByIssueIdQuery, CriteriasByIssueIdQueryVariables>({
+        query: CriteriasByIssueIdDocument,
+        variables: {
+            issueId: criteria!.issue!.id
+        }
       });
       if (data) {
-        cache.writeQuery<CriteriasQuery, CriteriasQueryVariables>({
-          query: CriteriasDocument,
+        const filter = data.criteriasByIssueId.filter(
+                 ({ id }) => id !== result.data?.deleteCriteria?.id
+          )
+        //console.log('filter', filter)
+        cache.writeQuery<CriteriasByIssueIdQuery, CriteriasByIssueIdQueryVariables>({
+          query: CriteriasByIssueIdDocument,
+          variables: {
+            issueId: criteria!.issue!.id
+          },
           data: {
-            criterias: data.criterias.filter(
-              ({ id }) => id !== result.data?.deleteCriteria?.id
-            )
+            criteriasByIssueId: filter
           }
         });
       }
