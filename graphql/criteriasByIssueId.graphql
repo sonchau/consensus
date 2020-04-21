@@ -3,5 +3,9 @@ query CriteriasByIssueId($issueId: Int!) {
     id
     name
     score
+    issue {
+      id
+      issue
+    }
   }
 }

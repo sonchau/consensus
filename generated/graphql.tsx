@@ -393,6 +393,10 @@ export type CriteriasByIssueIdQuery = (
   & { criteriasByIssueId: Array<(
     { __typename?: 'Criteria' }
     & Pick<Criteria, 'id' | 'name' | 'score'>
+    & { issue: Maybe<(
+      { __typename?: 'Issue' }
+      & Pick<Issue, 'id' | 'issue'>
+    )> }
   )> }
 );
 
@@ -885,6 +889,10 @@ export const CriteriasByIssueIdDocument = gql`
     id
     name
     score
+    issue {
+      id
+      issue
+    }
   }
 }
     `;
